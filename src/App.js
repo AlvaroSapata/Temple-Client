@@ -29,13 +29,13 @@ function App() {
         <Route path='/auth/signup' element= {<Signup/>}/>
         <Route path="/auth/login" element={<Login />} />
 
-        <Route path='/api/djs' element= {<Djs/>}/>
+        <Route path='/djs' element= {<Djs/>}/>
 
-        <Route path="/api/events" element={<Events />} />
+        <Route path="/events" element={<Events />} />
 
-        <Route path="/api/locations" element={<Locations />} />
+        <Route path="/locations" element={<Locations />} />
 
-        <Route path="/api/products" element={<Products />} />
+        <Route path="/products" element={<Products />} />
 
         <Route path="/error" element={<Error />} />
         <Route path="*" element={<NotFound />} />

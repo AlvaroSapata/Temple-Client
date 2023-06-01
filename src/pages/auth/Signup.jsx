@@ -26,10 +26,12 @@ function Signup() {
       await signupService(user);
       navigate("/auth/login");
     } catch (error) {
+      console.log(error)
       if (error.response.status === 400) {
-        setErrorMessage(error.response.data.errorMessage);
+        setErrorMessage(error.response.data.message);
       } else {
-        navigate("/error");
+        //navigate("/error");
+        console.log(error)
       }
     }
   };
@@ -59,6 +61,7 @@ function Signup() {
         <br />
         
         <button type="submit">Sign Up</button>
+        
         {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
       </form>
     </div>

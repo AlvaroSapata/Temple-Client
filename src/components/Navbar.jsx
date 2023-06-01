@@ -9,13 +9,13 @@ function Navbar() {
     <Link to="/auth/signup">Registro</Link>
     <Link to="/auth/login">Login</Link>
 
-    <Link to="/api/djs">Nuestros Djs</Link>
+    <Link to="/djs">Nuestros Djs</Link>
 
-    <Link to="/api/events">Events</Link>
+    <Link to="/events">Events</Link>
 
-    <Link to="/api/locations">Locations</Link>
+    <Link to="/locations">Locations</Link>
 
-    <Link to="/api/products">Productos</Link>
+    <Link to="/products">Productos</Link>
     
     </div>
   )

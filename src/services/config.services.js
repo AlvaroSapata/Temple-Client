@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const service = axios.create({
-    baseUrl: process.env.REACT_APP_SERVER_URL,
+    baseURL: process.env.REACT_APP_SERVER_URL,
+
  })
 
 

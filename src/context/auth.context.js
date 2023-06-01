@@ -50,12 +50,12 @@ function AuthWrapper(props) {
     );
 
     //3* la renderizacion de la app con el contexto pasado
-    return (
-      <AuthContext.Provider value={passedContext}>
-        {props.children}
-      </AuthContext.Provider>
-    );
-  }
+}
+return (
+  <AuthContext.Provider value={passedContext}>
+    {props.children}
+  </AuthContext.Provider>
+);
 }
 
 

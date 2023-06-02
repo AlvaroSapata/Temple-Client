@@ -1,8 +1,10 @@
-import React from 'react'
+import LocationDetailsComponent from "../../components/locations/LocationDetailsComponent"
 
 function LocationDetails() {
   return (
-    <div>LocationDetails</div>
+    <div>
+    <LocationDetailsComponent />
+    </div>
   )
 }
 

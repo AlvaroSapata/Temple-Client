@@ -15,6 +15,7 @@ import Djs from "./pages/djs/Djs";
 import Events from "./pages/events/Events";
 // Locations
 import Locations from "./pages/locations/Locations";
+import LocationDetails from "./pages/locations/LocationDetails";
 // Products
 import Products from "./pages/products/Products";
 
@@ -34,6 +35,7 @@ function App() {
         <Route path="/events" element={<Events />} />
 
         <Route path="/locations" element={<Locations />} />
+        <Route path="/locations/:locationId" element={<LocationDetails />} />
 
         <Route path="/products" element={<Products />} />
 

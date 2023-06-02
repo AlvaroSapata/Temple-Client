@@ -60,7 +60,11 @@ function Djs() {
       <h3>Nuestros Djs</h3>
       <button onClick={toggleForm}>Añadir Dj</button> {/* Solo Admin */}
       {isFormVisible ? (
-        <AddDjForm getData={getData} setIsLoading={setIsLoading} />
+        <AddDjForm
+          getData={getData}
+          setIsLoading={setIsLoading}
+          toggleForm={toggleForm}
+        />
       ) : null}
       {djs.map((eachDj) => {
         return (

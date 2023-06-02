@@ -229,3 +229,11 @@ font-family: Inconsolata;
   margin-right: 25%;
   margin-top: 20px;
 }
+
+.leaflet-container {
+  height: 300px; /* example */
+  width: 90vw; /* example */
+  margin-left: 5vw;
+  margin-right: 5vw;
+  margin-top: 20px;
+}

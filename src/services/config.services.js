@@ -3,6 +3,8 @@ import axios from "axios";
 const service = axios.create({
     baseURL: process.env.REACT_APP_SERVER_URL,
 
+    
+
  })
 
 
@@ -11,7 +13,7 @@ const service = axios.create({
     const authToken = localStorage.getItem("authToken");
 
     if (authToken) {
-        config.headers.Authorization = `Bearer ${authToken}`;
+        config.headers.authorization = `Bearer ${authToken}`;
     }
     return config;
  })

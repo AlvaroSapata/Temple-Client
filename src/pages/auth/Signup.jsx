@@ -27,6 +27,7 @@ function Signup() {
       navigate("/auth/login");
     } catch (error) {
       console.log(error)
+      console.log(error.response);
       if (error.response.status === 400) {
         setErrorMessage(error.response.data.message);
       } else {

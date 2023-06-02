@@ -29,7 +29,7 @@ function AuthWrapper(props) {
       setIsLoading(false);
     } catch (error) {
       // actualiza el estado de la app
-
+          console.log(error);
       setIsLoggedIn(false);
       setUser(null);
       setIsLoading(false);

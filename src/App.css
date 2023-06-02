@@ -5,3 +5,107 @@
 a {
   margin: 10px;
 }
+
+/* CARTA CSS */
+
+/* .card {
+  position: absolute;
+  border-radius: 8px;
+  height: 450px;
+  width: 400px;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 0 0 80px -10px black;
+  overflow: hidden;
+}
+
+.card-blur {
+  position: absolute;
+  height: 100%;
+  width: calc(100% + 1px);
+  background-color: black;
+  opacity: 0;
+  transition: opacity 0.15s ease-in;
+}
+
+.card:hover .card-blur {
+  opacity: 0.6;
+}
+
+.footer {
+  z-index: 1;
+  position: absolute;
+  height: 80px;
+  width: 100%;
+  bottom: 0;
+}
+
+svg#curve {
+  position: absolute;
+  fill: white;
+  left: 0;
+  bottom: 0;
+  width: 400px;
+  height: 450px;
+}
+
+.info {
+font-family: Inconsolata;
+  padding-left: 20px;
+  transform: translateY(250px);
+  
+  transition: transform 1s cubic-bezier(.31,1.21,.64,1.02);
+}
+
+.card:hover .info {
+  transform: translateY(0px);
+}
+
+.name {
+  font-weight: bolder;
+  padding-top: 5px;
+}
+
+.job {
+  margin-top: 10px;
+}
+
+
+.card {
+  background-image: url("https://http.cat/100")
+}
+
+.background {
+  background-image: url("")
+} */
+
+.myDjFormContainer {
+  background-color: white;
+  border: solid 2px black;
+  position: absolute;
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+  margin-left: 10vw;
+  margin-right: 10vw;
+/*   border-radius: 50%;
+  top: 250px;
+  right:0% */ 
+}
+
+.myDjForm{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-left: 25%;
+  margin-right: 25%;
+  gap: 5px;
+}
+

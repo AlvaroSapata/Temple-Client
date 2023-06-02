@@ -6,22 +6,20 @@ import {
   editLocationService,
   getLocationDetailsService,
 } from "../../services/locations.services";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-
+// import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 function LocationDetails() {
-  
   const params = useParams();
-  console.log(params)
+  console.log(params);
   const navigate = useNavigate();
 
   const [locationDetails, setLocationDetails] = useState(null);
   // Estado de loading
   const [isLoading, setIsLoading] = useState(true);
   // Leaflet mapa
-  const [ center, setCenter ] = useState([42.34, -3.71])
+  // const [ center, setCenter ] = useState([42.34, -3.71])
 
-  const [clickedPosition, setClickedPosition] = useState(null);
+  // const [clickedPosition, setClickedPosition] = useState(null);
 
   useEffect(() => {
     getData();
@@ -41,7 +39,7 @@ function LocationDetails() {
 
   const handleDelete = async () => {
     try {
-      await deleteLocationService(params.id);
+      await deleteLocationService(params.locationId);
       navigate("/locations");
     } catch (error) {
       console.log(error);
@@ -51,26 +49,24 @@ function LocationDetails() {
     return <h3>...buscando</h3>;
   }
 
-  return <div>
-
-    <h3>Detalles de la Ubicacion</h3>
+  return (
     <div>
-      <p>{locationDetails.name}</p>
-      <p>{locationDetails.description}</p>
-      <img src={locationDetails.image} alt="imagen" width={"200px"} />
-    </div>
-    <MapContainer center={center} zoom={18} scrollWheelZoom={false}>
+      <h3>Detalles de la Ubicacion</h3>
+      <div>
+        <p>{locationDetails.name}</p>
+        <p>{locationDetails.description}</p>
+        <img src={locationDetails.image} alt="imagen" width={"200px"} />
+      </div>
+      {/*     <MapContainer center={center} zoom={18} scrollWheelZoom={false}>
   <TileLayer
     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
   />
 
-  {/* invoke Marker Componentes here */}
-
-</MapContainer>
-    <button >Borrar</button>
-
-  </div>;
+</MapContainer> */}
+      <button onClick={handleDelete}>eliminar</button>
+    </div>
+  );
 }
 
 export default LocationDetails;

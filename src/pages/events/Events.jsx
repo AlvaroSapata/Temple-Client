@@ -14,14 +14,24 @@ function Events() {
 
   const [djs, setDjs] = useState([]);
 
-  const [location, setLocation] = useState("");
+  const [locations, setLocations] = useState([]);
 
+  
   useEffect(() => {
     getData()
   }, [])
 
 
   const getData = async () => {
+
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/locations`)
+      
+      setLocations(response.data);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
 
     try{
        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/djs`)
@@ -35,7 +45,7 @@ function Events() {
       const response = await axios.get(
         `${process.env.REACT_APP_SERVER_URL}/events`
       )
-      console.log(response);
+      
       setEvents(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -52,14 +62,18 @@ function Events() {
     <div>
 
       <h3>Nuestros Eventos</h3>
-      <AddEventForm getData={getData} setIsLoading={setIsLoading} djsArr={djs} locationArr={location} />
+     
+      <AddEventForm getData={getData} setIsLoading={setIsLoading} djsArr={djs} locationsArr={locations} />
 
       {events.map((eachEvent)=>{
         return (
           <div key={eachEvent.id}>
             <h4>{eachEvent.title}</h4>
             <img src={eachEvent.image} alt="imagen" />
-            <p>{eachEvent.date.toLocalDateString()}</p>
+            <p>{eachEvent.date}</p>
+            <p>{eachEvent.location?.name}</p>
+            <p>{eachEvent.djs[0].name}</p>
+            
             
 
           </div>

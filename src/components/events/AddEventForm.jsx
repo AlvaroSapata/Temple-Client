@@ -1,32 +1,52 @@
 import { useState } from "react";
 import { createEventService } from "../../services/events.services";
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Form from "react-bootstrap/Form";
 function AddEventForm(props) {
+  // console.log(props.djsArr);
+  const { setIsLoading, getData, djsArr, locationsArr } = props;
 
-    console.log(props.djsArr);
-  const { setIsLoading, getData, djsArr, locationArr } = props;
+  // console.log(locationsArr);
 
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
   const [date, setDate] = useState("");
-  const [location, setLocation] = useState("");
+  // const [location, setLocation] = useState("");
   const [gallery, setGallery] = useState("");
   const [afterMovie, setAfterMovie] = useState("");
-//   const [djs, setDjs] = useState(djsArr);
+    const [djs, setDjs] = useState([]);
+  const [locationsSelected, setLocationsSelected] = useState("");
+
+  const handleselectedLocations = (e) => {
+    setLocationsSelected(e.target.value);
+    console.log(e.target.value);
+  };
+
+  const handleselectedDjs = (e) => {
+   const copyDjs = [...e.target.children]
+   const filteredDjs= copyDjs.filter((eachDj)=>{
+     return eachDj.selected
+     
+    })
+     const djsIds =  filteredDjs.map((eachDj)=>{
+      return eachDj.value
+    }) 
+    setDjs(djsIds);
+    
+  };
   
-//   const [ischecked, setIsChecked] = useState(false);
-   
+  //   const [ischecked, setIsChecked] = useState(false);
+
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleImageChange = (e) => setImage(e.target.value);
   const handleDateChange = (e) => setDate(e.target.value);
-  const handleLocationChange = (e) => setLocation(e.target.value);
+  // const handleLocationChange = (e) => setLocation(e.target.value);
   const handleGalleryChange = (e) => setGallery(e.target.value);
   const handleAfterMovieChange = (e) => setAfterMovie(e.target.value);
-//   const handleDjsChange = (e) => setDjs(e.target.value);
- 
-//   const handleCheckboxChange = (e) => setIsChecked(!ischecked);
+  //   const handleDjsChange = (e) => setDjs(e.target.value);
+
+  //   const handleCheckboxChange = (e) => setIsChecked(!ischecked);
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("apretando el boton");
@@ -37,11 +57,10 @@ function AddEventForm(props) {
         title: title,
         image: image,
         date: date,
-        location: location,
+        location: locationsSelected,
         gallery: gallery,
         afterMovie: afterMovie,
-        djs: djsArr,
-        
+        djs: djs,
       };
 
       await createEventService(newEvent);
@@ -49,8 +68,6 @@ function AddEventForm(props) {
     } catch (error) {
       console.log(error);
     }
-
-
   };
   return (
     <div className="myEventFormContainer">
@@ -85,16 +102,19 @@ function AddEventForm(props) {
 
         <br />
 
-        <DropdownButton id="dropdown-basic-button" title="Dropdown button">
-        {locationArr.map((eachLocation)=>{
-         return(
-          <div key={eachLocation._id}>
-      <Dropdown.Item href={eachLocation}>{eachLocation}</Dropdown.Item>
-      
-      </div>
-         )
-        })}
-    </DropdownButton>
+        <Form.Select
+          id="dropdown-basic-button"
+          title="Dropdown button"
+          onChange={handleselectedLocations}
+        >
+          {locationsArr.map((eachLocation) => {
+            return (
+              <option key={eachLocation._id} value={eachLocation._id}>
+                {eachLocation.name}
+              </option>
+            );
+          })}
+        </Form.Select>
 
         {/* <label htmlFor="location">Location</label>
         <input
@@ -112,41 +132,32 @@ function AddEventForm(props) {
           name="gallery"
           onChange={handleGalleryChange}
           value={gallery}
-          />
+        />
 
-                  <br />
+        <br />
 
-                  <label htmlFor="afterMovie">After Movie</label>
-                  <input
-                    type="text"
-                    name="afterMovie"
-                    onChange={handleAfterMovieChange}
-                    value={afterMovie}
-                  />
-                  <br />
-                  <label htmlFor="djs">DJS</label>
-                 {djsArr.map((eachDjs)=>{
-                    console.log(eachDjs.name);
-                    return(
-                        <div key={eachDjs._id}>
+        <label htmlFor="afterMovie">After Movie</label>
+        <input
+          type="text"
+          name="afterMovie"
+          onChange={handleAfterMovieChange}
+          value={afterMovie}
+        />
+        <br />
+        <label htmlFor="djs">DJS</label>
+        <Form.Select multiple={true} onChange={handleselectedDjs}>
+          {djsArr.map((eachDjs) => {
+            return (
+              <option key={eachDjs._id} value={eachDjs._id}> {eachDjs.name}</option>
 
-                        <p>{eachDjs.name}</p>
-                  <input
-                    type="checkbox"
-                    name="djs"
-                    // checked={false}
-                    // onChange={handleCheckboxChange}
-                    value={eachDjs._id}
-                  />
-                        </div>
-                    )
-                  })}
-                  <br />
+              // checked={false}
+              // onChange={handleCheckboxChange}
+            );
+          })}
+        </Form.Select>
+        <br />
 
-                 
-               
-
-                  <button type="submit">Agregar</button>
+        <button type="submit">Agregar</button>
       </form>
     </div>
   );

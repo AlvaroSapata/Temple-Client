@@ -6,7 +6,7 @@ function AddDjForm(props) {
   console.log(props.getData);
 
   // Destructurar props
-  const { setIsLoading, getData } = props;
+  const { setIsLoading, getData, toggleForm } = props;
 
   // Estados para registrar los cambios
   const [name, setName] = useState("");
@@ -19,6 +19,7 @@ function AddDjForm(props) {
     e.preventDefault();
     console.log("apretando el boton");
     setIsLoading(true);
+    toggleForm();
 
     try {
       const newDj = {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import axios from "axios";
 import AddEventForm from "../../components/events/AddEventForm";
 
@@ -64,19 +64,21 @@ function Events() {
       <h3>Nuestros Eventos</h3>
      
       <AddEventForm getData={getData} setIsLoading={setIsLoading} djsArr={djs} locationsArr={locations} />
+      
 
       {events.map((eachEvent)=>{
         return (
-          <div key={eachEvent.id}>
+          <Link to={`/events/${eachEvent._id}`}>
+          <div key={eachEvent._id}>
             <h4>{eachEvent.title}</h4>
             <img src={eachEvent.image} alt="imagen" />
             <p>{eachEvent.date}</p>
             <p>{eachEvent.location?.name}</p>
             <p>{eachEvent.djs[0].name}</p>
             
-            
 
           </div>
+            </Link>
         )
       })}
     </div>

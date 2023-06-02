@@ -18,6 +18,7 @@ import Locations from "./pages/locations/Locations";
 import LocationDetails from "./pages/locations/LocationDetails";
 // Products
 import Products from "./pages/products/Products";
+import EventDetails from './pages/events/EventDetails';
 
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
         <Route path='/djs' element= {<Djs/>}/>
 
         <Route path="/events" element={<Events />} />
-
+        <Route path="/events/:eventsId" element={<EventDetails />} />
         <Route path="/locations" element={<Locations />} />
         <Route path="/locations/:locationId" element={<LocationDetails />} />
 

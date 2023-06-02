@@ -1,8 +1,12 @@
+import EventDetailsComponents from "../../components/events/EventDetailsComponents"
 
 
 function EventDetails() {
   return (
-    <div>EventDetails</div>
+    <div>
+
+      <EventDetailsComponents/>
+    </div>
   )
 }
 

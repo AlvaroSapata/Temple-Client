@@ -72,7 +72,7 @@ function AddEventForm(props) {
   return (
     <div className="myEventFormContainer">
       <h3>Añadir Evento</h3>
-
+        
       <form onSubmit={handleSubmit} className="myEventForm">
         <label htmlFor="title">titulo</label>
         <input

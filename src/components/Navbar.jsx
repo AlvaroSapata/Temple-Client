@@ -19,7 +19,7 @@ function Navbar() {
   };
 
   return (
-    <div style={{ margin: "20px" }}>
+    <div className="myNavbar">
       <Link to="/">Home</Link>
       
       {!isLoggedIn ? <Link to="/auth/signup">Registro</Link> : null}

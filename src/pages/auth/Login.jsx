@@ -61,7 +61,7 @@ function Login() {
         </div>
 
         <br />
-        <button type="submit" style={{ width: "auto" }}>Log In</button>
+        <button className="loginBtnFix" type="submit" style={{ width: "auto" }}>Log In</button>
         <br />
         {errorMessage && <p style={{ color: "#03e9f4" }}>{errorMessage}</p>}
       </form>

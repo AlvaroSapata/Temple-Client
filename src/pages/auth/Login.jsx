@@ -41,33 +41,29 @@ function Login() {
     }
   };
   return (
-    <div>
-      <h1>Log In</h1>
-
+    <div class="login-box">
+          <pre>
+        <h2>Login</h2>
+      </pre>
       <form onSubmit={handleLogin}>
-        <label>Email</label>
-        <input
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleEmailChange}
-        />
+        <div class="user-box">
+          <input type="email" value={email} onChange={handleEmailChange} />
+          <label>Email</label>
+        </div>
+
+        <div class="user-box">
+          <input
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+          <label>Contraseña</label>
+        </div>
 
         <br />
-
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePasswordChange}
-          />
-
-
-          <br />
-          <button type="submit">Log In</button>
-          <br />
-          {errorMessage && <p style={{ color: "red" }} >{errorMessage}</p>}
+        <button type="submit" style={{ width: "auto" }}>Log In</button>
+        <br />
+        {errorMessage && <p style={{ color: "#03e9f4" }}>{errorMessage}</p>}
       </form>
     </div>
   );

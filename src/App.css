@@ -116,6 +116,7 @@ font-family: Inconsolata;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 30px;
 }
 
 .flip-card {
@@ -248,7 +249,16 @@ font-family: Inconsolata;
   margin-right: 5vw;
   margin-top: 20px;
 }
-/* SIGNUP */
+
+.myPrductImgContainer{
+  width: 100%;
+}
+
+.myProductImg{
+width: 80%;
+height: 100%;
+}
+/* SIGNUP ______________________________________________________________________ */
 .login-box {
   position: absolute;
   top: 50%;
@@ -405,4 +415,28 @@ font-family: Inconsolata;
   50%,100% {
     bottom: 100%;
   }
+}
+.myButtons{
+  position: relative;
+  display: inline-block;
+  padding: 5px 5px;
+  color: #03e9f4;
+  font-size: 11px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: 0.5s;
+  margin-top: 0px;
+  letter-spacing: 4px;
+  border-radius: 5px;
+  background-color: #a19f9f;
+  margin-bottom: 20px;
+}
+
+.myButtons:hover {
+  background: #03e9f4;
+  color: #000000;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #03e9f4, 0 0 15px #03e9f4, 0 0 10px #03e9f4,
+    0 0 100px #03e9f4;
 }

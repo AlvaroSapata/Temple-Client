@@ -157,7 +157,7 @@ function AddEventForm(props) {
         </Form.Select>
         <br />
 
-        <button type="submit">Agregar</button>
+        <button className="myButtons" type="submit">Agregar</button>
       </form>
     </div>
   );

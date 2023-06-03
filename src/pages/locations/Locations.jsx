@@ -60,7 +60,7 @@ function Locations() {
   return (
     <div>
       <h3>Nuestros Locales</h3>
-      <button onClick={toggleForm}>Añadir Ubicacion</button> {/* Solo Admin */}
+      <button className="myButtons" onClick={toggleForm}>Añadir Ubicacion</button> {/* Solo Admin */}
       
 
       {isFormVisible ? (
@@ -79,7 +79,7 @@ function Locations() {
           <img src={eachLocation.image} alt="imagen" width={"300px"}/>
           <p>{eachLocation.description}</p>
           </Link>
-          <button onClick={() => deleteProduct(eachLocation._id)}>
+          <button className="myButtons" onClick={() => deleteProduct(eachLocation._id)}>
               eliminar
             </button>
           </div>

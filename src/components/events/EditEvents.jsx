@@ -115,7 +115,7 @@ function EditEvents(props) {
           />
           <br />
 
-          <button>Aceptar cambios</button>
+          <button className="myButtons">Aceptar cambios</button>
           <br />
         </form>
 

@@ -83,7 +83,7 @@ function EditLocationForm(props) {
           onChange={handleAdressChange}
         />
         <br />
-        <button>Aceptar cambios</button>
+        <button className="myButtons">Aceptar cambios</button>
         <br />
       </form>
     </div>

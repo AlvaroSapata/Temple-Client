@@ -75,7 +75,7 @@ function AddLocationForm(props) {
             value={description}
             />
           <br />
-          <button type="submit">Agregar</button>
+          <button className="myButtons" type="submit">Agregar</button>
         </form>
       </div>
     );

@@ -92,7 +92,7 @@ function EditProductForm(props) {
           onChange={handleImageChange}
         />
         <br />
-        <button>Aceptar cambios</button>
+        <button className="myButtons">Aceptar cambios</button>
         <br />
         <div>
           {/* HACER QUE NO MUEVA TODO */}

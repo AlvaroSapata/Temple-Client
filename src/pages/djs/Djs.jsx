@@ -58,7 +58,7 @@ function Djs() {
   return (
     <div>
       <h3>Nuestros Djs</h3>
-      <button onClick={toggleForm}>Añadir Dj</button> {/* Solo Admin */}
+      <button className="myButtons" onClick={toggleForm}>Añadir Dj</button> {/* Solo Admin */}
       {isFormVisible ? (
         <AddDjForm
           getData={getData}
@@ -72,7 +72,7 @@ function Djs() {
             <img src={eachDj.image} alt="eachDj" width={"250px"} />
             <p>{eachDj.name}</p>
             {/* Utilizamos una funcion anonima para pasar el id a la funcion delete */}
-            <button onClick={() => deleteDj(eachDj._id)}>eliminar</button>
+            <button className="myButtons" onClick={() => deleteDj(eachDj._id)}>eliminar</button>
           </div>
         );
       })}

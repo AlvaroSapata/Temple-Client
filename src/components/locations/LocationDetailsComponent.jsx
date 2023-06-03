@@ -51,8 +51,8 @@ function LocationDetails() {
         <p>{locationDetails.description}</p>
         <img src={locationDetails.image} alt="imagen" width={"200px"} />
       </div>
-      <button onClick={handleDelete}>eliminar</button>
-      <button >editar</button>
+      <button className="myButtons" onClick={handleDelete}>eliminar</button>
+      <button className="myButtons" >editar</button>
       <EditLocationForm locationDetails={locationDetails} getData={getData}/>
 
     </div>

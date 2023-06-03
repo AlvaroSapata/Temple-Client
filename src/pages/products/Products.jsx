@@ -67,8 +67,8 @@ function Products() {
   return (
     <div>
       <h3>Nuestros Productos</h3>
-      <button onClick={toggleForm}>Añadir Producto</button> {/* Solo Admin */}
-      <button className="myEditProductBtn" onClick={flipProduct}>Editar Productos</button>
+      <button className="myButtons" onClick={toggleForm}>Añadir Producto</button> {/* Solo Admin */}
+      <button className="myButtons" onClick={flipProduct}>Editar Productos</button>
 
       {isFormVisible ? (
         <AddProductForm
@@ -84,11 +84,13 @@ function Products() {
           <div className={isEditing ? "flip-card editing" : "flip-card"}>
               <div className="flip-card-inner">
                 <div className="flip-card-front">
-                  <img
+                <div className="myPrductImgContainer">
+                  <img className="myProductImg"
                     src={eachProduct.image}
                     alt="eachProduct"
-                    width={"300px"}
+                    
                   />
+                  </div>
                   <p className="title">{eachProduct.name}</p>
                   <div className="myPriceAndIcon"><p>{eachProduct.price}€</p><button><img src="images/add-cart.png" alt="add" /></button></div>
                   

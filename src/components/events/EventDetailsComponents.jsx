@@ -58,8 +58,8 @@ function EventDetailsComponents(props) {
 
         <p>{eventDetails.joinPeople.length}</p>
       </div>
-      <button onClick={handleDelete}>eliminar</button>
-      <button>editar</button>
+      <button className="myButtons" onClick={handleDelete}>eliminar</button>
+      <button className="myButtons">editar</button>
       <EditEvent eventDetails={eventDetails} getData={getData} djs={eventDetails.djs} />
       
     </div>

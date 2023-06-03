@@ -53,7 +53,7 @@ function AddDjForm(props) {
           value={image}
         />
         <br />
-        <button type="submit">Agregar</button>
+        <button className="myButtons" type="submit">Agregar</button>
       </form>
     </div>
   );

@@ -11,7 +11,8 @@ import { getAllDjsService } from "../../services/djs.services";
 
 function EventDetailsComponents(props) {
   const params = useParams();
-  console.log(params);
+  
+  
   const navigate = useNavigate();
 
   const [eventDetails, setEventDetails] = useState(null);
@@ -31,16 +32,17 @@ function EventDetailsComponents(props) {
     try {
       const response = await getEventsDetailsService(params.eventsId);
 
-      console.log("EVENTDETAILSSERVICE",response);
+     
       setEventDetails(response.data);
       setIsLoading(false);
+      console.log(response.data, "aquiiiiii");
     } catch (error) {
       console.log(error);
     }
 
     try {
       const response = await getAllLocationsService()
-      console.log("GetAllLocationsService",response.data)
+      
       setAllLocations(response.data)
       setIsLoading(false);
     } catch(error){
@@ -49,7 +51,7 @@ function EventDetailsComponents(props) {
 
     try {
       const response = await getAllDjsService()
-      console.log("GetAllDjsService",response.data)
+   
       setAllDjs(response.data)
       setIsLoading(false);
 
@@ -68,12 +70,11 @@ function EventDetailsComponents(props) {
   };
 
 
-
   if (isLoading) {
     return <ScaleLoader color="#36d7b7" className="myLoader" />;
   }
 
-
+   
 
   return (
     <div>
@@ -84,6 +85,7 @@ function EventDetailsComponents(props) {
         <p>{eventDetails.date}</p>
         <img src={eventDetails.image} alt="imagen" width={"200px"} />
         <p>{eventDetails.location.title}</p>
+        
         <p>GALERIIIIA</p>
         <p>AFTER MOVIIIIE</p>
         {eventDetails.djs.map((eachDjs) => {

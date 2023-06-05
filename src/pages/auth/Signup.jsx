@@ -50,20 +50,20 @@ function Signup() {
         <h2>Signup</h2>
       </pre>
       <form onSubmit={handleSingup}>
-        <div class="user-box">
+        <div className="user-box">
           <input type="text" value={username} onChange={handleUsernameChange} />
           <label>Nombre de usuario</label>
         </div>
 
         <br />
-        <div class="user-box">
+        <div className="user-box">
           <input type="email" value={email} onChange={handleEmailChange} />
           <label>Email</label>
         </div>
 
         <br />
 
-        <div class="user-box">
+        <div className="user-box">
           <input
             type="password"
             value={password}
@@ -74,7 +74,7 @@ function Signup() {
 
         <br />
 
-        <div class="user-box">
+        <div className="user-box">
           <input
             type="password"
             value={passwordVerification}

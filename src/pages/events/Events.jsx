@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import axios from "axios";
 import AddEventForm from "../../components/events/AddEventForm";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 
 function Events() {
@@ -54,7 +55,7 @@ function Events() {
 
 
     if (isLoading) {
-      return <h3>Cargando...</h3>;
+      return <ScaleLoader color="#36d7b7" className="myLoader" />;
     }
 
   }

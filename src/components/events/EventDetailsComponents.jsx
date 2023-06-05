@@ -5,6 +5,8 @@ import {
   getEventsDetailsService,
 } from "../../services/events.services";
 import EditEvent from "./EditEvents";
+import ScaleLoader from "react-spinners/ScaleLoader";
+
 
 function EventDetailsComponents(props) {
   const params = useParams();
@@ -40,7 +42,7 @@ function EventDetailsComponents(props) {
     }
   };
   if (isLoading) {
-    return <h3>...buscando</h3>;
+    return <ScaleLoader color="#36d7b7" className="myLoader" />;
   }
 
   return (

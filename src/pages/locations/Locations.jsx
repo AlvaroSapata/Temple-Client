@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import {deleteLocationService} from "../../services/locations.services";
 import AddLocationForm from "../../components/locations/AddLocationForm";
+import ScaleLoader from "react-spinners/ScaleLoader";
+
 function Locations() {
   // Navegar a distintas rutas despues de una accion
   const navigate = useNavigate();
@@ -54,7 +56,7 @@ function Locations() {
 
   // Clausula de loading
   if (isLoading) {
-    return <h3>Cargando...</h3>;
+    return <ScaleLoader color="#36d7b7" className="myLoader" />;
   }
 
   return (

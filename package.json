@@ -15,6 +15,7 @@
     "react-leaflet": "^4.2.1",
     "react-router-dom": "^6.11.2",
     "react-scripts": "5.0.1",
+    "react-spinners": "^0.13.8",
     "routes": "^2.1.0",
     "services": "^0.0.3",
     "web-vitals": "^2.1.4"

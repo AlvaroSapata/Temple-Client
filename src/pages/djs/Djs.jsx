@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import AddDjForm from "../../components/djs/AddDjForm";
 import { deleteDjService } from "../../services/djs.services";
+import ScaleLoader from "react-spinners/ScaleLoader";
+
 
 function Djs() {
   // Navegar a distintas rutas despues de una accion
@@ -52,7 +54,7 @@ function Djs() {
 
   // Clausula de loading
   if (isLoading) {
-    return <h3>Cargando...</h3>;
+    return <ScaleLoader color="#36d7b7" className="myLoader" />;
   }
 
   return (

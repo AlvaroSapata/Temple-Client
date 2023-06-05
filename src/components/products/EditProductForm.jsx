@@ -92,11 +92,11 @@ function EditProductForm(props) {
           onChange={handleImageChange}
         />
         <br />
-        <button className="myButtons">Aceptar cambios</button>
+        <button className="myButtons"  style={{ width: "80%", marginLeft: "10%", marginRight:"10%"}}>Aceptar cambios</button>
         <br />
         <div>
           {/* HACER QUE NO MUEVA TODO */}
-          {showMessage && <p>Producto actualizado !</p>}
+          {showMessage && <p>Actualizado !</p>}
         </div>
       </form>
     </div>

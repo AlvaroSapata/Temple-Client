@@ -41,17 +41,17 @@ function Login() {
     }
   };
   return (
-    <div class="login-box">
+    <div className="login-box">
           <pre>
         <h2>Login</h2>
       </pre>
       <form onSubmit={handleLogin}>
-        <div class="user-box">
+        <div className="user-box">
           <input type="email" value={email} onChange={handleEmailChange} />
           <label>Email</label>
         </div>
 
-        <div class="user-box">
+        <div className="user-box">
           <input
             type="password"
             value={password}

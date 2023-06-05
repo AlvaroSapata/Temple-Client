@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { verifyService } from "../services/auth.services";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 const AuthContext = createContext();
 
@@ -29,7 +30,7 @@ function AuthWrapper(props) {
       setIsLoading(false);
     } catch (error) {
       // actualiza el estado de la app
-          console.log(error);
+      console.log(error);
       setIsLoggedIn(false);
       setUser(null);
       setIsLoading(false);
@@ -43,21 +44,16 @@ function AuthWrapper(props) {
   };
 
   if (isLoading) {
-    return (
-      <div>
-        <h3>... Validando credenciales</h3>
-      </div>
-    );
+    return <ScaleLoader color="#36d7b7" className="myLoader" />;
 
     //3* la renderizacion de la app con el contexto pasado
+  }
+  return (
+    <AuthContext.Provider value={passedContext}>
+      {props.children}
+    </AuthContext.Provider>
+  );
 }
-return (
-  <AuthContext.Provider value={passedContext}>
-    {props.children}
-  </AuthContext.Provider>
-);
-}
-
 
 //* devemos envolver app en index.js
 

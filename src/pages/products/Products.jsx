@@ -4,6 +4,7 @@ import axios from "axios";
 import AddProductForm from "../../components/products/AddProductForm";
 import { deleteProductService } from "../../services/products.services";
 import EditProductForm from "../../components/products/EditProductForm";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 function Products() {
   // Navegar a distintas rutas despues de una accion
@@ -61,7 +62,7 @@ function Products() {
 
   // Clausula de loading
   if (isLoading) {
-    return <h3>Cargando...</h3>;
+    return <ScaleLoader color="#36d7b7" className="myLoader" />;
   }
 
   return (
@@ -84,7 +85,7 @@ function Products() {
           <div className={isEditing ? "flip-card editing" : "flip-card"}>
               <div className="flip-card-inner">
                 <div className="flip-card-front">
-                <div className="myPrductImgContainer">
+                <div className="myPrductImgContainer" style={{maxWidth:"100%", maxHeight:"60%"}}>
                   <img className="myProductImg"
                     src={eachProduct.image}
                     alt="eachProduct"
@@ -93,7 +94,9 @@ function Products() {
                   </div>
                   <p className="title">{eachProduct.name}</p>
                   <div className="myPriceAndIcon"><p>{eachProduct.price}€</p><button><img src="images/add-cart.png" alt="add" /></button></div>
-                  
+                  <div>
+                    {eachProduct.description}
+                  </div>
                 </div>
                 <div className="flip-card-back">
                 <EditProductForm eachProduct={eachProduct} getData={getData} setIsEditing={setIsEditing}/>

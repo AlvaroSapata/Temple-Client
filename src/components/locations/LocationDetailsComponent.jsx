@@ -5,6 +5,8 @@ import {
   getLocationDetailsService,
 } from "../../services/locations.services";
 import EditLocationForm from "./EditLocationForm";
+import Card from "react-bootstrap/Card";
+import { Button } from "react-bootstrap";
 
 function LocationDetails() {
   const params = useParams();
@@ -14,6 +16,8 @@ function LocationDetails() {
   const [locationDetails, setLocationDetails] = useState(null);
   // Estado de loading
   const [isLoading, setIsLoading] = useState(true);
+  // Estado visivilidad formulario
+  const [isFormVisible, setIsFormVisible] = useState(false);
 
   useEffect(() => {
     getData();
@@ -39,22 +43,37 @@ function LocationDetails() {
       console.log(error);
     }
   };
+
+  // Muestra/esconde el formulario
+  const toggleForm = () => {
+    setIsFormVisible(!isFormVisible);
+  };
+
   if (isLoading) {
     return <h3>...buscando</h3>;
   }
 
   return (
-    <div>
+    <div className="locationsDetailsPage">
       <h3>Detalles de la Ubicacion</h3>
       <div>
-        <p>{locationDetails.name}</p>
-        <p>{locationDetails.description}</p>
-        <img src={locationDetails.image} alt="imagen" width={"200px"} />
+        <Card style={{ width: "18rem" }}>
+          <Card.Img variant="top" src={locationDetails.image} />
+          <Card.Body>
+            <Card.Title>{locationDetails.name}</Card.Title>
+            <Card.Text>{locationDetails.description}</Card.Text>
+            <Button variant="primary" onClick={handleDelete}>
+              eliminar
+            </Button>
+            <Button variant="primary" onClick={toggleForm}>
+              editar
+            </Button>
+          </Card.Body>
+        </Card>
       </div>
-      <button className="myButtons" onClick={handleDelete}>eliminar</button>
-      <button className="myButtons" >editar</button>
-      <EditLocationForm locationDetails={locationDetails} getData={getData}/>
 
+      {isFormVisible? <EditLocationForm locationDetails={locationDetails} getData={getData} />:null}
+      
     </div>
   );
 }

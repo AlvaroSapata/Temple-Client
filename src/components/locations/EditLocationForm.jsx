@@ -81,7 +81,7 @@ function EditLocationForm(props) {
   return (
     
     <div >
-      <p className="name">{locationDetails.name}</p>
+    
       <form onSubmit={handleSubmit} className="myBackCardForm">
         <label htmlFor="name">Nombre</label>
         <input

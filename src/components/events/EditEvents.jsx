@@ -255,7 +255,7 @@ function EditEvents(props) {
           <input
             type="file"
             name="aftermovie"
-            onChange={handleVideoUpload}
+            onChange={handleFileUpload}
             disabled={isUploading}
           />
 

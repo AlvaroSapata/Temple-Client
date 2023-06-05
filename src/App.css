@@ -367,7 +367,7 @@ a:hover:before {
   top: -20px;
   left: 0;
   color: #03e9f4;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .login-box form button {
@@ -375,7 +375,7 @@ a:hover:before {
   display: inline-block;
   padding: 10px 20px;
   color: #03e9f4;
-  font-size: 16px;
+  font-size: 15px;
   text-decoration: none;
   text-transform: uppercase;
   overflow: hidden;
@@ -391,8 +391,8 @@ a:hover:before {
   background: #03e9f4;
   color: #000000;
   border-radius: 5px;
-  box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
-    0 0 100px #03e9f4;
+  box-shadow: 0 0 2px #03e9f4, 0 0 10px #03e9f4, 0 0 10px #03e9f4,
+    0 0 50px #03e9f4;
 }
 
 .login-box button {

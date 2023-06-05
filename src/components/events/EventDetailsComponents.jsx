@@ -6,7 +6,8 @@ import {
 } from "../../services/events.services";
 import EditEvent from "./EditEvents";
 import ScaleLoader from "react-spinners/ScaleLoader";
-
+import { getAllLocationsService } from "../../services/locations.services";
+import { getAllDjsService } from "../../services/djs.services";
 
 function EventDetailsComponents(props) {
   const params = useParams();
@@ -14,8 +15,13 @@ function EventDetailsComponents(props) {
   const navigate = useNavigate();
 
   const [eventDetails, setEventDetails] = useState(null);
+
+  const [allLocations,setAllLocations] = useState([])
+
+  const [allDjs ,setAllDjs] = useState([])
   // Estado de loading
   const [isLoading, setIsLoading] = useState(true);
+
 
   useEffect(() => {
     getData();
@@ -25,11 +31,30 @@ function EventDetailsComponents(props) {
     try {
       const response = await getEventsDetailsService(params.eventsId);
 
-      console.log(response);
+      console.log("EVENTDETAILSSERVICE",response);
       setEventDetails(response.data);
       setIsLoading(false);
     } catch (error) {
       console.log(error);
+    }
+
+    try {
+      const response = await getAllLocationsService()
+      console.log("GetAllLocationsService",response.data)
+      setAllLocations(response.data)
+      setIsLoading(false);
+    } catch(error){
+      console.log(error)
+    }
+
+    try {
+      const response = await getAllDjsService()
+      console.log("GetAllDjsService",response.data)
+      setAllDjs(response.data)
+      setIsLoading(false);
+
+    } catch(error){
+      console.log(error)
     }
   };
 
@@ -41,29 +66,42 @@ function EventDetailsComponents(props) {
       console.log(error);
     }
   };
+
+
+
   if (isLoading) {
     return <ScaleLoader color="#36d7b7" className="myLoader" />;
   }
 
+
+
   return (
     <div>
       <h3>Detalles del Evento</h3>
+
       <div>
         <p>{eventDetails.title}</p>
         <p>{eventDetails.date}</p>
         <img src={eventDetails.image} alt="imagen" width={"200px"} />
+        <p>{eventDetails.location.title}</p>
         <p>GALERIIIIA</p>
         <p>AFTER MOVIIIIE</p>
-        {eventDetails.djs.map((eachDjs)=>{
-          return <p>{eachDjs.name}</p>
+        {eventDetails.djs.map((eachDjs) => {
+          return <p>{eachDjs.name}</p>;
         })}
 
         <p>{eventDetails.joinPeople.length}</p>
       </div>
-      <button className="myButtons" onClick={handleDelete}>eliminar</button>
+      <button className="myButtons" onClick={handleDelete}>
+        eliminar
+      </button>
       <button className="myButtons">editar</button>
-      <EditEvent eventDetails={eventDetails} getData={getData} djs={eventDetails.djs} />
-      
+      <EditEvent
+        eventDetails={eventDetails}
+        getData={getData}
+        djsArr={allDjs}
+        locationsArr={allLocations}
+      />
     </div>
   );
 }

@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { createEventService } from "../../services/events.services";
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
 import Form from "react-bootstrap/Form";
 function AddEventForm(props) {
   // console.log(props.djsArr);
@@ -118,7 +116,7 @@ function AddEventForm(props) {
 
         <br />
 
-        <label htmlFor="gallery">Gallery</label>
+        <label htmlFor="gallery">Galeria de Fotografias</label>
         <input
           type="text"
           name="gallery"
@@ -128,7 +126,7 @@ function AddEventForm(props) {
 
         <br />
 
-        <label htmlFor="afterMovie">After Movie</label>
+        <label htmlFor="afterMovie">Aftermovie</label>
         <input
           type="text"
           name="afterMovie"

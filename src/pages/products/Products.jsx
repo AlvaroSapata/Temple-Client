@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import AddProductForm from "../../components/products/AddProductForm";
-import { deleteProductService } from "../../services/products.services";
+import { deleteProductService, getAllProductsService } from "../../services/products.services";
 import EditProductForm from "../../components/products/EditProductForm";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
@@ -25,9 +24,7 @@ function Products() {
   // Actualizamos los estados
   const getData = async () => {
     try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/products`
-      );
+      const response = await getAllProductsService()
       console.log(response);
       setProducts(response.data);
       setIsLoading(false);

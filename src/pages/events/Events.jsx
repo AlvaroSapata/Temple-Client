@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
-import axios from "axios";
 import AddEventForm from "../../components/events/AddEventForm";
 import ScaleLoader from "react-spinners/ScaleLoader";
+import { getAllLocationsService } from "../../services/locations.services";
+import { getAllDjsService } from "../../services/djs.services";
+import { getAllEventsService } from "../../services/events.services";
 
 
 function Events() {
@@ -26,7 +28,7 @@ function Events() {
   const getData = async () => {
 
     try {
-      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/locations`)
+      const response = await getAllLocationsService()
       
       setLocations(response.data);
       setIsLoading(false);
@@ -35,7 +37,7 @@ function Events() {
     }
 
     try{
-       const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/djs`)
+       const response = await getAllDjsService()
        setDjs(response.data);
       setIsLoading(false);
     }catch(error){
@@ -43,9 +45,7 @@ function Events() {
     }
 
     try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/events`
-      )
+      const response = await getAllEventsService()
       
       setEvents(response.data);
       setIsLoading(false);
@@ -72,7 +72,7 @@ function Events() {
           <Link to={`/events/${eachEvent._id}`}>
           <div key={eachEvent._id}>
             <h4>{eachEvent.title}</h4>
-            <img src={eachEvent.image} alt="imagen" />
+            <img src={eachEvent.image} alt="imagen" width={"200px"}/>
             <p>{eachEvent.date}</p>
             <p>{eachEvent.location?.name}</p>
             <p>{eachEvent.djs[0].name}</p>

@@ -101,7 +101,7 @@ function AddEventForm(props) {
         />
 
         <br />
-
+        <label htmlFor="location">Ubicacion</label>
         <Form.Select
           id="dropdown-basic-button"
           title="Dropdown button"
@@ -115,14 +115,6 @@ function AddEventForm(props) {
             );
           })}
         </Form.Select>
-
-        {/* <label htmlFor="location">Location</label>
-        <input
-          type="text"
-          name="location"
-          onChange={handleLocationChange}
-          value={location}
-        /> */}
 
         <br />
 
@@ -149,9 +141,6 @@ function AddEventForm(props) {
           {djsArr.map((eachDjs) => {
             return (
               <option key={eachDjs._id} value={eachDjs._id}> {eachDjs.name}</option>
-
-              // checked={false}
-              // onChange={handleCheckboxChange}
             );
           })}
         </Form.Select>

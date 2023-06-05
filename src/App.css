@@ -118,7 +118,7 @@ font-family: Inconsolata;
   bottom: -5px;
 }
 
-.myNavbar a::before {
+.myNavbar a:before {
   right: 0;
   top: -5px;
 }

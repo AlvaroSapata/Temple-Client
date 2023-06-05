@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import {deleteLocationService} from "../../services/locations.services";
+import {deleteLocationService, getAllLocationsService} from "../../services/locations.services";
 import AddLocationForm from "../../components/locations/AddLocationForm";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
@@ -24,9 +23,7 @@ function Locations() {
   // Actualizamos los estados
   const getData = async () => {
     try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/locations`
-      );
+      const response = await getAllLocationsService()
       console.log(response);
       setLocations(response.data);
       setIsLoading(false);

@@ -11,6 +11,7 @@ function AuthWrapper(props) {
   const [user, setUser] = useState(null);
   // Funcion isloading => la app empieza validando el token
   const [isLoading, setIsLoading] = useState(true);
+  // isAdmin????
 
   useEffect(() => {
     authenticateUser();

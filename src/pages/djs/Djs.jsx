@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import AddDjForm from "../../components/djs/AddDjForm";
-import { deleteDjService } from "../../services/djs.services";
+import { deleteDjService, getAllDjsService } from "../../services/djs.services";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
 
@@ -23,9 +22,7 @@ function Djs() {
   // Actualizamos los estados
   const getData = async () => {
     try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/djs`
-      );
+      const response = await getAllDjsService()
       console.log(response);
       setDjs(response.data);
       setIsLoading(false);

@@ -2,11 +2,12 @@
 import { useEffect, useState } from "react";
 import { editEventsService } from "../../services/events.services";
 import { useNavigate } from "react-router-dom";
+import Form from "react-bootstrap/Form";
 
 function EditEvents(props) {
     
     const { eventDetails, getData, djs} = props;
-
+    console.log(eventDetails)
     
 
     const navigate = useNavigate();
@@ -113,7 +114,21 @@ function EditEvents(props) {
             value={afterMovie}
             onChange={handleAfterMovieChange}
           />
-          <br />
+{/*           <br />
+          <Form.Select
+          id="dropdown-basic-button"
+          title="Dropdown button"
+          onChange={handleselectedLocations}
+        >
+          {locationsArr.map((eachLocation) => {
+            return (
+              <option key={eachLocation._id} value={eachLocation._id}>
+                {eachLocation.name}
+              </option>
+            );
+          })}
+        </Form.Select> */}
+        <br />
 
           <button className="myButtons">Aceptar cambios</button>
           <br />

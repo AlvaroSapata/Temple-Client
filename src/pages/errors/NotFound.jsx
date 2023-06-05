@@ -1,6 +1,6 @@
 function NotFound() {
     return (
-      <div className="notFoundPage">NotFound</div>
+      <div className="notFoundPage"><img src="images/NotFound.png" alt="img" /></div>
     )
   }
   

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { editEventsService } from "../../services/events.services";
 import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
+import { uploadImageService } from "../../services/upload.services";
 
 function EditEvents(props) {
   const { eventDetails, getData, djsArr, locationsArr } = props;
@@ -19,6 +20,9 @@ function EditEvents(props) {
 
   const [locationsSelected, setLocationsSelected] = useState(eventDetails.location);
   const [djsSelected, setDjsSelected] = useState(eventDetails.djs);
+
+  const [imageUrl, setImageUrl] = useState(null);
+  const [isUploading, setIsUploading] = useState(false);
 
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleImageChange = (e) => setImage(e.target.value);
@@ -57,7 +61,7 @@ function EditEvents(props) {
     try {
       const updatedEvent = {
         title,
-        image,
+        image: imageUrl,
         date,
         location: locationsSelected,
         gallery,
@@ -69,6 +73,36 @@ function EditEvents(props) {
       navigate("/events");
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const handleFileUpload = async (event) => {
+    // console.log("The file to be uploaded is: ", e.target.files[0]);
+
+    if (!event.target.files[0]) {
+      // to prevent accidentally clicking the choose file button and not selecting a file
+      return;
+    }
+
+    setIsUploading(true); // to start the loading animation
+
+    const uploadData = new FormData(); // images and other files need to be sent to the backend in a FormData
+    uploadData.append("image", event.target.files[0]);
+    //                   |
+    //     this name needs to match the name used in the middleware => uploader.single("image")
+
+    try {
+      const response = await uploadImageService(uploadData);
+      // or below line if not using services
+      // const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/upload`, uploadData)
+
+      setImageUrl(response.data.imageUrl);
+      //                          |
+      //     this is how the backend sends the image to the frontend => res.json({ imageUrl: req.file.path });
+
+      setIsUploading(false); // to stop the loading animation
+    } catch (error) {
+      navigate("/error");
     }
   };
 
@@ -89,14 +123,27 @@ function EditEvents(props) {
           onChange={handleTitleChange}
         />
         <br />
-        <label htmlFor="description">Imagen</label>
-        <input
-          type="text"
-          name="description"
-          id="description"
-          value={image}
-          onChange={handleImageChange}
-        />
+        <div>
+          <label>Image: </label>
+          <input
+            type="file"
+            name="image"
+            onChange={handleFileUpload}
+            disabled={isUploading}
+          />
+
+          {/* below disabled prevents the user from attempting another upload while one is already happening */}
+        </div>
+
+        {/* to render a loading message or spinner while uploading the picture */}
+        {isUploading ? <h3>... uploading image</h3> : null}
+
+        {/* below line will render a preview of the image from cloudinary */}
+        {imageUrl ? (
+          <div>
+            <img src={imageUrl} alt="img" width={200} />
+          </div>
+        ) : null}
         <br />
         <label htmlFor="date">FECHA</label>
         <input

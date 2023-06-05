@@ -5,6 +5,7 @@ import { deleteProductService, getAllProductsService } from "../../services/prod
 import EditProductForm from "../../components/products/EditProductForm";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
+
 function Products() {
   // Navegar a distintas rutas despues de una accion
   const navigate = useNavigate();

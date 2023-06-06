@@ -2,6 +2,9 @@ import { useState } from "react";
 import { createProductService } from "../../services/products.services";
 import { uploadImageService } from "../../services/upload.services";
 import { useNavigate } from "react-router-dom";
+import Form from "react-bootstrap/Form";
+import ScaleLoader from "react-spinners/ScaleLoader";
+
 function AddProductForm(props) {
   // console.log(props.setIsLoading);
   // console.log(props.getData);
@@ -76,59 +79,66 @@ function AddProductForm(props) {
     <div className="myProductFormContainer">
       <h3>Añadir Producto</h3>
 
-      <form onSubmit={handleSubmit} className="myProductForm">
-        <label htmlFor="name">name</label>
-        <input
-          type="text"
-          name="name"
-          onChange={handleNameChange}
-          value={name}
-        />
-
-        <br />
-
-        <div>
-          <label>Image: </label>
-          <input
+      <Form onSubmit={handleSubmit} className="myProductForm">
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Nombre</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Nombre del producto"
+            name="name"
+            onChange={handleNameChange}
+            value={name}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Descripcion</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Descripcion del producto"
+            name="description"
+            onChange={handleDescriptionChange}
+            value={description}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Precio</Form.Label>
+          <Form.Control
+            type="number"
+            placeholder="Precio del producto"
+            name="price"
+            onChange={handlePriceChange}
+            value={price}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Imagen</Form.Label>
+          <Form.Control
             type="file"
+            placeholder="Precio del producto"
             name="image"
             onChange={handleFileUpload}
             disabled={isUploading}
+            
           />
+        </Form.Group>
+        
+        
 
-          {/* below disabled prevents the user from attempting another upload while one is already happening */}
-        </div>
-
-        {/* to render a loading message or spinner while uploading the picture */}
         {isUploading ? <h3>... uploading image</h3> : null}
 
-        {/* below line will render a preview of the image from cloudinary */}
         {imageUrl ? (
           <div>
             <img src={imageUrl} alt="img" width={200} />
           </div>
         ) : null}
         <br />
-        <label htmlFor="price">price</label>
-        <input
-          type="text"
-          name="price"
-          onChange={handlePriceChange}
-          value={price}
-        />
-        <br />
-        <label htmlFor="description">description</label>
-        <input
-          type="text"
-          name="description"
-          onChange={handleDescriptionChange}
-          value={description}
-        />
-        <br />
+
+     
+  
         <button className="myButtons" type="submit">
           Agregar
         </button>
-      </form>
+      </Form>
     </div>
   );
 }

@@ -6,6 +6,8 @@ import { getAllLocationsService } from "../../services/locations.services";
 import { getAllDjsService } from "../../services/djs.services";
 import { getAllEventsService } from "../../services/events.services";
 import { AuthContext } from "../../context/auth.context.js";
+import Card from "react-bootstrap/Card";
+import { Button } from "react-bootstrap";
 
 function Events() {
   const navigate = useNavigate();
@@ -19,33 +21,20 @@ function Events() {
   const [djs, setDjs] = useState([]);
 
   const [locations, setLocations] = useState([]);
+
   // Estado visivilidad formulario
   const [isFormVisible, setIsFormVisible] = useState(false);
 
-  // const [esAdministrador, setEsAdministrador] = useState(false);
-
+  const [pastEvents, setPastEvents] = useState([]);
+  const [nextEvents, setNextEvents] = useState([]);
 
   useEffect(() => {
     getData();
-    // const verificarAdministrador = () => {
-    //   // Obtiene el usuario actualmente autenticado (puede ser desde el estado, local storage, etc.)
-      
-
-    //   const esAdminUsuario = isAdminVerify();
-    //   setEsAdministrador(esAdminUsuario);
-    // };
-
-    // verificarAdministrador();
   }, []);
-
-
-
-
 
   const getData = async () => {
     try {
       const response = await getAllLocationsService();
-
       setLocations(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -63,27 +52,40 @@ function Events() {
     try {
       const response = await getAllEventsService();
       const responseClone = [...response.data];
-      responseClone.forEach((eachEvent) => {
+      /*       responseClone.forEach((eachEvent) => {
         eachEvent.date = new Date(eachEvent.date).toLocaleDateString();
-      });
+      }); */
 
       setEvents(responseClone);
       setIsLoading(false);
+
+      const thisDate = new Date();
+
+      const past = responseClone.filter(
+        (eachEvent) => new Date(eachEvent.date) < thisDate
+      );
+      const next = responseClone.filter(
+        (eachEvent) => new Date(eachEvent.date) > thisDate
+      );
+
+      setPastEvents(past);
+      setNextEvents(next);
     } catch (error) {
       navigate("/error");
     }
   };
+
   // Muestra/esconde el formulario
   const toggleForm = () => {
     setIsFormVisible(!isFormVisible);
   };
 
+  // Estado de loading
   if (isLoading) {
     return <ScaleLoader color="#36d7b7" className="myLoader" />;
   }
   return (
-    <div>
-      <h3>Nuestros Eventos</h3>
+    <div className="eventsPage">
       {isAdmin ? (
         <button className="myButtons" onClick={toggleForm}>
           Añadir Evento
@@ -98,22 +100,36 @@ function Events() {
           locationsArr={locations}
         />
       ) : null}
-      {events.map((eachEvent) => {
-        return (
+      <h3>Proximos Eventos:</h3>
+      <div className="myEventsList">
+        {nextEvents.map((eachEvent) => (
           <Link to={`/events/${eachEvent._id}`} key={eachEvent._id}>
-            <div>
-              <h4>{eachEvent.title}</h4>
-              <img src={eachEvent.image} alt="imagen" width={"200px"} />
-              <p>{eachEvent.date}</p>
-              <p>{eachEvent.location?.name}</p>
-              {/* PONER QUE APAREZCAN TODOS LOS DJS */}
-              {eachEvent.djs.map((eachDj) => {
-                return <p key={eachDj._id}>{eachDj.name}</p>;
-              })}
-            </div>
+            <Card className="myEventsCardStyle">
+              <Card.Title>{eachEvent.title}</Card.Title>
+              <Card.Img src={eachEvent.image} alt="imagen" width={"200px"} />
+              <Card.Body>
+                <Card.Text>{eachEvent.date}</Card.Text>
+                <Card.Text>{eachEvent.location?.name}</Card.Text>
+              </Card.Body>
+            </Card>
           </Link>
-        );
-      })}
+        ))}
+      </div>
+      <h3>Eventos Pasados:</h3>
+      <div className="myEventsList">
+        {pastEvents.map((eachEvent) => (
+          <Link to={`/events/${eachEvent._id}`} key={eachEvent._id}>
+            <Card className="myEventsCardStyle">
+              <Card.Title>{eachEvent.title}</Card.Title>
+              <Card.Img src={eachEvent.image} alt="imagen" width={"200px"} />
+              <Card.Body>
+                <Card.Text>{eachEvent.date}</Card.Text>
+                <Card.Text>{eachEvent.location?.name}</Card.Text>
+              </Card.Body>
+            </Card>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }

@@ -596,12 +596,26 @@ a:hover:before {
   justify-content: center;
   flex-wrap: wrap;
   gap: 2vw;
+  overflow: hidden;
 }
+.myLocationsListImgContainer{
+  width: 300px;
+  height: 400px;
+  overflow: hidden;
+}
+.myLocationsList Img{
+  width: 100%;
+  height: 100%;
+  background-size: cover; 
+  background-position: center;
+}
+
 .myLocationsList a {
   text-decoration: none;
 }
-.myCardStyle {
+.myLocationCardStyle {
   width: 300px;
+  height: 500px;
   background-color: #471971;
   color: bisque;
 }
@@ -651,4 +665,41 @@ a:hover:before {
 
 .reactplayer {
   width: 100% !important;
+}
+
+/* EVENTS _______________________________________________ */
+.eventsPage{
+  margin-top: 60px;
+}
+
+.myEventsList{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2vw;
+  overflow: hidden;
+}
+
+.myEventsListImgContainer{
+  width: 300px;
+  height: 400px;
+  overflow: hidden;
+}
+
+.myEventsList Img{
+  width: 100%;
+  height: 100%;
+  background-size: cover; 
+  background-position: center;
+}
+
+.myEventsList a{
+  text-decoration: none;
+}
+
+.myEventsCardStyle{
+  width: 300px;
+  height: 500px;
+  background-color: #471971;
+  color: bisque;
 }

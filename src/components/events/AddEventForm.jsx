@@ -5,15 +5,12 @@ import Form from "react-bootstrap/Form";
 import { uploadImageService } from "../../services/upload.services";
 import { useNavigate } from "react-router-dom";
 function AddEventForm(props) {
-  // console.log(props.djsArr);
   const { setIsLoading, getData, djsArr, locationsArr } = props;
   const navigate = useNavigate();
-  // console.log(locationsArr);
 
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
   const [date, setDate] = useState("");
-  // const [location, setLocation] = useState("");
   const [gallery, setGallery] = useState("");
   const [afterMovie, setAfterMovie] = useState("");
   const [djs, setDjs] = useState([]);
@@ -24,7 +21,6 @@ function AddEventForm(props) {
 
   const handleselectedLocations = (e) => {
     setLocationsSelected(e.target.value);
-    // console.log(e.target.value);
   };
 
   const handleselectedDjs = (e) => {
@@ -41,11 +37,11 @@ function AddEventForm(props) {
   //   const [ischecked, setIsChecked] = useState(false);
 
   const handleTitleChange = (e) => setTitle(e.target.value);
-  const handleImageChange = (e) => setImage(e.target.value);
+  // const handleImageChange = (e) => setImage(e.target.value);
   const handleDateChange = (e) => setDate(e.target.value);
   // const handleLocationChange = (e) => setLocation(e.target.value);
-  const handleGalleryChange = (e) => setGallery(e.target.value);
-  const handleAfterMovieChange = (e) => setAfterMovie(e.target.value);
+  // const handleGalleryChange = (e) => setGallery(e.target.value);
+  // const handleAfterMovieChange = (e) => setAfterMovie(e.target.value);
   //   const handleDjsChange = (e) => setDjs(e.target.value);
 
   //   const handleCheckboxChange = (e) => setIsChecked(!ischecked);
@@ -128,7 +124,7 @@ function AddEventForm(props) {
         </div>
 
         {/* to render a loading message or spinner while uploading the picture */}
-        {isUploading ? <h3>... uploading image</h3> : null}
+        {isUploading ? <h5>... uploading image</h5> : null}
 
         {/* below line will render a preview of the image from cloudinary */}
         {imageUrl ? (
@@ -163,15 +159,15 @@ function AddEventForm(props) {
 
         <br />
 
-        <label htmlFor="gallery">Galeria de Fotografias</label>
+        {/* <label htmlFor="gallery">Galeria de Fotografias</label>
         <input
           type="text"
           name="gallery"
           onChange={handleGalleryChange}
           value={gallery}
-        />
+        /> */}
 
-        <br />
+        {/* <br />
 
         <label htmlFor="afterMovie">Aftermovie</label>
         <input
@@ -180,7 +176,8 @@ function AddEventForm(props) {
           onChange={handleAfterMovieChange}
           value={afterMovie}
         />
-        <br />
+        <br /> */}
+
         <label htmlFor="djs">DJS</label>
         <Form.Select multiple={true} onChange={handleselectedDjs}>
           {djsArr.map((eachDjs) => {

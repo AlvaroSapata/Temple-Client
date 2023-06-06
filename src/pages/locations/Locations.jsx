@@ -83,8 +83,10 @@ function Locations() {
           return (
             <div key={eachLocation._id}>
               <Link to={`/locations/${eachLocation._id}`}>
-                <Card className="myCardStyle">
+                <Card className="myLocationCardStyle">
+                <div className="myLocationsListImgContainer">
                   <Card.Img variant="top" src={eachLocation.image} />
+                  </div>
                   <Card.Body>
                     <Card.Title>{eachLocation.name}</Card.Title>
                     <Card.Text>{eachLocation.description}</Card.Text>

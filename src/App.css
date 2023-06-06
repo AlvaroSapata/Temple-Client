@@ -97,6 +97,7 @@ font-family: Inconsolata;
   left: 0;
   display: flex;
   align-items: center;
+  z-index: 1;
 }
 
 .myNavbar a {
@@ -550,7 +551,7 @@ a:hover:before {
   position: relative;
   display: inline-block;
   padding: 5px 5px;
-  color: #03e9f4;
+  color: bisque;
   font-size: 14px;
   text-decoration: none;
   text-transform: uppercase;
@@ -564,11 +565,12 @@ a:hover:before {
 }
 
 .myButtons:hover {
-  background: #fc538a;
-  color: #03e9f4;
+  background: #471971;
+  color: bisque;
+  /* border:solid 2px #fc538a; */
   border-radius: 5px;
-  box-shadow: 0 0 5px #fc538a, 0 0 15px #fc538a, 0 0 10px #fc538a,
-    0 0 100px #fc538a;
+  box-shadow: 0 0 5px #a572d4, 0 0 15px #a572d4, 0 0 10px #a572d4,
+    0 0 100px #a572d4;
 }
 
 .loginBtnFix {
@@ -614,15 +616,23 @@ a:hover:before {
 .notFoundPage{
   margin-top: 0px;
   height: 95vh;
-  background-size: auto 100vh, auto;
-  background-repeat: repeat;
-  filter: blur(8px);
-   background-image: url("../public/images/NotFound.png"); 
-   z-index: 0;
+
 }
 
-.notFoundPage img{
+.notFoundPage1 img{
   margin-top: 0px;
   height: 100vh;
   filter: blur(0px);
 }
+/* .notFoundPage2 img{
+  margin-top: 0px;
+  height: 100vh;
+  filter: blur(0px);
+  margin-left: 0;
+}
+.notFoundPage3 img{
+  margin-top: 0px;
+  height: 100vh;
+  filter: blur(0px);
+}
+ */

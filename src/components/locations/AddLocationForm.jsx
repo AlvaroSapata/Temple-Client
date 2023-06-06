@@ -4,8 +4,8 @@ import { uploadImageService } from "../../services/upload.services";
 import { useNavigate } from "react-router-dom";
 
 function AddLocationForm(props) {
-    console.log(props.setIsLoading);
-    console.log(props.getData);
+    // console.log(props.setIsLoading);
+    // console.log(props.getData);
   const navigate = useNavigate()
     // Destructurar props
     const { setIsLoading, getData, toggleForm } = props;
@@ -26,7 +26,7 @@ const [isUploading, setIsUploading] = useState(false);
   
     const handleSubmit = async (e) => {
       e.preventDefault();
-      console.log("apretando el boton");
+      // console.log("apretando el boton");
       setIsLoading(true);
       toggleForm();
   

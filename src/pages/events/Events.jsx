@@ -1,13 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AddEventForm from "../../components/events/AddEventForm";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { getAllLocationsService } from "../../services/locations.services";
 import { getAllDjsService } from "../../services/djs.services";
 import { getAllEventsService } from "../../services/events.services";
+import { AuthContext } from "../../context/auth.context.js";
 
 function Events() {
   const navigate = useNavigate();
+  // Destructuracion
+  const { isAdmin } = useContext(AuthContext);
 
   const [events, setEvents] = useState([]);
 
@@ -43,8 +46,12 @@ function Events() {
 
     try {
       const response = await getAllEventsService();
+      const responseClone = [...response.data];
+      responseClone.forEach((eachEvent) => {
+        eachEvent.date = new Date(eachEvent.date).toLocaleDateString();
+      });
 
-      setEvents(response.data);
+      setEvents(responseClone);
       setIsLoading(false);
     } catch (error) {
       navigate("/error");
@@ -61,10 +68,12 @@ function Events() {
   return (
     <div>
       <h3>Nuestros Eventos</h3>
-      <button className="myButtons" onClick={toggleForm}>
-        Añadir Evento
-      </button>{" "}
-      {/* Solo Admin */}
+      {isAdmin ? (
+        <button className="myButtons" onClick={toggleForm}>
+          Añadir Evento
+        </button>
+      ) : null}
+
       {isFormVisible ? (
         <AddEventForm
           getData={getData}
@@ -75,13 +84,16 @@ function Events() {
       ) : null}
       {events.map((eachEvent) => {
         return (
-          <Link to={`/events/${eachEvent._id}`}>
-            <div key={eachEvent._id}>
+          <Link to={`/events/${eachEvent._id}`} key={eachEvent._id}>
+            <div>
               <h4>{eachEvent.title}</h4>
               <img src={eachEvent.image} alt="imagen" width={"200px"} />
               <p>{eachEvent.date}</p>
               <p>{eachEvent.location?.name}</p>
-              <p>{eachEvent.djs[0].name}</p>
+              {/* PONER QUE APAREZCAN TODOS LOS DJS */}
+              {eachEvent.djs.map((eachDj) => {
+                return <p key={eachDj._id}>{eachDj.name}</p>;
+              })}
             </div>
           </Link>
         );

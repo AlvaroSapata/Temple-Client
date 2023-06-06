@@ -3,8 +3,8 @@ import { createProductService } from "../../services/products.services";
 import { uploadImageService } from "../../services/upload.services";
 import { useNavigate } from "react-router-dom";
 function AddProductForm(props) {
-  console.log(props.setIsLoading);
-  console.log(props.getData);
+  // console.log(props.setIsLoading);
+  // console.log(props.getData);
   const navigate = useNavigate();
   // Destructurar props
   const { setIsLoading, getData, toggleForm } = props;
@@ -25,7 +25,7 @@ function AddProductForm(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("apretando el boton");
+    // console.log("apretando el boton");
     setIsLoading(true);
     toggleForm();
 

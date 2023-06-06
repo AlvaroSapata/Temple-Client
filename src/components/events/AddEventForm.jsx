@@ -16,31 +16,28 @@ function AddEventForm(props) {
   // const [location, setLocation] = useState("");
   const [gallery, setGallery] = useState("");
   const [afterMovie, setAfterMovie] = useState("");
-    const [djs, setDjs] = useState([]);
+  const [djs, setDjs] = useState([]);
   const [locationsSelected, setLocationsSelected] = useState("");
 
   const [imageUrl, setImageUrl] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
 
-
   const handleselectedLocations = (e) => {
     setLocationsSelected(e.target.value);
-    console.log(e.target.value);
+    // console.log(e.target.value);
   };
 
   const handleselectedDjs = (e) => {
-   const copyDjs = [...e.target.children]
-   const filteredDjs= copyDjs.filter((eachDj)=>{
-     return eachDj.selected
-     
-    })
-     const djsIds =  filteredDjs.map((eachDj)=>{
-      return eachDj.value
-    }) 
+    const copyDjs = [...e.target.children];
+    const filteredDjs = copyDjs.filter((eachDj) => {
+      return eachDj.selected;
+    });
+    const djsIds = filteredDjs.map((eachDj) => {
+      return eachDj.value;
+    });
     setDjs(djsIds);
-    
   };
-  
+
   //   const [ischecked, setIsChecked] = useState(false);
 
   const handleTitleChange = (e) => setTitle(e.target.value);
@@ -54,7 +51,7 @@ function AddEventForm(props) {
   //   const handleCheckboxChange = (e) => setIsChecked(!ischecked);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("apretando el boton");
+    // console.log("apretando el boton");
     setIsLoading(true);
 
     try {
@@ -73,11 +70,7 @@ function AddEventForm(props) {
     } catch (error) {
       console.log(error);
     }
-
-
-
   };
-
 
   const handleFileUpload = async (event) => {
     // console.log("The file to be uploaded is: ", e.target.files[0]);
@@ -111,7 +104,7 @@ function AddEventForm(props) {
   return (
     <div className="myEventFormContainer">
       <h3>Añadir Evento</h3>
-        
+
       <form onSubmit={handleSubmit} className="myEventForm">
         <label htmlFor="title">titulo</label>
         <input
@@ -192,13 +185,18 @@ function AddEventForm(props) {
         <Form.Select multiple={true} onChange={handleselectedDjs}>
           {djsArr.map((eachDjs) => {
             return (
-              <option key={eachDjs._id} value={eachDjs._id}> {eachDjs.name}</option>
+              <option key={eachDjs._id} value={eachDjs._id}>
+                {" "}
+                {eachDjs.name}
+              </option>
             );
           })}
         </Form.Select>
         <br />
 
-        <button className="myButtons" type="submit">Agregar</button>
+        <button className="myButtons" type="submit">
+          Agregar
+        </button>
       </form>
     </div>
   );

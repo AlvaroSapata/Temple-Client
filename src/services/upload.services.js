@@ -1,7 +1,11 @@
 import service from "./config.services";
 
 const uploadImageService = (imageFile) => {
-  return service.post("/upload", imageFile);
+  return service.post("/upload/image", imageFile);
 };
 
-export { uploadImageService };
+const uploadVideoService =(videoFile) => {
+  return service.post("/upload/video", videoFile);
+};
+
+export { uploadImageService,uploadVideoService };

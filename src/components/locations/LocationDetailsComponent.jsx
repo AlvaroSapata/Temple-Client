@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   deleteLocationService,
@@ -7,10 +7,13 @@ import {
 import EditLocationForm from "./EditLocationForm";
 import Card from "react-bootstrap/Card";
 import { Button } from "react-bootstrap";
+import { AuthContext } from "../../context/auth.context.js";
 
 function LocationDetails() {
   const params = useParams();
-  console.log(params);
+  // console.log(params);
+  // Destructuracion
+  const { isAdmin } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [locationDetails, setLocationDetails] = useState(null);
@@ -27,7 +30,7 @@ function LocationDetails() {
     try {
       const response = await getLocationDetailsService(params.locationId);
 
-      console.log(response);
+      // console.log(response);
       setLocationDetails(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -62,18 +65,23 @@ function LocationDetails() {
           <Card.Body>
             <Card.Title>{locationDetails.name}</Card.Title>
             <Card.Text>{locationDetails.description}</Card.Text>
-            <Button variant="primary" onClick={handleDelete}>
-              eliminar
-            </Button>
-            <Button variant="primary" onClick={toggleForm}>
-              editar
-            </Button>
+            {isAdmin ? (
+              <Button variant="primary" onClick={handleDelete}>
+                eliminar
+              </Button>
+            ) : null}
+            {isAdmin ? (
+              <Button variant="primary" onClick={toggleForm}>
+                editar
+              </Button>
+            ) : null}
           </Card.Body>
         </Card>
       </div>
 
-      {isFormVisible? <EditLocationForm locationDetails={locationDetails} getData={getData} />:null}
-      
+      {isFormVisible ? (
+        <EditLocationForm locationDetails={locationDetails} getData={getData} />
+      ) : null}
     </div>
   );
 }

@@ -35,7 +35,7 @@ const [isUploading, setIsUploading] = useState(false);
       };
       await editProductService(eachProduct._id, updatedProduct);
       setShowMessage(true);
-      console.log("producto actualizado");
+      // console.log("producto actualizado");
     } catch (error) {
       console.log(error);
     }

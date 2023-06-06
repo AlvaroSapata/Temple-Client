@@ -3,8 +3,8 @@ import { createDjService } from "../../services/djs.services";
 import { uploadImageService } from "../../services/upload.services";
 import { useNavigate } from "react-router-dom";
 function AddDjForm(props) {
-  console.log(props.setIsLoading);
-  console.log(props.getData);
+  // console.log(props.setIsLoading);
+  // console.log(props.getData);
 
   // Destructurar props
   const { setIsLoading, getData, toggleForm } = props;
@@ -23,7 +23,7 @@ function AddDjForm(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("apretando el boton");
+    // console.log("apretando el boton");
     setIsLoading(true);
     toggleForm();
 

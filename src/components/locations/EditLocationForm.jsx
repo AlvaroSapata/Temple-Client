@@ -35,7 +35,7 @@ function EditLocationForm(props) {
         image: imageUrl
       };
       await editLocationService(locationDetails._id, updatedProduct);
-      console.log("Ubicacion actualizada");
+      // console.log("Ubicacion actualizada");
       navigate("/locations");
     } catch (error) {
       console.log(error);

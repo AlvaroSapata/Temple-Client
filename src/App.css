@@ -636,3 +636,8 @@ a:hover:before {
   filter: blur(0px);
 }
  */
+
+ /* DETALLES EVENTO _________________________________________ */
+ .eventDetailsPage{
+  margin-top: 50px;
+ }

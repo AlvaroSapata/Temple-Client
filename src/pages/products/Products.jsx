@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AddProductForm from "../../components/products/AddProductForm";
 import { deleteProductService, getAllProductsService } from "../../services/products.services";
 import EditProductForm from "../../components/products/EditProductForm";
 import ScaleLoader from "react-spinners/ScaleLoader";
+import { AuthContext } from "../../context/auth.context.js";
 
 
 function Products() {
@@ -18,15 +19,19 @@ function Products() {
   // Estado para editar el producto
   const [isEditing, setIsEditing] = useState(false);
 
+  // Destructuracion
+    const { isAdmin } = useContext(AuthContext);
+
   useEffect(() => {
     getData();
+
   }, []); // CDM
 
   // Actualizamos los estados
   const getData = async () => {
     try {
       const response = await getAllProductsService()
-      console.log(response);
+      // console.log(response);
       setProducts(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -54,7 +59,7 @@ function Products() {
 
   // Da la vuelta al producto
   const flipProduct = () => {
-    console.log(isEditing)
+    // console.log(isEditing)
     setIsEditing(true);
   }
 
@@ -66,8 +71,9 @@ function Products() {
   return (
     <div>
       <h3>Nuestros Productos</h3>
-      <button className="myButtons" onClick={toggleForm}>Añadir Producto</button> {/* Solo Admin */}
-      <button className="myButtons" onClick={flipProduct}>Editar Productos</button>
+       <div>{isAdmin?<button className="myButtons" onClick={toggleForm}>Añadir Producto</button>:null}</div> 
+       <div>{isAdmin?<button className="myButtons" onClick={flipProduct}>Editar Productos</button>:null}</div> 
+      
 
       {isFormVisible ? (
         <AddProductForm

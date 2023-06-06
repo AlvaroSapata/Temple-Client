@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AddDjForm from "../../components/djs/AddDjForm";
 import { deleteDjService, getAllDjsService } from "../../services/djs.services";
 import ScaleLoader from "react-spinners/ScaleLoader";
-
+import { AuthContext } from "../../context/auth.context.js";
 
 function Djs() {
   // Navegar a distintas rutas despues de una accion
   const navigate = useNavigate();
+    // Destructuracion
+    const { isAdmin } = useContext(AuthContext);
   // Estado principal
   const [djs, setDjs] = useState([]);
   // Estado de loading
@@ -23,7 +25,7 @@ function Djs() {
   const getData = async () => {
     try {
       const response = await getAllDjsService()
-      console.log(response);
+      // console.log(response);
       setDjs(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -57,7 +59,8 @@ function Djs() {
   return (
     <div>
       <h3>Nuestros Djs</h3>
-      <button className="myButtons" onClick={toggleForm}>Añadir Dj</button> {/* Solo Admin */}
+      {isAdmin?<button className="myButtons" onClick={toggleForm}>Añadir Dj</button>:null}
+      
       {isFormVisible ? (
         <AddDjForm
           getData={getData}
@@ -71,7 +74,8 @@ function Djs() {
             <img src={eachDj.image} alt="eachDj" width={"250px"} />
             <p>{eachDj.name}</p>
             {/* Utilizamos una funcion anonima para pasar el id a la funcion delete */}
-            <button className="myButtons" onClick={() => deleteDj(eachDj._id)}>eliminar</button>
+            {isAdmin?<button className="myButtons" onClick={() => deleteDj(eachDj._id)}>eliminar</button>:null}
+            
           </div>
         );
       })}

@@ -126,10 +126,14 @@ function EventDetailsComponents(props) {
         <img src={eventDetails.image} alt="imagen" width={"200px"} />
         <p>Ubicacion: {eventDetails.location.title}</p>
 
-        {/* <p>GALERIIIIA</p> */}
         <p>Djs:</p>
         {eventDetails.djs.map((eachDjs) => {
-          return <p>{eachDjs.name}</p>;
+          return (
+            <div>
+              <img src={eachDjs.image} alt="img" width={"100px"} />
+              <p>{eachDjs.name}</p>
+            </div>
+          );
         })}
         <div>
           <p>{eventDetails.joinPeople.length}</p>
@@ -141,7 +145,32 @@ function EventDetailsComponents(props) {
             ? "eliminar"
             : "añadir"}
         </button>
-        <ReactPlayer url={eventDetails.afterMovie} controls={true} />
+        {eventDetails.gallery && eventDetails.gallery.length > 0 ? (
+          <div>
+            <p>Galería:</p>
+            {eventDetails.gallery.map((image, index) => (
+              <img
+                key={index}
+                src={image}
+                alt={`imagen-${index}`}
+                width={"200px"}
+              />
+            ))}
+          </div>
+        ) : (
+          <p>Proximamente ...</p>
+        )}
+        {eventDetails.afterMovie ? (
+          <div className="myReactPlayerContainer">
+            <ReactPlayer
+              className="reactplayer"
+              url={eventDetails.afterMovie}
+              controls={true}
+            />
+          </div>
+        ) : (
+          <p>Proximamente ...</p>
+        )}
       </div>
     </div>
   );

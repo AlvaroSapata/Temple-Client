@@ -3,7 +3,7 @@ import { editEventsService } from "../../services/events.services";
 import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import { uploadImageService } from "../../services/upload.services";
-import { uploadVideoService} from "../../services/upload.services"
+import { uploadVideoService } from "../../services/upload.services";
 
 function EditEvents(props) {
   const { eventDetails, getData, djsArr, locationsArr } = props;
@@ -12,7 +12,6 @@ function EditEvents(props) {
 
   const [title, setTitle] = useState(eventDetails.title);
   const [date, setDate] = useState(eventDetails.date);
-  const [gallery, setGallery] = useState(eventDetails.gallery);
 
   const [locationsSelected, setLocationsSelected] = useState(
     eventDetails.location
@@ -21,13 +20,19 @@ function EditEvents(props) {
 
   const [videoUrl, setVideoUrl] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
+  const [galleryImages, setGalleryImages] = useState([]);
+
   const [isUploadingImage, setIsUploadingImage] = useState(false);
   const [isUploadingVideo, setIsUploadingVideo] = useState(false);
-  
+  // const [isUploadingGallery, setIsUploadingGallery] = useState(false);
 
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDateChange = (e) => setDate(e.target.value);
-  const handleGalleryChange = (e) => setGallery(e.target.value);
+  const handleGalleryImagesChange = (e) => {
+    const files = e.target.files;
+    const imagesArray = Array.from(files);
+    setGalleryImages(imagesArray);
+  };
 
   const handleSelectedLocations = (e) => setLocationsSelected(e.target.value);
 
@@ -49,13 +54,27 @@ function EditEvents(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Subir las imágenes de la galería
+    const galleryUploadPromises = galleryImages.map((image) => {
+      const uploadData = new FormData();
+      uploadData.append("image", image);
+      return uploadImageService(uploadData);
+    });
+
     try {
+      // Esperar a que se completen todas las promesas de subida de imágenes
+      const galleryUploadResponses = await Promise.all(galleryUploadPromises);
+
+      // Obtener las URL de las imágenes subidas
+      const galleryImageUrls = galleryUploadResponses.map(
+        (response) => response.data.imageUrl
+      );
       const updatedEvent = {
         title,
         image: imageUrl,
         date,
         location: locationsSelected,
-        gallery,
+        gallery: galleryImageUrls,
         afterMovie: videoUrl,
         djs: djsSelected,
       };
@@ -111,8 +130,6 @@ function EditEvents(props) {
   useEffect(() => {
     getData();
   }, []);
-
-  
 
   return (
     <div key={eventDetails._id}>
@@ -208,14 +225,15 @@ function EditEvents(props) {
         </Form.Select>
         <br />
 
-        <label htmlFor="gallery">Galeria</label>
+        <label htmlFor="galleryImages">Galería de Imágenes</label>
         <input
-          type="text"
-          name="gallery"
-          id="gallery"
-          value={gallery}
-          onChange={handleGalleryChange}
+          type="file"
+          name="galleryImages"
+          id="galleryImages"
+          onChange={handleGalleryImagesChange}
+          multiple
         />
+
         <br />
         <div>
           <label>After Movie: </label>

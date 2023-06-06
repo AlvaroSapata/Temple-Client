@@ -587,7 +587,7 @@ a:hover:before {
 }
 
 /* UBICACIONES __________________________________________________________*/
-.locationsListPage{
+.locationsListPage {
   margin-top: 60px;
 }
 
@@ -596,11 +596,10 @@ a:hover:before {
   justify-content: center;
   flex-wrap: wrap;
   gap: 2vw;
-  
 }
 .myLocationsList a {
   text-decoration: none;
- }
+}
 .myCardStyle {
   width: 300px;
   background-color: #471971;
@@ -608,18 +607,17 @@ a:hover:before {
 }
 /* DETALLES DE UBICACION __________________________________________________________*/
 
-.locationsDetailsPage{
+.locationsDetailsPage {
   margin-top: 60px;
 }
 
 /* NOTFOUND */
-.notFoundPage{
+.notFoundPage {
   margin-top: 0px;
   height: 95vh;
-
 }
 
-.notFoundPage1 img{
+.notFoundPage1 img {
   margin-top: 0px;
   height: 100vh;
   filter: blur(0px);
@@ -637,13 +635,20 @@ a:hover:before {
 }
  */
 
- /* DETALLES EVENTO _________________________________________ */
- .eventDetailsPage{
+/* DETALLES EVENTO _________________________________________ */
+.eventDetailsPage {
   margin-top: 50px;
- }
+}
 
- /* REACT PLAYER ______________________________________________*/
- .reactplayer{
-  
+/* REACT PLAYER ______________________________________________*/
 
- }
+.myReactPlayerContainer {
+  width: 60vw;
+  margin-top: 20px;
+  margin-left: 20vw;
+  margin-right: 20vw;
+}
+
+.reactplayer {
+  width: 100% !important;
+}

@@ -9,6 +9,7 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 import { getAllLocationsService } from "../../services/locations.services";
 import { getAllDjsService } from "../../services/djs.services";
 import { AuthContext } from "../../context/auth.context.js";
+// import ReactPlayer from "react-player";
 
 function EventDetailsComponents(props) {
   // Destructuracion
@@ -74,7 +75,7 @@ function EventDetailsComponents(props) {
   const toggleForm = () => {
     setIsFormVisible(!isFormVisible);
   };
-
+  console.log("first",eventDetails)
   if (isLoading) {
     return <ScaleLoader color="#36d7b7" className="myLoader" />;
   }
@@ -89,10 +90,10 @@ function EventDetailsComponents(props) {
       ) : null}
       {isAdmin ? (
         <button className="myButtons" onClick={toggleForm}>
-        editar
-      </button>
+          editar
+        </button>
       ) : null}
-      
+
       {isFormVisible ? (
         <EditEvent
           eventDetails={eventDetails}
@@ -103,18 +104,22 @@ function EventDetailsComponents(props) {
       ) : null}
 
       <div>
-        <p>{eventDetails.title}</p>
-        <p>{eventDetails.date}</p>
+        <p>Titulo: {eventDetails.title}</p>
+        <p>Fecha: {eventDetails.date}</p>
         <img src={eventDetails.image} alt="imagen" width={"200px"} />
-        <p>{eventDetails.location.title}</p>
-
-        <p>GALERIIIIA</p>
-        <p>AFTER MOVIIIIE</p>
+        <p>Ubicacion: {eventDetails.location.name}</p>
+        {/* <p>GALERIIIIA</p> */}
         {eventDetails.djs.map((eachDjs) => {
-          return <p>{eachDjs.name}</p>;
+          return (
+            <div>
+              <p>{eachDjs.name}</p>
+              <img src={eachDjs.image} alt="dj" style={{ width: "100px" }} />
+            </div>
+          );
         })}
-
         <p>{eventDetails.joinPeople.length}</p>
+        <p>Aftermovie Oficial:</p>
+{/*         <ReactPlayer className="reactplayer" url="{eventDetails.aftermovie}" controls={"true"} /> */}
       </div>
     </div>
   );

@@ -9,7 +9,9 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 import { getAllLocationsService } from "../../services/locations.services";
 import { getAllDjsService } from "../../services/djs.services";
 import { AuthContext } from "../../context/auth.context.js";
-// import ReactPlayer from "react-player";
+import {joinService} from "../../services/events.services";
+import {unJoinService} from "../../services/events.services";
+import ReactPlayer from 'react-player'
 
 function EventDetailsComponents(props) {
   // Destructuracion
@@ -28,7 +30,9 @@ function EventDetailsComponents(props) {
   // Estado visivilidad formulario
   const [isFormVisible, setIsFormVisible] = useState(false);
 
-  const [joinPeople, setJoinPeople] = useState(0);
+  const [joinPeople, setJoinPeople] = useState([]);
+
+  const [isJoined, setIsJoined] = useState(false)
 
   useEffect(() => {
     getData();
@@ -38,7 +42,8 @@ function EventDetailsComponents(props) {
     try {
       const response = await getEventsDetailsService(params.eventsId);
       response.data.date = new Date(response.data.date).toLocaleDateString();
-
+       ReactPlayer.canPlay(response.data.aftermovie)
+       console.log(ReactPlayer.canPlay(response.data.aftermovie));
       setEventDetails(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -66,8 +71,19 @@ function EventDetailsComponents(props) {
 
   const handlecountPeople = async () => {
     try {
-      const response = await getEventsDetailsService(params.eventsId);
-      setJoinPeople(response.data.joinPeople+1);
+      if(isJoined === true) {
+        const response = await unJoinService(params.eventsId)
+        console.log(response, "eliminado");
+        setJoinPeople(response.data.joinPeople);
+        setIsJoined(false);
+      }else{
+        const response = await joinService(params.eventsId);
+      console.log(response, "añadido");
+       setJoinPeople(response.data.joinPeople);
+       setIsJoined(true);
+       
+      }
+      getData()
     } catch (error) {
       console.log(error);
     }
@@ -86,7 +102,7 @@ function EventDetailsComponents(props) {
   const toggleForm = () => {
     setIsFormVisible(!isFormVisible);
   };
-  console.log("first",eventDetails)
+
   if (isLoading) {
     return <ScaleLoader color="#36d7b7" className="myLoader" />;
   }
@@ -101,10 +117,10 @@ function EventDetailsComponents(props) {
       ) : null}
       {isAdmin ? (
         <button className="myButtons" onClick={toggleForm}>
-          editar
-        </button>
+        editar
+      </button>
       ) : null}
-
+      
       {isFormVisible ? (
         <EditEvent
           eventDetails={eventDetails}
@@ -115,23 +131,20 @@ function EventDetailsComponents(props) {
       ) : null}
 
       <div>
-        <p>Titulo: {eventDetails.title}</p>
-        <p>Fecha: {eventDetails.date}</p>
+        <p>{eventDetails.title}</p>
+        <p>{eventDetails.date}</p>
         <img src={eventDetails.image} alt="imagen" width={"200px"} />
-        <p>Ubicacion: {eventDetails.location.name}</p>
-        {/* <p>GALERIIIIA</p> */}
+        <p>{eventDetails.location.title}</p>
+
+        <p>GALERIIIIA</p>
+        
         {eventDetails.djs.map((eachDjs) => {
-          return (
-            <div>
-              <p>{eachDjs.name}</p>
-              <img src={eachDjs.image} alt="dj" style={{ width: "100px" }} />
-            </div>
-          );
+          return <p>{eachDjs.name}</p>;
         })}
+
         <p>{eventDetails.joinPeople.length}</p>
-        <button onChange={handlecountPeople} width="200px" > agregar</button>
-        <p>Aftermovie Oficial:</p>
-{/*         <ReactPlayer className="reactplayer" url="{eventDetails.aftermovie}" controls={"true"} /> */}
+
+        <button onClick={handlecountPeople} width="200px" >{isJoined ? "eliminar" : "añadir"} </button>
       </div>
     </div>
   );

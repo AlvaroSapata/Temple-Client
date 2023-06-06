@@ -112,30 +112,26 @@ function AddProductForm(props) {
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Imagen</Form.Label>
+          {isUploading ? (
+            <ScaleLoader color={"#471971"} loading={true} />
+          ) : null}
           <Form.Control
             type="file"
             placeholder="Precio del producto"
             name="image"
             onChange={handleFileUpload}
             disabled={isUploading}
-            
           />
+
+          <br />
+          {imageUrl ? (
+            <div>
+              <img src={imageUrl} alt="img" width={250} />
+            </div>
+          ) : null}
         </Form.Group>
-        
-        
 
-        {isUploading ? <h3>... uploading image</h3> : null}
-
-        {imageUrl ? (
-          <div>
-            <img src={imageUrl} alt="img" width={200} />
-          </div>
-        ) : null}
-        <br />
-
-     
-  
-        <button className="myButtons" type="submit">
+        <button className="myButtons" type="submit" disabled={isUploading}>
           Agregar
         </button>
       </Form>

@@ -84,21 +84,19 @@ function Locations() {
             <div key={eachLocation._id}>
               <Link to={`/locations/${eachLocation._id}`}>
                 <Card className="myLocationCardStyle">
-                <div className="myLocationsListImgContainer">
-                  <Card.Img variant="top" src={eachLocation.image} />
+                  <div className="myLocationsListImgContainer">
+                    <Card.Img variant="top" src={eachLocation.image} />
                   </div>
                   <Card.Body>
                     <Card.Title>{eachLocation.name}</Card.Title>
                     <Card.Text>{eachLocation.description}</Card.Text>
                     {isAdmin ? (
-                      <Button
+                      <button
                         className="myButtons"
-                        style={{ backgroundColor: "lightRed" }}
-                        variant="danger"
                         onClick={() => deleteProduct(eachLocation._id)}
                       >
                         Eliminar
-                      </Button>
+                      </button>
                     ) : null}
                   </Card.Body>
                 </Card>

@@ -2,9 +2,9 @@ import { useEffect, useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import AddEventForm from "../components/events/AddEventForm";
 import ScaleLoader from "react-spinners/ScaleLoader";
-import { getAllLocationsService } from "../services/locations.services";
-import { getAllDjsService } from "../services/djs.services";
-import { getAllEventsService } from "../services/events.services";
+import { getAllLocationsService } from "../services/locations.services.js";
+import { getAllDjsService } from "../services/djs.services.js";
+import { getAllEventsService } from "../services/events.services.js";
 import { AuthContext } from "../context/auth.context.js";
 import Card from "react-bootstrap/Card";
 
@@ -14,34 +14,23 @@ function Home() {
   // Destructuracion
   const { isAdmin } = useContext(AuthContext);
 
-  // const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState([]);
 
   const [isLoading, setIsLoading] = useState(true);
 
-   const [djs, setDjs] = useState([]);
+  const [djs, setDjs] = useState([]);
 
   const [locations, setLocations] = useState([]);
-  // Estado visivilidad formulario
-  const [isFormVisible, setIsFormVisible] = useState(false);
 
   const [nextEvents, setNextEvents] = useState([]);
 
-  // const [esAdministrador, setEsAdministrador] = useState(false);
-
-
   useEffect(() => {
     getData();
-    
   }, []);
-
-
-
-
 
   const getData = async () => {
     try {
       const response = await getAllLocationsService();
-
       setLocations(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -59,32 +48,36 @@ function Home() {
     try {
       const response = await getAllEventsService();
       const responseClone = [...response.data];
-      responseClone.forEach((eachEvent) => {
+      /*       responseClone.forEach((eachEvent) => {
         eachEvent.date = new Date(eachEvent.date).toLocaleDateString();
-      });
+      }); */
+
+      setEvents(responseClone);
+      setIsLoading(false);
 
       const thisDate = new Date();
 
-      
       const next = responseClone.filter(
         (eachEvent) => new Date(eachEvent.date) > thisDate
       );
 
+
       setNextEvents(next);
-      setIsLoading(false);
     } catch (error) {
       navigate("/error");
     }
   };
-  
 
+  // Estado de loading
   if (isLoading) {
     return <ScaleLoader color="#36d7b7" className="myLoader" />;
   }
   return (
-    <div>
-
-<h3>Proximos Eventos:</h3>
+    <div className="eventsPage">
+            
+      <h2>Bienvenidos a TEMPLE</h2>
+      <h4>Tasty Electronic Music</h4>
+      <h3>Proximos Eventos:</h3>
       <div className="myEventsList">
         {nextEvents.map((eachEvent) => (
           <Link to={`/events/${eachEvent._id}`} key={eachEvent._id}>
@@ -99,9 +92,9 @@ function Home() {
           </Link>
         ))}
       </div>
-
+      
     </div>
-  )
+  );
 }
 
 export default Home

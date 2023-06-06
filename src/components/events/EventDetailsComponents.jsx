@@ -27,6 +27,8 @@ function EventDetailsComponents(props) {
   // Estado visivilidad formulario
   const [isFormVisible, setIsFormVisible] = useState(false);
 
+  const [joinPeople, setJoinPeople] = useState(0);
+
   useEffect(() => {
     getData();
   }, []);
@@ -60,6 +62,15 @@ function EventDetailsComponents(props) {
       console.log(error);
     }
   };
+
+  const handlecountPeople = async () => {
+    try {
+      const response = await getEventsDetailsService(params.eventsId);
+      setJoinPeople(response.data.joinPeople+1);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const handleDelete = async () => {
     try {
@@ -115,6 +126,7 @@ function EventDetailsComponents(props) {
         })}
 
         <p>{eventDetails.joinPeople.length}</p>
+        <button onChange={handlecountPeople} width="200px" > agregar</button>
       </div>
     </div>
   );

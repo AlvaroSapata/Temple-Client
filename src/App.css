@@ -97,6 +97,7 @@ font-family: Inconsolata;
   left: 0;
   display: flex;
   align-items: center;
+  z-index: 1;
 }
 
 .myNavbar a {
@@ -614,15 +615,23 @@ a:hover:before {
 .notFoundPage{
   margin-top: 0px;
   height: 95vh;
-  background-size: auto 100vh, auto;
-  background-repeat: repeat;
-  filter: blur(8px);
-   background-image: url("../public/images/NotFound.png"); 
-   z-index: 0;
+
 }
 
-.notFoundPage img{
+.notFoundPage1 img{
   margin-top: 0px;
   height: 100vh;
   filter: blur(0px);
 }
+/* .notFoundPage2 img{
+  margin-top: 0px;
+  height: 100vh;
+  filter: blur(0px);
+  margin-left: 0;
+}
+.notFoundPage3 img{
+  margin-top: 0px;
+  height: 100vh;
+  filter: blur(0px);
+}
+ */

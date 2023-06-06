@@ -22,9 +22,25 @@ function Events() {
   // Estado visivilidad formulario
   const [isFormVisible, setIsFormVisible] = useState(false);
 
+  // const [esAdministrador, setEsAdministrador] = useState(false);
+
+
   useEffect(() => {
     getData();
+    // const verificarAdministrador = () => {
+    //   // Obtiene el usuario actualmente autenticado (puede ser desde el estado, local storage, etc.)
+      
+
+    //   const esAdminUsuario = isAdminVerify();
+    //   setEsAdministrador(esAdminUsuario);
+    // };
+
+    // verificarAdministrador();
   }, []);
+
+
+
+
 
   const getData = async () => {
     try {

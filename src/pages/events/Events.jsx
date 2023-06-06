@@ -5,7 +5,7 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 import { getAllLocationsService } from "../../services/locations.services";
 import { getAllDjsService } from "../../services/djs.services";
 import { getAllEventsService } from "../../services/events.services";
-
+// import {isAdminVerify} from "../../services/isAdminback.service";
 function Events() {
   const navigate = useNavigate();
 
@@ -19,9 +19,25 @@ function Events() {
   // Estado visivilidad formulario
   const [isFormVisible, setIsFormVisible] = useState(false);
 
+  // const [esAdministrador, setEsAdministrador] = useState(false);
+
+
   useEffect(() => {
     getData();
+    // const verificarAdministrador = () => {
+    //   // Obtiene el usuario actualmente autenticado (puede ser desde el estado, local storage, etc.)
+      
+
+    //   const esAdminUsuario = isAdminVerify();
+    //   setEsAdministrador(esAdminUsuario);
+    // };
+
+    // verificarAdministrador();
   }, []);
+
+
+
+
 
   const getData = async () => {
     try {
@@ -64,7 +80,6 @@ function Events() {
       <button className="myButtons" onClick={toggleForm}>
         Añadir Evento
       </button>{" "}
-      {/* Solo Admin */}
       {isFormVisible ? (
         <AddEventForm
           getData={getData}

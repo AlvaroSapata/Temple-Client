@@ -8,6 +8,7 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 
 function EditEvents(props) {
   const { eventDetails, getData, djsArr, locationsArr } = props;
+  console.log(eventDetails.date)
 
   const navigate = useNavigate();
 
@@ -19,9 +20,9 @@ function EditEvents(props) {
   );
   const [djsSelected, setDjsSelected] = useState(eventDetails.djs);
 
-  const [videoUrl, setVideoUrl] = useState(null);
-  const [imageUrl, setImageUrl] = useState(null);
-  const [galleryImages, setGalleryImages] = useState([]);
+  const [videoUrl, setVideoUrl] = useState(eventDetails.afterMovie);
+  const [imageUrl, setImageUrl] = useState(eventDetails.image);
+  const [galleryImages, setGalleryImages] = useState(eventDetails.gallery);
 
   const [isUploadingImage, setIsUploadingImage] = useState(false);
   const [isUploadingVideo, setIsUploadingVideo] = useState(false);
@@ -90,13 +91,9 @@ function EditEvents(props) {
     if (!event.target.files[0]) {
       return;
     }
-
     setIsUploadingImage(true);
-
     const uploadData = new FormData();
     uploadData.append("image", event.target.files[0]);
-    //                   |
-    //     this name needs to match the name used in the middleware => uploader.single("image")
 
     try {
       const response = await uploadImageService(uploadData);
@@ -111,14 +108,9 @@ function EditEvents(props) {
     if (!event.target.files[0]) {
       return;
     }
-
     setIsUploadingVideo(true);
-
     const uploadData = new FormData();
     uploadData.append("video", event.target.files[0]);
-    //                   |
-    //     this name needs to match the name used in the middleware => uploader.single("image")
-
     try {
       const response = await uploadVideoService(uploadData);
       setVideoUrl(response.data.fileUrl);
@@ -133,11 +125,11 @@ function EditEvents(props) {
   }, []);
 
   return (
-    <div  className="myEditEventFormContainer" key={eventDetails._id}>
+    <div className="myEditEventFormContainer" key={eventDetails._id}>
       <p className="name">{eventDetails.title}</p>
       <Form onSubmit={handleSubmit} className="myEditEventForm">
-        <Form.Group className="mb-3" controlId="formBasicTitle">
-          <Form.Label htmlFor="name">Titulo</Form.Label>
+        <Form.Group className="mb-3" id="formBasicTitle">
+          <Form.Label>Titulo</Form.Label>
           <Form.Control
             type="text"
             name="name"
@@ -146,9 +138,8 @@ function EditEvents(props) {
             onChange={handleTitleChange}
           />
         </Form.Group>
-        <br />
         <div>
-          <Form.Group className="mb-3" controlId="formBasicDate">
+          <Form.Group className="mb-3" id="formBasicDate">
             <label>Image: </label>
             <input
               type="file"
@@ -167,9 +158,9 @@ function EditEvents(props) {
             ) : null}
           </Form.Group>
         </div>
-        <br />
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label htmlFor="date">Fecha</Form.Label>
+
+        <Form.Group className="mb-3" id="formBasicEmail">
+          <Form.Label>Fecha</Form.Label>
           <Form.Control
             type="date"
             name="date"
@@ -178,111 +169,105 @@ function EditEvents(props) {
             value={date}
           />
         </Form.Group>
-        <br />
 
-        <br />
-        <Form.Group className="mb-3" controlId="formBasicLocation">
-        <Form.Label htmlFor="location">Ubicacion</Form.Label>
-        <Form.Select
-          id="dropdown-basic-button"
-          title="Dropdown button"
-          onChange={handleSelectedLocations}
-          value={locationsSelected}
-        >
-          {locationsArr.map((eachLocation) => {
-            if (eachLocation._id === locationsSelected) {
-              return (
-                <option
-                  key={eachLocation._id}
-                  value={eachLocation._id}
-                  selected={true}
-                >
-                  {eachLocation.name}
-                </option>
-              );
-            } else {
-              return (
-                <option key={eachLocation._id} value={eachLocation._id}>
-                  {eachLocation.name}
-                </option>
-              );
-            }
-          })}
-        </Form.Select>
+        <Form.Group className="mb-3" id="formBasicLocation">
+          <Form.Label>Ubicacion</Form.Label>
+          <Form.Select
+            id="dropdown-basic-button"
+            title="Dropdown button"
+            onChange={handleSelectedLocations}
+            value={locationsSelected}
+          >
+            {locationsArr.map((eachLocation) => {
+              if (eachLocation._id === locationsSelected) {
+                return (
+                  <option
+                    key={eachLocation._id}
+                    value={eachLocation._id}
+                    selected={true}
+                  >
+                    {eachLocation.name}
+                  </option>
+                );
+              } else {
+                return (
+                  <option key={eachLocation._id} value={eachLocation._id}>
+                    {eachLocation.name}
+                  </option>
+                );
+              }
+            })}
+          </Form.Select>
         </Form.Group>
-        <br />
-        <Form.Group className="mb-3" controlId="formBasicDjs">
-        <Form.Label htmlFor="djs">DJS</Form.Label>
-        <Form.Select
-          multiple={true}
-          onChange={handleSelectedDjs}
-          value={djsSelected}
-        >
-          {djsArr.map((eachDjs) => {
-            if (eventDetails.djs.includes(eachDjs._id)) {
-              return (
-                <option key={eachDjs._id} value={eachDjs._id} selected={true}>
-                  {eachDjs.name}
-                </option>
-              );
-            } else {
-              return (
-                <option key={eachDjs._id} value={eachDjs._id}>
-                  {eachDjs.name}
-                </option>
-              );
-            }
-          })}
-        </Form.Select>
+
+        <Form.Group className="mb-3" id="formBasicDjs">
+          <Form.Label>DJS</Form.Label>
+          <Form.Select
+            multiple={true}
+            onChange={handleSelectedDjs}
+            value={djsSelected}
+          >
+            {djsArr.map((eachDjs) => {
+              if (eventDetails.djs.includes(eachDjs._id)) {
+                return (
+                  <option key={eachDjs._id} value={eachDjs._id} selected={true}>
+                    {eachDjs.name}
+                  </option>
+                );
+              } else {
+                return (
+                  <option key={eachDjs._id} value={eachDjs._id}>
+                    {eachDjs.name}
+                  </option>
+                );
+              }
+            })}
+          </Form.Select>
         </Form.Group>
-        <br />
-        <Form.Group className="mb-3" controlId="formBasicDate">
-        <Form.Label>Galería de Imágenes</Form.Label>
-        
-        <Form.Control
-          type="file"
-          name="galleryImages"
-          id="galleryImages"
-          onChange={handleGalleryImagesChange}
-          multiple
-        />
-        </Form.Group>
-        <br />
-        <div>
-        <Form.Group className="mb-3" controlId="formBasicDate">
-        <Form.Label>After Movie:</Form.Label>
-          
+
+        <Form.Group className="mb-3" id="formBasicDate">
+          <Form.Label>Galería de Imágenes</Form.Label>
+
           <Form.Control
             type="file"
-            name="aftermovie"
-            onChange={handleVideoUpload}
-            disabled={isUploadingVideo}
+            name="galleryImages"
+            id="galleryImages"
+            onChange={handleGalleryImagesChange}
+            multiple
           />
-          
-        
-
-        {isUploadingVideo ? (
-            <ScaleLoader color={"#471971"} loading={true} />
-          ) : null}
-
-        {videoUrl ? (
-          <div>
-            <iframe
-              src={videoUrl}
-              alt="video"
-              width={200}
-              title="video"
-            ></iframe>
-          </div>
-        ) : null}
-        <br />
         </Form.Group>
+
+        <div>
+          <Form.Group className="mb-3" id="formBasicDate">
+            <Form.Label>After Movie:</Form.Label>
+
+            <Form.Control
+              type="file"
+              name="aftermovie"
+              onChange={handleVideoUpload}
+              disabled={isUploadingVideo}
+            />
+
+            {isUploadingVideo ? (
+              <ScaleLoader color={"#471971"} loading={true} />
+            ) : null}
+
+            {videoUrl ? (
+              <div>
+                <iframe
+                  src={videoUrl}
+                  alt="video"
+                  width={200}
+                  title="video"
+                ></iframe>
+              </div>
+            ) : null}
+            
+          </Form.Group>
         </div>
         <button className="myButtons">Aceptar cambios</button>
         <br />
       </Form>
-
-      {/* PREGUNTAR SOBRE LOS DJS */}
     </div>
   );
 }

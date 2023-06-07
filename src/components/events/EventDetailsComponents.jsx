@@ -39,7 +39,6 @@ function EventDetailsComponents(props) {
   const getData = async () => {
     try {
       const response = await getEventsDetailsService(params.eventsId);
-      console.log(eventDetails);
       response.data.date = new Date(response.data.date).toLocaleDateString();
       setEventDetails(response.data);
       setIsLoading(false);
@@ -129,7 +128,7 @@ function EventDetailsComponents(props) {
         <p>Djs:</p>
         {eventDetails.djs.map((eachDjs) => {
           return (
-            <div>
+            <div key={eachDjs._id}>
               <img src={eachDjs.image} alt="img" width={"100px"} />
               <p>{eachDjs.name}</p>
             </div>
@@ -148,7 +147,7 @@ function EventDetailsComponents(props) {
         {eventDetails.gallery && eventDetails.gallery.length > 0 ? (
           <div className="myGalleryContainer">
             {eventDetails.gallery.map((image, index) => (
-              <div className="myEachGallery">
+              <div className="myEachGallery" key={index}>
               <img
                 key={index}
                 src={image}

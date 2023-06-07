@@ -737,6 +737,11 @@ font-family: Inconsolata;
   margin-top: 60px;
 }
 
+.leaflet-container {
+  height: 30vh; 
+  width: 100%; 
+}
+
 /* NOTFOUND */
 .notFoundPage {
   margin-top: 0px;

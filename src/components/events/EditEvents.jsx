@@ -8,12 +8,13 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 
 function EditEvents(props) {
   const { eventDetails, getData, djsArr, locationsArr } = props;
-  console.log(eventDetails.date)
+  console.log(eventDetails.date);
 
   const navigate = useNavigate();
 
   const [title, setTitle] = useState(eventDetails.title);
   const [date, setDate] = useState(eventDetails.date);
+  console.log(date);
 
   const [locationsSelected, setLocationsSelected] = useState(
     eventDetails.location
@@ -22,11 +23,15 @@ function EditEvents(props) {
 
   const [videoUrl, setVideoUrl] = useState(eventDetails.afterMovie);
   const [imageUrl, setImageUrl] = useState(eventDetails.image);
+  const [galleryImageUrls, setGalleryImageUrls] = useState(
+    eventDetails.gallery
+  );
+
   const [galleryImages, setGalleryImages] = useState(eventDetails.gallery);
 
   const [isUploadingImage, setIsUploadingImage] = useState(false);
   const [isUploadingVideo, setIsUploadingVideo] = useState(false);
-  // const [isUploadingGallery, setIsUploadingGallery] = useState(false);
+  const [isUploadingGallery, setIsUploadingGallery] = useState(false);
 
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDateChange = (e) => setDate(e.target.value);
@@ -55,22 +60,7 @@ function EditEvents(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Subir las imágenes de la galería
-    const galleryUploadPromises = galleryImages.map((image) => {
-      const uploadData = new FormData();
-      uploadData.append("image", image);
-      return uploadImageService(uploadData);
-    });
-
     try {
-      // Esperar a que se completen todas las promesas de subida de imágenes
-      const galleryUploadResponses = await Promise.all(galleryUploadPromises);
-
-      // Obtener las URL de las imágenes subidas
-      const galleryImageUrls = galleryUploadResponses.map(
-        (response) => response.data.imageUrl
-      );
       const updatedEvent = {
         title,
         image: imageUrl,
@@ -113,10 +103,35 @@ function EditEvents(props) {
     uploadData.append("video", event.target.files[0]);
     try {
       const response = await uploadVideoService(uploadData);
-      setVideoUrl(response.data.fileUrl);
+      setVideoUrl(response.data.videoUrl);
       setIsUploadingVideo(false);
     } catch (error) {
       navigate("/error");
+    }
+  };
+
+  const handleGalleryImagesUpload = async (event) => {
+    if (!event.target.files || event.target.files.length === 0) {
+      return;
+    }
+    setIsUploadingGallery(true);
+
+    const files = Array.from(event.target.files);
+    const uploadPromises = files.map((file) => {
+      const uploadData = new FormData();
+      uploadData.append("image", file);
+      return uploadImageService(uploadData);
+    });
+
+    try {
+      const uploadResponses = await Promise.all(uploadPromises);
+      const imageUrls = uploadResponses.map(
+        (response) => response.data.imageUrl
+      );
+      setGalleryImageUrls(imageUrls);
+      setIsUploadingGallery(false);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -232,9 +247,13 @@ function EditEvents(props) {
             type="file"
             name="galleryImages"
             id="galleryImages"
-            onChange={handleGalleryImagesChange}
+            onChange={handleGalleryImagesUpload}
+            disabled={isUploadingGallery}
             multiple
           />
+          {isUploadingGallery ? (
+            <ScaleLoader color={"#471971"} loading={true} />
+          ) : null}
         </Form.Group>
 
         <div>
@@ -243,7 +262,7 @@ function EditEvents(props) {
 
             <Form.Control
               type="file"
-              name="aftermovie"
+              name="afterMovie"
               onChange={handleVideoUpload}
               disabled={isUploadingVideo}
             />
@@ -251,18 +270,6 @@ function EditEvents(props) {
             {isUploadingVideo ? (
               <ScaleLoader color={"#471971"} loading={true} />
             ) : null}
-
-            {videoUrl ? (
-              <div>
-                <iframe
-                  src={videoUrl}
-                  alt="video"
-                  width={200}
-                  title="video"
-                ></iframe>
-              </div>
-            ) : null}
-            
           </Form.Group>
         </div>
         <button className="myButtons">Aceptar cambios</button>

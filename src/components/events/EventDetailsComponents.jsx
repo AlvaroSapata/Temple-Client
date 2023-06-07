@@ -39,7 +39,7 @@ function EventDetailsComponents(props) {
   const getData = async () => {
     try {
       const response = await getEventsDetailsService(params.eventsId);
-      response.data.date = new Date(response.data.date).toLocaleDateString();
+      response.data.date = new Date(response.data.date).toISOString().slice(0,10)
       setEventDetails(response.data);
       setIsLoading(false);
     } catch (error) {

@@ -68,11 +68,12 @@ function Events() {
         (eachEvent) => new Date(eachEvent.date) > thisDate
       );
       past.forEach((eachEvent)=>{
-        eachEvent.date= new Date(eachEvent.date).toLocaleDateString()
-      })
+        eachEvent.date= new Date(eachEvent.date).toISOString().slice(0,10)})
+      
       next.forEach((eachEvent)=>{
-        eachEvent.date= new Date(eachEvent.date).toLocaleDateString()
-      })
+        eachEvent.date= new Date(eachEvent.date).toISOString().slice(0,10)})
+
+      
 
       setPastEvents(past);
       setNextEvents(next);
@@ -114,7 +115,7 @@ function Events() {
             <Card className="myEventsCardStyle">
               <Card.Title>{eachEvent.title}</Card.Title>
               <div className="myEventsListImgContainer">
-                <Card.Img src={eachEvent.image} alt="imagen" width={"200px"} />
+                <Card.Img src={eachEvent.image} alt="imagen" />
               </div>
               <Card.Body>
                 <Card.Text>{eachEvent.date}</Card.Text>
@@ -130,7 +131,7 @@ function Events() {
           <Link to={`/events/${eachEvent._id}`} key={eachEvent._id}>
             <Card className="myEventsCardStyle">
               <Card.Title>{eachEvent.title}</Card.Title>
-              <Card.Img src={eachEvent.image} alt="imagen" width={"200px"} />
+              <Card.Img src={eachEvent.image} alt="imagen" />
               <Card.Body>
                 <Card.Text>{eachEvent.date}</Card.Text>
                 <Card.Text>{eachEvent.location?.name}</Card.Text>

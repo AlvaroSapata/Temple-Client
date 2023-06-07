@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import {
   deleteEventsService,
   getEventsDetailsService,
@@ -12,6 +12,7 @@ import { AuthContext } from "../../context/auth.context.js";
 import { joinService } from "../../services/events.services";
 import { unJoinService } from "../../services/events.services";
 import ReactPlayer from "react-player";
+import Card from "react-bootstrap/Card";
 
 function EventDetailsComponents(props) {
   // Destructuracion
@@ -39,7 +40,9 @@ function EventDetailsComponents(props) {
   const getData = async () => {
     try {
       const response = await getEventsDetailsService(params.eventsId);
-      response.data.date = new Date(response.data.date).toISOString().slice(0,10)
+      response.data.date = new Date(response.data.date)
+        .toISOString()
+        .slice(0, 10);
       setEventDetails(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -98,18 +101,19 @@ function EventDetailsComponents(props) {
 
   return (
     <div className="eventDetailsPage">
-      <h3>Detalles del Evento</h3>
-      {isAdmin ? (
-        <button className="myButtons" onClick={handleDelete}>
-          eliminar
-        </button>
-      ) : null}
-      {isAdmin ? (
-        <button className="myButtons" onClick={toggleForm}>
-          editar
-        </button>
-      ) : null}
-
+      {/* <h3>Detalles del Evento</h3> */}
+      <div className="separadorbtns">
+        {isAdmin ? (
+          <button className="myButtons" onClick={handleDelete}>
+            eliminar
+          </button>
+        ) : null}
+        {isAdmin ? (
+          <button className="myButtons" onClick={toggleForm}>
+            editar
+          </button>
+        ) : null}
+      </div>
       {isFormVisible ? (
         <EditEvent
           eventDetails={eventDetails}
@@ -119,59 +123,123 @@ function EventDetailsComponents(props) {
         />
       ) : null}
 
-      <div>
-        <p>Titulo: {eventDetails.title}</p>
-        <p>Fecha: {eventDetails.date}</p>
-        <img src={eventDetails.image} alt="imagen" width={"200px"} />
-        <p>Ubicacion: {eventDetails.location.title}</p>
-
-        <p>Djs:</p>
-        {eventDetails.djs.map((eachDjs) => {
-          return (
-            <div key={eachDjs._id}>
-              <img src={eachDjs.image} alt="img" width={"100px"} />
-              <p>{eachDjs.name}</p>
-            </div>
-          );
-        })}
-        <div>
-          <p>{eventDetails.joinPeople.length}</p>
-          <img src="/images/grupo-de-chat.png" alt="img" width={"50px"} />
-        </div>
-
-        <button onClick={handlecountPeople} width="200px">
-          {eventDetails.joinPeople.includes(authContext.user._id)
-            ? "eliminar"
-            : "añadir"}
-        </button>
-        {eventDetails.gallery && eventDetails.gallery.length > 0 ? (
-          <div className="myGalleryContainer">
-            {eventDetails.gallery.map((image, index) => (
-              <div className="myEachGallery" key={index}>
-              <img
-                key={index}
-                src={image}
-                alt={`imagen-${index}`}
-                width={"200px"}
-              />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p>Proximamente ...</p>
-        )}
-        {eventDetails.afterMovie ? (
-          <div className="myReactPlayerContainer">
-            <ReactPlayer
-              className="reactplayer"
-              url={eventDetails.afterMovie}
-              controls={true}
+      <Card className="myDetailsCard">
+        <Card.Body className="myFirstDiv">
+          <div className="divIzquierda">
+            <Card.Img
+              className="myCartel"
+              src={eventDetails.image}
+              alt="imagen"
+              width={"200px"}
             />
           </div>
-        ) : (
-          <p>Proximamente ...</p>
-        )}
-      </div>
+
+          <div className="divDerecha">
+            <div className="TitulodetallesContainer">
+              <Card.Title className="TitulodetallesContainerText">
+                {eventDetails.title}
+              </Card.Title>
+            </div>
+            <div className="DatedetallesContainer">
+              <Card.Text> {eventDetails.date}</Card.Text>
+            </div>
+            <div className="LocationdetallesContainer">
+              <Card.Img src="/images/icons8-location-50.png" alt="asd" />
+              <Link to={`/locations/${eventDetails.location}`}>
+                <Card.Text>{eventDetails.location.name}</Card.Text>
+              </Link>
+            </div>
+            <div className="djsFix">
+              <Link to={`/djs`}>
+                <div className="djscontainer">
+                  {eventDetails.djs.map((eachDjs) => {
+                    return (
+                      <div key={eachDjs._id}>
+                        <Card.Text>{eachDjs.name}</Card.Text>
+                        <Card.Img
+                          className="djDetailsImg"
+                          src={eachDjs.image}
+                          alt="img"
+                          width={"100px"}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              </Link>
+            </div>
+
+            <div className="gentequeva">
+              <div className="botoncontainer">
+                <button
+                  className="myButtons"
+                  onClick={handlecountPeople}
+                  width="200px"
+                >
+                  {eventDetails.joinPeople.includes(authContext.user._id)
+                    ? "Eliminarme"
+                    : "Apuntarme"}
+                </button>
+              </div>
+              <div className="genteicono">
+                <Card.Img
+                  className="iconogente"
+                  src="/images/icons8-people-50.png"
+                  alt="img"
+                  width={"40px"}
+                />
+                <Card.Text className="numeropersonas">
+                  {eventDetails.joinPeople.length} Personas se han apuntado{" "}
+                </Card.Text>
+              </div>
+            </div>
+          </div>
+        </Card.Body>
+
+        <Card.Body className="galleryContainer">
+          <div className="hrContainer">
+            <hr className="custom-hr" />
+          </div>
+          <div className="tituloseparacion">
+            <h2>Galeria de Fotos</h2>
+          </div>
+          <div>
+            {eventDetails.gallery && eventDetails.gallery.length > 0 ? (
+              <div className="myGalleryContainer">
+                {eventDetails.gallery.map((image, index) => (
+                  <div className="myEachGallery" key={index}>
+                    <Card.Img
+                      key={index}
+                      src={image}
+                      alt={`imagen-${index}`}
+                      width={"200px"}
+                    />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p>Proximamente ...</p>
+            )}
+            <div className="hrContainer">
+              <hr className="custom-hr" />
+            </div>
+            <div className="tituloseparacion">
+              <h2>Aftermovie Oficial</h2>
+            </div>
+          </div>
+          {eventDetails.afterMovie ? (
+            <div className="myReactPlayerContainer">
+              <ReactPlayer
+                className="reactplayer"
+                url={eventDetails.afterMovie}
+                controls={true}
+              />
+            </div>
+          ) : (
+            <p>Proximamente ...</p>
+          )}
+        </Card.Body>
+      </Card>
     </div>
   );
 }

@@ -7,7 +7,7 @@ import { getAllDjsService } from "../../services/djs.services";
 import { getAllEventsService } from "../../services/events.services";
 import { AuthContext } from "../../context/auth.context.js";
 import Card from "react-bootstrap/Card";
-import { Button } from "react-bootstrap";
+
 
 function Events() {
   const navigate = useNavigate();
@@ -67,13 +67,13 @@ function Events() {
       const next = responseClone.filter(
         (eachEvent) => new Date(eachEvent.date) > thisDate
       );
-      past.forEach((eachEvent)=>{
-        eachEvent.date= new Date(eachEvent.date).toISOString().slice(0,10)})
-      
-      next.forEach((eachEvent)=>{
-        eachEvent.date= new Date(eachEvent.date).toISOString().slice(0,10)})
+      past.forEach((eachEvent) => {
+        eachEvent.date = new Date(eachEvent.date).toISOString().slice(0, 10);
+      });
 
-      
+      next.forEach((eachEvent) => {
+        eachEvent.date = new Date(eachEvent.date).toISOString().slice(0, 10);
+      });
 
       setPastEvents(past);
       setNextEvents(next);
@@ -112,14 +112,25 @@ function Events() {
       <div className="myEventsList">
         {nextEvents.map((eachEvent) => (
           <Link to={`/events/${eachEvent._id}`} key={eachEvent._id}>
-            <Card className="myEventsCardStyle">
-              <Card.Title>{eachEvent.title}</Card.Title>
+          <Card className="myEventsCardStyle">
+              <div className="myEventsCardTitle">
+                <Card.Title>{eachEvent.title}</Card.Title>
+              </div>
               <div className="myEventsListImgContainer">
                 <Card.Img src={eachEvent.image} alt="imagen" />
               </div>
               <Card.Body>
-                <Card.Text>{eachEvent.date}</Card.Text>
-                <Card.Text>{eachEvent.location?.name}</Card.Text>
+                <div className="myEventsListDateContainer">
+                  <Card.Text>{eachEvent.date}</Card.Text>
+                </div>
+                <div className="myEventsListLocationContainer">
+                  <Card.Img
+                    className="myEventsListLocationContainerImg"
+                    src="images/icons8-location-50.png"
+                    alt="imagen"
+                  />
+                  <Card.Text>{eachEvent.location?.name}</Card.Text>
+                </div>
               </Card.Body>
             </Card>
           </Link>
@@ -130,11 +141,24 @@ function Events() {
         {pastEvents.map((eachEvent) => (
           <Link to={`/events/${eachEvent._id}`} key={eachEvent._id}>
             <Card className="myEventsCardStyle">
-              <Card.Title>{eachEvent.title}</Card.Title>
-              <Card.Img src={eachEvent.image} alt="imagen" />
+              <div className="myEventsCardTitle">
+                <Card.Title>{eachEvent.title}</Card.Title>
+              </div>
+              <div className="myEventsListImgContainer">
+                <Card.Img src={eachEvent.image} alt="imagen" />
+              </div>
               <Card.Body>
-                <Card.Text>{eachEvent.date}</Card.Text>
-                <Card.Text>{eachEvent.location?.name}</Card.Text>
+                <div className="myEventsListDateContainer">
+                  <Card.Text>{eachEvent.date}</Card.Text>
+                </div>
+                <div className="myEventsListLocationContainer">
+                  <Card.Img
+                    className="myEventsListLocationContainerImg"
+                    src="images/icons8-location-50.png"
+                    alt="imagen"
+                  />
+                  <Card.Text>{eachEvent.location?.name}</Card.Text>
+                </div>
               </Card.Body>
             </Card>
           </Link>

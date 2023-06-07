@@ -59,24 +59,31 @@ function LocationDetails() {
 
   return (
     <div className="locationsDetailsPage">
-      <h3>Detalles de la Ubicacion</h3>
+      <div className="separadorbtns">
       {isAdmin ? (
-        <Button variant="primary" onClick={handleDelete}>
+        <Button className="myButtons" variant="primary" onClick={handleDelete}>
           eliminar
         </Button>
       ) : null}
       {isAdmin ? (
-        <Button variant="primary" onClick={toggleForm}>
+        <Button className="myButtons" variant="primary" onClick={toggleForm}>
           editar
         </Button>
       ) : null}
+      </div>
       <div>
-        <Card style={{ width: "18rem" }}>
-          <Card.Img variant="top" src={locationDetails.image} />
+        <Card className="myLocationCard">
+        <div className="divIzd" >
+          <Card.Body >
+            <Card.Img variant="top" src={locationDetails.image} />
+          </Card.Body>
+          </div>
+          <div className="divDcha" >
           <Card.Body>
-            <Card.Title>{locationDetails.name}</Card.Title>
-            <Card.Text>{locationDetails.description}</Card.Text>
-            <MapContainer
+            <Card.Title className="tituloLocation">{locationDetails.name}</Card.Title>
+            <Card.Text className="descripcionLocation">{locationDetails.description}</Card.Text>
+            <div className="contendorMapa">
+            <MapContainer className="mapLocationShow"
               center={locationDetails.address}
               zoom={17}
               scrollWheelZoom={true}
@@ -86,14 +93,14 @@ function LocationDetails() {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
               <Marker position={locationDetails.address}>
-              <Popup>
-                
+                <Popup>
                   <b>{locationDetails.name}</b>
-                
-              </Popup>
-            </Marker>
+                </Popup>
+              </Marker>
             </MapContainer>
+            </div>
           </Card.Body>
+          </div>
         </Card>
       </div>
 

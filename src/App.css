@@ -1,22 +1,29 @@
 .App {
   text-align: center;
   margin-top: 20px;
-  
 }
-
 
 a {
   margin: 10px;
 }
-.carousel-container{
+.carousel-container {
   width: 100vw;
 }
 
-.carousel-slide{
+.carousel-slide {
   display: flex;
   justify-content: center;
 }
 
+.carousel-indicators {
+  background-color: #000000 !important;
+  position: absolute !important;
+  bottom: -40px !important;
+}
+.carousel-control-prev,
+.carousel-control-next {
+  width: 0px !important;
+}
 /* CARTA CSS */
 
 /* .card {
@@ -425,7 +432,6 @@ font-family: Inconsolata;
   margin-top: 20px;
 }
 
-
 .myPrductImgContainer {
   width: 100%;
 }
@@ -710,9 +716,7 @@ font-family: Inconsolata;
   color: bisque;
 }
 
-
-.myEditLocationContainer{
-
+.myEditLocationContainer {
   background-color: white;
   border: solid 5px #471971;
   position: absolute;
@@ -726,10 +730,7 @@ font-family: Inconsolata;
   border-radius: 5vw;
   z-index: 1;
   box-shadow: 0px 0px 20px rgba(71, 25, 113, 0.6);
-
-
 }
-
 
 .myEditLocationForm {
   display: flex;
@@ -743,14 +744,55 @@ font-family: Inconsolata;
 
 .locationsDetailsPage {
   margin-top: 60px;
+ color: bisque;
 }
 
 .leaflet-container {
-  height: 30vh; 
-  width: 100%; 
+  height: 30vh;
+  width: 100%;
+  border: #000000 solid 4px;
+  border-radius: 15px;
 }
 
-/* NOTFOUND */
+.myLocationCard{
+  display: flex;
+  flex-direction: row;
+  width: 85vw;
+  margin-left: 7.5vw;
+  background: linear-gradient(to top left, #C868A1, #471971,#471971, #C868A1);
+  box-shadow: 0px 0px 20px rgba(71, 25, 113, 0.6);
+}
+.divIzd{
+  width: 30vw;
+}
+.divIzd Img{
+  margin-top: 15px;
+  margin-left: 15px;
+  height: 29vw;
+}
+.divDcha{
+  width: 50vw;
+  margin-left: 50px;
+  margin-top: 10px;
+}
+.contendorMapa{
+  height: auto;
+  z-index: 1;
+}
+.mapLocationShow{
+  height: 320px !important;
+  z-index: 1;
+}
+.tituloLocation{
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+.descripcionLocation{
+  font-size: 20px;
+  margin-bottom: 40px;
+
+}
+/* NOTFOUND ___________________________________________*/
 .notFoundPage {
   margin-top: 0px;
   height: 95vh;
@@ -779,29 +821,29 @@ font-family: Inconsolata;
   margin-top: 50px;
 }
 
-.myGalleryContainer{
+.myGalleryContainer {
   display: flex;
   gap: 10px;
   justify-content: center;
-  flex-wrap:wrap ;
+  flex-wrap: wrap;
 }
-.myEachGallery img:hover{
+/* .myEachGallery img:hover {
   transition: 0.2s;
-}
+} */
 
-@media (min-width: 360px) {
-  .myEachGallery img:hover{
+/* @media (min-width: 360px) {
+  .myEachGallery img:hover {
     width: 25em;
     height: 33em;
   }
 }
 
 @media (max-width: 360px) {
-  .myEachGallery img:hover{
+  .myEachGallery img:hover {
     width: 20em;
     height: 28em;
   }
-}
+} */
 
 .myEditEventFormContainer {
   background-color: white;
@@ -828,17 +870,149 @@ font-family: Inconsolata;
   gap: 5px;
 }
 
+.myFirstDiv {
+  display: flex;
+  flex-direction: row;
+  background: linear-gradient(to top left, #C868A1, #471971,#471971, #C868A1);
+
+}
+.myDetailsCard {
+  width: 90vw;
+  margin-left: 5vw;
+  background-color: #471971;
+  color: bisque;
+  box-shadow: 0px 0px 20px rgba(71, 25, 113, 0.6);}
+.myCartel {
+  width: 30vw;
+  margin-top: 50px;
+}
+.djDetailsImg {
+  width: 14vw;
+}
+.djscontainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2vw;
+}
+.gentequeva {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+.iconogente {
+  width: 5vw;
+}
+.genteicono {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.divIzquierda {
+  width: 40vw;
+}
+.divDerecha {
+  width: 40vw;
+  margin-left: 2vw;
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.TitulodetallesContainer {
+  margin-bottom: 20px;
+}
+.TitulodetallesContainerText {
+  font-size: 40px;
+}
+
+.DatedetallesContainer {
+  background-color: #d62b2b;
+  font-size: 25px;
+  width: 20vw;
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: 10px;
+}
+.LocationdetallesContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 20px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  height: 40px;
+}
+.LocationdetallesContainer a {
+  text-decoration: none;
+  color: bisque;
+}
+.LocationdetallesContainer a:hover {
+  font-size: 22px;
+  /* AÑADIR BRILLO */
+}
+.LocationdetallesContainer Img {
+  height: 20px;
+  width: 20px;
+}
+.djscontainer {
+  margin-top: 10px;
+}
+.djsFix {
+  height: 300px;
+}
+.djsFix a {
+  text-decoration: none;
+  color: bisque;
+}
+
+.botoncontainer {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.numeropersonas {
+  margin-left: 30px;
+  font-size: 20px;
+}
+.galleryContainer{
+  background: linear-gradient(to top right, #C868A1,#471971, #471971, #C868A1);
+
+}
+.hrContainer{
+  display: flex;
+  justify-content: center;
+}
+.custom-hr {
+  border-width: 4px;
+  width: 80vw;
+  background: linear-gradient(to right, #ff0000, #0000ff);
+  margin-bottom: 20px;
+  margin-top: 60px;
+}
+.tituloseparacion{
+ 
+  margin-bottom: 40px;
+}
+.separadorbtns{
+  display: flex;
+  justify-content: center;
+  gap: 2vw;
+  padding-top: 20px;
+}
 /* REACT PLAYER ______________________________________________*/
 
 .myReactPlayerContainer {
-  width: 60vw;
+  height: 100vh;
   margin-top: 20px;
-  margin-left: 20vw;
-  margin-right: 20vw;
-}
+  background: linear-gradient(to top, rgb(0, 0, 0), rgba(255, 0, 0, 0), rgba(255, 0, 0, 0));
+ }
 
 .reactplayer {
   width: 100% !important;
+  height: 100% !important;
 }
 
 /* EVENTS _______________________________________________ */
@@ -855,9 +1029,28 @@ font-family: Inconsolata;
 }
 
 .myEventsListImgContainer {
-  width: 300px;
+  width: 280px;
   height: 400px;
+  margin-left: 10px;
+  margin-right: 10px;
   overflow: hidden;
+}
+.myEventsListDateContainer {
+  width: 265px;
+  margin-right: 10px;
+  background-color: #d62b2b;
+  margin-bottom: 5px;
+  border-radius: 2px;
+}
+
+.myEventsListLocationContainer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.myEventsListLocationContainerImg {
+  height: 20px !important;
+  width: 20px !important;
 }
 
 .myEventsList Img {
@@ -867,19 +1060,24 @@ font-family: Inconsolata;
   background-position: center;
 }
 
-.myEventsList a {
+.myEventsList a,
+.eventsPage a {
   text-decoration: none;
 }
 
 .myEventsCardStyle {
   width: 300px;
-  height: 500px;
+  height: 530px;
   background-color: #471971;
   color: bisque;
 }
 
+.myEventsCardTitle {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
 
-.myAddEventFormContainer{
+.myAddEventFormContainer {
   background-color: white;
   border: solid 5px #471971;
   position: absolute;
@@ -895,7 +1093,6 @@ font-family: Inconsolata;
   box-shadow: 0px 0px 20px rgba(71, 25, 113, 0.6);
 }
 
-
 .myAddEventForm {
   display: flex;
   flex-direction: column;
@@ -905,27 +1102,19 @@ font-family: Inconsolata;
   gap: 5px;
 }
 
-
 /* HOME */
+
 .neonText {
   color: #fff;
-  text-shadow:
-    0 0 7px #fff,
-    0 0 10px #fff,
-    0 0 21px #fff,
-    0 0 42px #bc13fe,
-    0 0 82px #bc13fe,
-    0 0 92px #bc13fe,
-    0 0 102px #bc13fe,
-    0 0 151px #bc13fe;
-    font-family: "Sacramento", sans-serif;
-    
+  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #bc13fe,
+    0 0 82px #bc13fe, 0 0 92px #bc13fe, 0 0 102px #bc13fe, 0 0 151px #bc13fe;
+  font-family: "Sacramento", sans-serif;
 }
-.neonText body{
+.neonText body {
   background-color: #010a01;
   display: flex;
   justify-content: center;
-  align-items: center;  
+  align-items: center;
 }
 .neonText h2 {
   text-align: center;
@@ -936,7 +1125,7 @@ font-family: Inconsolata;
 .neonText h4 {
   text-align: center;
   font-weight: 400;
-   font-size: 40px; 
+  font-size: 40px;
   /* animation: pulsate 1.5s infinite alternate;  */
 }
 

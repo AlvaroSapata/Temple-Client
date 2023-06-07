@@ -80,7 +80,7 @@ function AddProductForm(props) {
       <h3>Añadir Producto</h3>
 
       <Form onSubmit={handleSubmit} className="myProductForm">
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3" id="formBasicEmail">
           <Form.Label>Nombre</Form.Label>
           <Form.Control
             type="text"
@@ -90,7 +90,7 @@ function AddProductForm(props) {
             value={name}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3" id="formBasicEmail">
           <Form.Label>Descripcion</Form.Label>
           <Form.Control
             type="text"
@@ -100,7 +100,7 @@ function AddProductForm(props) {
             value={description}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3" id="formBasicEmail">
           <Form.Label>Precio</Form.Label>
           <Form.Control
             type="number"
@@ -110,7 +110,7 @@ function AddProductForm(props) {
             value={price}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3" id="formBasicEmail">
           <Form.Label>Imagen</Form.Label>
           {isUploading ? (
             <ScaleLoader color={"#471971"} loading={true} />

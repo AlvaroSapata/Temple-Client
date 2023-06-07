@@ -72,7 +72,7 @@ function AddLocationForm(props) {
       <h3>Añadir Ubicacion</h3>
 
       <Form onSubmit={handleSubmit} className="myProductForm">
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3" id="formBasicEmail">
           <Form.Label>Nombre</Form.Label>
           <Form.Control
             type="text"
@@ -82,7 +82,7 @@ function AddLocationForm(props) {
             value={name}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3" id="formBasicEmail">
           <Form.Label>Descripcion</Form.Label>
           <Form.Control
             type="text"
@@ -92,7 +92,7 @@ function AddLocationForm(props) {
             value={description}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3" id="formBasicEmail">
           <Form.Label>Imagen</Form.Label>
           {isUploading ? (
             <ScaleLoader color={"#471971"} loading={true} />

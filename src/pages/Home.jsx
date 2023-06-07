@@ -9,7 +9,6 @@ import { AuthContext } from "../context/auth.context.js";
 import { Carousel, Card } from 'react-bootstrap';
 
 function Home() {
-
   const navigate = useNavigate();
   // Destructuracion
   const { isAdmin } = useContext(AuthContext);
@@ -60,7 +59,9 @@ function Home() {
       const next = responseClone.filter(
         (eachEvent) => new Date(eachEvent.date) > thisDate
       );
-
+      next.forEach((eachEvent) => {
+        eachEvent.date = new Date(eachEvent.date).toLocaleDateString();
+      });
 
       setNextEvents(next);
     } catch (error) {
@@ -74,9 +75,10 @@ function Home() {
   }
   return (
     <div className="eventsPage">
-            
-      <h2>Bienvenidos a TEMPLE</h2>
-      <h4>Tasty Electronic Music</h4>
+      <div className="neonText">
+        <h2 >Temple</h2>
+        <h4>Tasty Electronic Music</h4>
+      </div>
       <h3>Proximos Eventos:</h3>
       <div className="carousel-container">
       <div className="carousel-slide">
@@ -105,4 +107,4 @@ function Home() {
   );
 }
 
-export default Home
+export default Home;

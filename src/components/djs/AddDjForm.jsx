@@ -74,7 +74,7 @@ function AddDjForm(props) {
     <div className="myDjFormContainer">
       <h3>Añadir Dj</h3>
       <Form onSubmit={handleSubmit} className="myDjForm">
-      <Form.Group className="mb-3" controlId="formBasicTitle">
+      <Form.Group className="mb-3" id="formBasicTitle">
       
       <Form.Label htmlFor="title">Name</Form.Label>
         <Form.Control
@@ -86,7 +86,7 @@ function AddDjForm(props) {
         </Form.Group>
         <br />
         <div>
-        <Form.Group className="mb-3" controlId="formBasicDate">
+        <Form.Group className="mb-3" id="formBasicDate">
         <Form.Label>Imagen</Form.Label>
           <Form.Control
             type="file"

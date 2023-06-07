@@ -5,12 +5,12 @@ import Form from "react-bootstrap/Form";
 import { uploadImageService } from "../../services/upload.services";
 import { useNavigate } from "react-router-dom";
 import ScaleLoader from "react-spinners/ScaleLoader";
+
 function AddEventForm(props) {
-  const { setIsLoading, getData, djsArr, locationsArr } = props;
+  const { setIsLoading, getData, djsArr, locationsArr, toggleForm } = props;
   const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
-  const [image, setImage] = useState("");
   const [date, setDate] = useState("");
   const [gallery, setGallery] = useState("");
   const [afterMovie, setAfterMovie] = useState("");
@@ -35,20 +35,10 @@ function AddEventForm(props) {
     setDjs(djsIds);
   };
 
-  //   const [ischecked, setIsChecked] = useState(false);
-
   const handleTitleChange = (e) => setTitle(e.target.value);
-  // const handleImageChange = (e) => setImage(e.target.value);
   const handleDateChange = (e) => setDate(e.target.value);
-  // const handleLocationChange = (e) => setLocation(e.target.value);
-  // const handleGalleryChange = (e) => setGallery(e.target.value);
-  // const handleAfterMovieChange = (e) => setAfterMovie(e.target.value);
-  //   const handleDjsChange = (e) => setDjs(e.target.value);
-
-  //   const handleCheckboxChange = (e) => setIsChecked(!ischecked);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log("apretando el boton");
     setIsLoading(true);
 
     try {
@@ -70,30 +60,16 @@ function AddEventForm(props) {
   };
 
   const handleFileUpload = async (event) => {
-    // console.log("The file to be uploaded is: ", e.target.files[0]);
-
     if (!event.target.files[0]) {
-      // to prevent accidentally clicking the choose file button and not selecting a file
       return;
     }
-
-    setIsUploading(true); // to start the loading animation
-
-    const uploadData = new FormData(); // images and other files need to be sent to the backend in a FormData
+    setIsUploading(true);
+    const uploadData = new FormData();
     uploadData.append("image", event.target.files[0]);
-    //                   |
-    //     this name needs to match the name used in the middleware => uploader.single("image")
-
     try {
       const response = await uploadImageService(uploadData);
-      // or below line if not using services
-      // const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/upload`, uploadData)
-
       setImageUrl(response.data.imageUrl);
-      //                          |
-      //     this is how the backend sends the image to the frontend => res.json({ imageUrl: req.file.path });
-
-      setIsUploading(false); // to stop the loading animation
+      setIsUploading(false);
     } catch (error) {
       navigate("/error");
     }
@@ -102,103 +78,83 @@ function AddEventForm(props) {
     <div className="myAddEventFormContainer">
       <h3>Añadir Evento</h3>
 
-      <Form onSubmit={handleSubmit} className="myAddEventForm">
-      <Form.Group className="mb-3" controlId="formBasicTitle">
-        <Form.Label htmlFor="title">titulo</Form.Label>
-        <Form.Control
-          type="text"
-          name="title"
-          onChange={handleTitleChange}
-          value={title}
-        />
-       </Form.Group>
-        <br />
-        <div>
-        <Form.Group className="mb-3" controlId="formBasicDate">
-        <Form.Label>Imagen</Form.Label>
-        {isUploading ? (
-            <ScaleLoader color={"#471971"} loading={true} />
-          ) : null}
+      <Form
+        onSubmit={(event) => {
+          handleSubmit(event);
+          toggleForm(event);
+        }}
+        className="myAddEventForm"
+      >
+        <Form.Group className="mb-3" id="formBasicTitle">
+          <Form.Label>titulo</Form.Label>
           <Form.Control
-            type="file"
-            name="image"
-            onChange={handleFileUpload}
-            disabled={isUploading}
+            type="text"
+            name="title"
+            onChange={handleTitleChange}
+            value={title}
           />
-          {imageUrl ? (
-          <div>
-            <img src={imageUrl} alt="img" width={200} />
-          </div>
-        ) : null}
-          </Form.Group>
-          {/* below disabled prevents the user from attempting another upload while one is already happening */}
-        </div>
-     
-        {/* to render a loading message or spinner while uploading the picture */}
-       
-
-        {/* below line will render a preview of the image from cloudinary */}
-       
-        <br />
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label htmlFor="date">Fecha</Form.Label>
-        <Form.Control
-          type="date"
-          name="date"
-          onChange={handleDateChange}
-          value={date}
-        />
-       </Form.Group>
-        <br />
-        <Form.Group className="mb-3" controlId="formBasicLocation">
-        <Form.Label htmlFor="location">Ubicacion</Form.Label>
-        <Form.Select
-          id="dropdown-basic-button"
-          title="Dropdown button"
-          onChange={handleselectedLocations}
-        >
-          {locationsArr.map((eachLocation) => {
-            return (
-              <option key={eachLocation._id} value={eachLocation._id}>
-                {eachLocation.name}
-              </option>
-            );
-          })}
-        </Form.Select>
         </Form.Group>
-        <br />
 
-        {/* <label htmlFor="gallery">Galeria de Fotografias</label>
-        <input
-          type="text"
-          name="gallery"
-          onChange={handleGalleryChange}
-          value={gallery}
-        /> */}
+        <div>
+          <Form.Group className="mb-3" id="formBasicDate">
+            <Form.Label>Imagen</Form.Label>
+            {isUploading ? (
+              <ScaleLoader color={"#471971"} loading={true} />
+            ) : null}
+            <Form.Control
+              type="file"
+              name="image"
+              onChange={handleFileUpload}
+              disabled={isUploading}
+            />
+            {imageUrl ? (
+              <div>
+                <img src={imageUrl} alt="img" width={200} />
+              </div>
+            ) : null}
+          </Form.Group>
+        </div>
 
-        {/* <br />
+        <Form.Group className="mb-3" id="formBasicEmail">
+          <Form.Label>Fecha</Form.Label>
+          <Form.Control
+            type="date"
+            name="date"
+            onChange={handleDateChange}
+            value={date}
+          />
+        </Form.Group>
 
-        <label htmlFor="afterMovie">Aftermovie</label>
-        <input
-          type="text"
-          name="afterMovie"
-          onChange={handleAfterMovieChange}
-          value={afterMovie}
-        />
-        <br /> */}
-         <Form.Group className="mb-3" controlId="formBasicDjs">
-        <Form.Label htmlFor="djs">DJS</Form.Label>
-        
-        <Form.Select multiple={true} onChange={handleselectedDjs}>
-          {djsArr.map((eachDjs) => {
-            return (
-              <option key={eachDjs._id} value={eachDjs._id}>
-                {" "}
-                {eachDjs.name}
-              </option>
-            );
-          })}
-        </Form.Select>
+        <Form.Group className="mb-3" id="formBasicLocation">
+          <Form.Label>Ubicacion</Form.Label>
+          <Form.Select
+            id="dropdown-basic-button"
+            title="Dropdown button"
+            onChange={handleselectedLocations}
+          >
+          <option disabled={true}>Elige una Ubicacion</option>
+            {locationsArr.map((eachLocation) => {
+              return (
+                <option key={eachLocation._id} value={eachLocation._id}>
+                  {eachLocation.name}
+                </option>
+              );
+            })}
+          </Form.Select>
+        </Form.Group>
+
+        <Form.Group className="mb-3" id="formBasicDjs">
+          <Form.Label>DJS</Form.Label>
+
+          <Form.Select multiple={true} onChange={handleselectedDjs}>
+            {djsArr.map((eachDjs) => {
+              return (
+                <option key={eachDjs._id} value={eachDjs._id}>
+                  {eachDjs.name}
+                </option>
+              );
+            })}
+          </Form.Select>
         </Form.Group>
         <br />
 

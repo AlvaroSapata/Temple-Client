@@ -78,6 +78,7 @@ function Locations() {
           toggleForm={toggleForm}
         />
       ) : null}
+       {/* Cartas */}
       <div className="myLocationsList">
         {locations.map((eachLocation) => {
           return (

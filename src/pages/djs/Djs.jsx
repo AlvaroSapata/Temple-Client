@@ -4,6 +4,7 @@ import AddDjForm from "../../components/djs/AddDjForm";
 import { deleteDjService, getAllDjsService } from "../../services/djs.services";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { AuthContext } from "../../context/auth.context.js";
+import Card from 'react-bootstrap/Card';
 
 function Djs() {
   // Navegar a distintas rutas despues de una accion

@@ -5,6 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { uploadImageService } from "../../services/upload.services";
 import Form from "react-bootstrap/Form";
 import ScaleLoader from "react-spinners/ScaleLoader";
+
+import { MapContainer, TileLayer, Marker } from "react-leaflet";
+import ClickMarker from "../../components/locations/ClickMarker";
+
 function EditLocationForm(props) {
   const { locationDetails, getData } = props;
 
@@ -12,18 +16,17 @@ function EditLocationForm(props) {
 
   const [name, setName] = useState(locationDetails.name);
   const [description, setDescription] = useState(locationDetails.description);
-  const [image, setImage] = useState(locationDetails.image);
-  const [adress, setAdress] = useState(locationDetails.adress);
 
-  const [imageUrl, setImageUrl] = useState(null);
+
+  const [imageUrl, setImageUrl] = useState(locationDetails.image);
   const [isUploading, setIsUploading] = useState(false);
 
-
+  // Estados mapa
+  const [coordinates, setCoordinates] = useState(locationDetails.address);
 
   const handleNameChange = (e) => setName(e.target.value);
-  const handleAdressChange = (e) => setAdress(e.target.value);
+
   const handleDescriptionChange = (e) => setDescription(e.target.value);
-  const handleImageChange = (e) => setImage(e.target.value);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,12 +34,11 @@ function EditLocationForm(props) {
     try {
       const updatedProduct = {
         name,
-        adress,
+        address: coordinates,
         description,
-        image: imageUrl
+        image: imageUrl,
       };
       await editLocationService(locationDetails._id, updatedProduct);
-      // console.log("Ubicacion actualizada");
       navigate("/locations");
     } catch (error) {
       console.log(error);
@@ -44,30 +46,16 @@ function EditLocationForm(props) {
   };
 
   const handleFileUpload = async (event) => {
-    // console.log("The file to be uploaded is: ", e.target.files[0]);
-
     if (!event.target.files[0]) {
-      // to prevent accidentally clicking the choose file button and not selecting a file
       return;
     }
-
-    setIsUploading(true); // to start the loading animation
-
-    const uploadData = new FormData(); // images and other files need to be sent to the backend in a FormData
+    setIsUploading(true);
+    const uploadData = new FormData(); 
     uploadData.append("image", event.target.files[0]);
-    //                   |
-    //     this name needs to match the name used in the middleware => uploader.single("image")
-
     try {
       const response = await uploadImageService(uploadData);
-      // or below line if not using services
-      // const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/upload`, uploadData)
-
       setImageUrl(response.data.imageUrl);
-      //                          |
-      //     this is how the backend sends the image to the frontend => res.json({ imageUrl: req.file.path });
-
-      setIsUploading(false); // to stop the loading animation
+      setIsUploading(false); 
     } catch (error) {
       navigate("/error");
     }
@@ -77,13 +65,9 @@ function EditLocationForm(props) {
     getData();
   }, []);
 
-
-
   return (
-    
-    <div className="myEditLocationContainer" >
-    
-    <Form onSubmit={handleSubmit} className="myEditLocationForm">
+    <div className="myEditLocationContainer">
+      <Form onSubmit={handleSubmit} className="myEditLocationForm">
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Nombre</Form.Label>
           <Form.Control
@@ -124,14 +108,16 @@ function EditLocationForm(props) {
           ) : null}
         </Form.Group>
 
-        <Form.Label htmlFor="adress">adress</Form.Label>
-        <Form.Control
-          type="text"
-          name="adress"
-          onChange={handleAdressChange}
-          value={adress}
-        />
-        <br />
+        <Form.Label htmlFor="address">Direccion</Form.Label>
+
+        <MapContainer center={coordinates} zoom={13} scrollWheelZoom={true}>
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <ClickMarker setCoordinates={setCoordinates} />
+          {coordinates !== null && <Marker position={coordinates} />}
+        </MapContainer>
 
         <button className="myButtons">Aceptar cambios</button>
         <br />

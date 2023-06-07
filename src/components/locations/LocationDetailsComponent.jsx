@@ -8,6 +8,7 @@ import EditLocationForm from "./EditLocationForm";
 import Card from "react-bootstrap/Card";
 import { Button } from "react-bootstrap";
 import { AuthContext } from "../../context/auth.context.js";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 function LocationDetails() {
   const params = useParams();
@@ -59,22 +60,39 @@ function LocationDetails() {
   return (
     <div className="locationsDetailsPage">
       <h3>Detalles de la Ubicacion</h3>
+      {isAdmin ? (
+        <Button variant="primary" onClick={handleDelete}>
+          eliminar
+        </Button>
+      ) : null}
+      {isAdmin ? (
+        <Button variant="primary" onClick={toggleForm}>
+          editar
+        </Button>
+      ) : null}
       <div>
         <Card style={{ width: "18rem" }}>
           <Card.Img variant="top" src={locationDetails.image} />
           <Card.Body>
             <Card.Title>{locationDetails.name}</Card.Title>
             <Card.Text>{locationDetails.description}</Card.Text>
-            {isAdmin ? (
-              <Button variant="primary" onClick={handleDelete}>
-                eliminar
-              </Button>
-            ) : null}
-            {isAdmin ? (
-              <Button variant="primary" onClick={toggleForm}>
-                editar
-              </Button>
-            ) : null}
+            <MapContainer
+              center={locationDetails.address}
+              zoom={17}
+              scrollWheelZoom={true}
+            >
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              <Marker position={locationDetails.address}>
+              <Popup>
+                
+                  <b>{locationDetails.name}</b>
+                
+              </Popup>
+            </Marker>
+            </MapContainer>
           </Card.Body>
         </Card>
       </div>

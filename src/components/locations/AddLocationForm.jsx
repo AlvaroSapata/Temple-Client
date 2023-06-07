@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import ClickMarker from "../../components/locations/ClickMarker";
 
 function AddLocationForm(props) {

@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 
 import { uploadImageService } from "../../services/upload.services";
 import { useNavigate } from "react-router-dom";
+import ScaleLoader from "react-spinners/ScaleLoader";
 function AddEventForm(props) {
   const { setIsLoading, getData, djsArr, locationsArr } = props;
   const navigate = useNavigate();
@@ -101,48 +102,56 @@ function AddEventForm(props) {
     <div className="myEventFormContainer">
       <h3>Añadir Evento</h3>
 
-      <form onSubmit={handleSubmit} className="myEventForm">
-        <label htmlFor="title">titulo</label>
-        <input
+      <Form onSubmit={handleSubmit} className="myEventForm">
+      <Form.Group className="mb-3" controlId="formBasicTitle">
+        <Form.Label htmlFor="title">titulo</Form.Label>
+        <Form.Control
           type="text"
           name="title"
           onChange={handleTitleChange}
           value={title}
         />
-
+       </Form.Group>
         <br />
         <div>
-          <label>Image: </label>
+        <Form.Group className="mb-3" controlId="formBasicDate">
+        <Form.Label>Imagen</Form.Label>
+        {isUploading ? (
+            <ScaleLoader color={"#471971"} loading={true} />
+          ) : null}
           <input
             type="file"
             name="image"
             onChange={handleFileUpload}
             disabled={isUploading}
           />
-
-          {/* below disabled prevents the user from attempting another upload while one is already happening */}
-        </div>
-
-        {/* to render a loading message or spinner while uploading the picture */}
-        {isUploading ? <h5>... uploading image</h5> : null}
-
-        {/* below line will render a preview of the image from cloudinary */}
-        {imageUrl ? (
+          {imageUrl ? (
           <div>
             <img src={imageUrl} alt="img" width={200} />
           </div>
         ) : null}
+          </Form.Group>
+          {/* below disabled prevents the user from attempting another upload while one is already happening */}
+        </div>
+     
+        {/* to render a loading message or spinner while uploading the picture */}
+       
+
+        {/* below line will render a preview of the image from cloudinary */}
+       
         <br />
-        <label htmlFor="date">Fecha</label>
-        <input
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label htmlFor="date">Fecha</Form.Label>
+        <Form.Control
           type="date"
           name="date"
           onChange={handleDateChange}
           value={date}
         />
-
+       </Form.Group>
         <br />
-        <label htmlFor="location">Ubicacion</label>
+        <Form.Group className="mb-3" controlId="formBasicLocation">
+        <Form.Label htmlFor="location">Ubicacion</Form.Label>
         <Form.Select
           id="dropdown-basic-button"
           title="Dropdown button"
@@ -156,7 +165,7 @@ function AddEventForm(props) {
             );
           })}
         </Form.Select>
-
+        </Form.Group>
         <br />
 
         {/* <label htmlFor="gallery">Galeria de Fotografias</label>
@@ -177,8 +186,9 @@ function AddEventForm(props) {
           value={afterMovie}
         />
         <br /> */}
-
-        <label htmlFor="djs">DJS</label>
+         <Form.Group className="mb-3" controlId="formBasicDjs">
+        <Form.Label htmlFor="djs">DJS</Form.Label>
+        
         <Form.Select multiple={true} onChange={handleselectedDjs}>
           {djsArr.map((eachDjs) => {
             return (
@@ -189,12 +199,13 @@ function AddEventForm(props) {
             );
           })}
         </Form.Select>
+        </Form.Group>
         <br />
 
         <button className="myButtons" type="submit">
           Agregar
         </button>
-      </form>
+      </Form>
     </div>
   );
 }

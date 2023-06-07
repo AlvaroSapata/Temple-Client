@@ -3,7 +3,8 @@ import { editLocationService } from "../../services/locations.services";
 import { useNavigate } from "react-router-dom";
 
 import { uploadImageService } from "../../services/upload.services";
-
+import Form from "react-bootstrap/Form";
+import ScaleLoader from "react-spinners/ScaleLoader";
 function EditLocationForm(props) {
   const { locationDetails, getData } = props;
 
@@ -82,59 +83,59 @@ function EditLocationForm(props) {
     
     <div >
     
-      <form onSubmit={handleSubmit} className="myBackCardForm">
-        <label htmlFor="name">Nombre</label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          value={name}
-          onChange={handleNameChange}
-        />
-        <br />
-        <label htmlFor="description">Descripcion</label>
-        <input
-          type="text"
-          name="description"
-          id="description"
-          value={description}
-          onChange={handleDescriptionChange}
-        />
-        <br />
-        <div>
-          <label>Image: </label>
-          <input
+    <Form onSubmit={handleSubmit} className="myProductForm">
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Nombre</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Nombre de la Ubicacion"
+            name="name"
+            onChange={handleNameChange}
+            value={name}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Descripcion</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Descripcion de la Ubicacion"
+            name="description"
+            onChange={handleDescriptionChange}
+            value={description}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Imagen</Form.Label>
+          {isUploading ? (
+            <ScaleLoader color={"#471971"} loading={true} />
+          ) : null}
+          <Form.Control
             type="file"
+            placeholder="Precio del producto"
             name="image"
             onChange={handleFileUpload}
             disabled={isUploading}
           />
 
-          {/* below disabled prevents the user from attempting another upload while one is already happening */}
-        </div>
+          {imageUrl ? (
+            <div>
+              <img src={imageUrl} alt="img" width={250} />
+            </div>
+          ) : null}
+        </Form.Group>
 
-        {/* to render a loading message or spinner while uploading the picture */}
-        {isUploading ? <h3>... uploading image</h3> : null}
-
-        {/* below line will render a preview of the image from cloudinary */}
-        {imageUrl ? (
-          <div>
-            <img src={imageUrl} alt="img" width={200} />
-          </div>
-        ) : null}
-        <br />
-        <label htmlFor="price">Adress</label>
-        <input
+        <Form.Label htmlFor="adress">adress</Form.Label>
+        <Form.Control
           type="text"
           name="adress"
-          id="adress"
-          value={adress}
           onChange={handleAdressChange}
+          value={adress}
         />
         <br />
+
         <button className="myButtons">Aceptar cambios</button>
         <br />
-      </form>
+      </Form>
     </div>
   );
 }

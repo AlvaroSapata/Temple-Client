@@ -8,6 +8,14 @@
 a {
   margin: 10px;
 }
+.carousel-container{
+  width: 100vw;
+}
+
+.carousel-slide{
+  display: flex;
+  justify-content: center;
+}
 
 /* CARTA CSS */
 

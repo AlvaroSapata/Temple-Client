@@ -6,7 +6,7 @@ import { getAllLocationsService } from "../services/locations.services.js";
 import { getAllDjsService } from "../services/djs.services.js";
 import { getAllEventsService } from "../services/events.services.js";
 import { AuthContext } from "../context/auth.context.js";
-import Card from "react-bootstrap/Card";
+import { Carousel, Card } from 'react-bootstrap';
 
 function Home() {
   const navigate = useNavigate();
@@ -80,20 +80,29 @@ function Home() {
         <h4>Tasty Electronic Music</h4>
       </div>
       <h3>Proximos Eventos:</h3>
-      <div className="myEventsList">
+      <div className="carousel-container">
+      <div className="carousel-slide">
+      
+      <Carousel interval={1000} ride="carousel" wrap={true}>
         {nextEvents.map((eachEvent) => (
-          <Link to={`/events/${eachEvent._id}`} key={eachEvent._id}>
-            <Card className="myEventsCardStyle">
-              <Card.Title>{eachEvent.title}</Card.Title>
-              <Card.Img src={eachEvent.image} alt="imagen" width={"200px"} />
-              <Card.Body>
-                <Card.Text>{eachEvent.date}</Card.Text>
-                <Card.Text>{eachEvent.location?.name}</Card.Text>
-              </Card.Body>
-            </Card>
-          </Link>
+          <Carousel.Item key={eachEvent._id}>
+            <Link to={`/events/${eachEvent._id}`}>
+              <Card className="myEventsCardStyle">
+                <Card.Title>{eachEvent.title}</Card.Title>
+                <Card.Img src={eachEvent.image} alt="imagen" width={"200px"} />
+                <Card.Body>
+                  <Card.Text>{eachEvent.date}</Card.Text>
+                  <Card.Text>{eachEvent.location?.name}</Card.Text>
+                </Card.Body>
+              </Card>
+            </Link>
+          </Carousel.Item>
         ))}
+      </Carousel>
       </div>
+    </div>
+  
+      
     </div>
   );
 }

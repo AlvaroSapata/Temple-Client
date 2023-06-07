@@ -8,7 +8,7 @@ import {
 import EditProductForm from "../../components/products/EditProductForm";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { AuthContext } from "../../context/auth.context.js";
-
+import PaymentIntent from "../../components/pagos/PaymentIntent";
 function Products() {
   // Navegar a distintas rutas despues de una accion
   const navigate = useNavigate();
@@ -23,6 +23,8 @@ function Products() {
 
   // Destructuracion
   const { isAdmin } = useContext(AuthContext);
+
+  const [showPaymentIntent, setShowPaymentIntent] = useState(false)
 
   useEffect(() => {
     getData();
@@ -131,6 +133,17 @@ function Products() {
                 </div>
               </div>
             </div>
+
+
+            <div>
+  { 
+    showPaymentIntent === false
+    ? <button onClick={() => setShowPaymentIntent(true)}>Purchase</button> 
+    : <PaymentIntent productDetails={ eachProduct }/> 
+  }/*
+</div>
+
+
             <button className="myEditProductBtn" onClick={flipProduct}>
               Editar
             </button>

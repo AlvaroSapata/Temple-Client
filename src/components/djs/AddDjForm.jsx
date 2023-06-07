@@ -2,6 +2,8 @@ import { useState } from "react";
 import { createDjService } from "../../services/djs.services";
 import { uploadImageService } from "../../services/upload.services";
 import { useNavigate } from "react-router-dom";
+import Form from "react-bootstrap/Form";
+import ScaleLoader from "react-spinners/ScaleLoader";
 function AddDjForm(props) {
   // console.log(props.setIsLoading);
   // console.log(props.getData);
@@ -71,19 +73,22 @@ function AddDjForm(props) {
   return (
     <div className="myDjFormContainer">
       <h3>Añadir Dj</h3>
-
-      <form onSubmit={handleSubmit} className="myDjForm">
-        <label htmlFor="name">name</label>
-        <input
+      <Form onSubmit={handleSubmit} className="myDjForm">
+      <Form.Group className="mb-3" controlId="formBasicTitle">
+      
+      <Form.Label htmlFor="title">Name</Form.Label>
+        <Form.Control
           type="text"
           name="name"
           onChange={handleNameChange}
           value={name}
         />
+        </Form.Group>
         <br />
         <div>
-          <label>Image: </label>
-          <input
+        <Form.Group className="mb-3" controlId="formBasicDate">
+        <Form.Label>Imagen</Form.Label>
+          <Form.Control
             type="file"
             name="image"
             onChange={handleFileUpload}
@@ -91,20 +96,23 @@ function AddDjForm(props) {
           />
 
           {/* below disabled prevents the user from attempting another upload while one is already happening */}
-        </div>
+      
 
         {/* to render a loading message or spinner while uploading the picture */}
-        {isUploading ? <h3>... uploading image</h3> : null}
-
+        {isUploading ? (
+            <ScaleLoader color={"#471971"} loading={true} />
+          ) : null}
         {/* below line will render a preview of the image from cloudinary */}
         {imageUrl ? (
           <div>
             <img src={imageUrl} alt="img" width={200} />
           </div>
         ) : null}
+        </Form.Group>
+         </div>
         <br />
         <button className="myButtons" type="submit">Agregar</button>
-      </form>
+      </Form>
     </div>
   );
 }

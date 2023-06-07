@@ -5,30 +5,34 @@ import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import ClickMarker from "../../components/locations/ClickMarker";
+
 function AddLocationForm(props) {
-  // console.log(props.setIsLoading);
-  // console.log(props.getData);
+
   const navigate = useNavigate();
   // Destructurar props
   const { setIsLoading, getData, toggleForm } = props;
 
   // Estados para registrar los cambios
   const [name, setName] = useState("");
-  const [image, setImage] = useState("");
-  const [adress, setAdress] = useState([]);
+
   const [description, setDescription] = useState("");
 
   const [imageUrl, setImageUrl] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
 
+  // Estados mapa
+  const [coordinates, setCoordinates] = useState(null);
+  const [center, setCenter] = useState([42.340636415406124, -3.7039897681929457])
+
   const handleNameChange = (e) => setName(e.target.value);
-  const handleImageChange = (e) => setImage(e.target.value);
-  const handleAdressChange = (e) => setAdress(e.target.value);
+  // const handleImageChange = (e) => setImage(e.target.value);
+  //  const handleAdressChange = (e) => setAdress(e.target.value);
   const handleDescriptionChange = (e) => setDescription(e.target.value);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log("apretando el boton");
     setIsLoading(true);
     toggleForm();
 
@@ -36,7 +40,7 @@ function AddLocationForm(props) {
       const newLocation = {
         name,
         image: imageUrl,
-        adress,
+        address:coordinates,
         description,
       };
       await createLocationService(newLocation);
@@ -47,34 +51,22 @@ function AddLocationForm(props) {
   };
 
   const handleFileUpload = async (event) => {
-    // console.log("The file to be uploaded is: ", e.target.files[0]);
-
     if (!event.target.files[0]) {
-      // to prevent accidentally clicking the choose file button and not selecting a file
       return;
     }
-
-    setIsUploading(true); // to start the loading animation
-
-    const uploadData = new FormData(); // images and other files need to be sent to the backend in a FormData
+    setIsUploading(true); 
+    const uploadData = new FormData();
     uploadData.append("image", event.target.files[0]);
-    //                   |
-    //     this name needs to match the name used in the middleware => uploader.single("image")
-
     try {
       const response = await uploadImageService(uploadData);
-      // or below line if not using services
-      // const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/upload`, uploadData)
-
       setImageUrl(response.data.imageUrl);
-      //                          |
-      //     this is how the backend sends the image to the frontend => res.json({ imageUrl: req.file.path });
-
-      setIsUploading(false); // to stop the loading animation
+      setIsUploading(false); 
     } catch (error) {
       navigate("/error");
     }
   };
+
+  console.log(coordinates)
   return (
     <div className="myLocationFormContainer">
       <h3>Añadir Ubicacion</h3>
@@ -120,14 +112,26 @@ function AddLocationForm(props) {
           ) : null}
         </Form.Group>
 
-        <Form.Label htmlFor="adress">adress</Form.Label>
+{/*         <Form.Label htmlFor="adress">adress</Form.Label>
         <Form.Control
           type="text"
           name="adress"
           onChange={handleAdressChange}
           value={adress}
-        />
+        /> */}
         <br />
+        <MapContainer
+          center={center}
+          zoom={13}
+          scrollWheelZoom={true}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <ClickMarker setCoordinates={setCoordinates} />
+          {coordinates !== null && <Marker position={coordinates} />}
+        </MapContainer>
 
         <button className="myButtons" type="submit">
           Agregar

@@ -19,6 +19,12 @@ import LocationDetails from "./pages/locations/LocationDetails";
 // Products
 import Products from "./pages/products/Products";
 import EventDetails from './pages/events/EventDetails';
+import PaymentSuccessOne from './components/pagos/PaymentSuccessOne';
+
+
+
+
+
 
 function App() {
   return (
@@ -42,6 +48,9 @@ function App() {
 
         <Route path="/error" element={<Error />} />
         <Route path="*" element={<NotFound />} />
+
+        <Route path="/payment-success" element={PaymentSuccessOne} />
+
 
       </Routes>
       

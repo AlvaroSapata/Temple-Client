@@ -733,6 +733,30 @@ font-family: Inconsolata;
   margin-top: 50px;
 }
 
+.myGalleryContainer{
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap:wrap ;
+}
+.myEachGallery img:hover{
+  transition: 0.2s;
+}
+
+@media (min-width: 360px) {
+  .myEachGallery img:hover{
+    width: 25em;
+    height: 33em;
+  }
+}
+
+@media (max-width: 360px) {
+  .myEachGallery img:hover{
+    width: 20em;
+    height: 28em;
+  }
+}
+
 /* REACT PLAYER ______________________________________________*/
 
 .myReactPlayerContainer {

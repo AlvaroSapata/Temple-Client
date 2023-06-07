@@ -146,15 +146,16 @@ function EventDetailsComponents(props) {
             : "añadir"}
         </button>
         {eventDetails.gallery && eventDetails.gallery.length > 0 ? (
-          <div>
-            <p>Galería:</p>
+          <div className="myGalleryContainer">
             {eventDetails.gallery.map((image, index) => (
+              <div className="myEachGallery">
               <img
                 key={index}
                 src={image}
                 alt={`imagen-${index}`}
                 width={"200px"}
               />
+              </div>
             ))}
           </div>
         ) : (

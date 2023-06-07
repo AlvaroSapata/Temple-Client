@@ -24,7 +24,7 @@ function Products() {
   // Destructuracion
   const { isAdmin } = useContext(AuthContext);
 
-  const [showPaymentIntent, setShowPaymentIntent] = useState(false)
+  const [showPaymentIntent, setShowPaymentIntent] = useState(false);
 
   useEffect(() => {
     getData();
@@ -68,7 +68,7 @@ function Products() {
 
   // Clausula de loading
   if (isLoading) {
-    return <ScaleLoader color="#36d7b7" className="myLoader" />;
+    return <ScaleLoader color="#471971" className="myLoader" />;
   }
 
   return (
@@ -98,62 +98,59 @@ function Products() {
           toggleForm={toggleForm}
         />
       ) : null}
-
-      {products.map((eachProduct) => {
-        return (
-          <div key={eachProduct._id} className="productContainer">
-            <div className={isEditing ? "flip-card editing" : "flip-card"}>
-              <div className="flip-card-inner">
-                <div className="flip-card-front">
-                  <div
-                    className="myPrductImgContainer"
-                    style={{ maxWidth: "100%", maxHeight: "60%" }}
-                  >
-                    <img
-                      className="myProductImg"
-                      src={eachProduct.image}
-                      alt="eachProduct"
+      <div className="myProductsList">
+        {products.map((eachProduct) => {
+          return (
+            <div key={eachProduct._id} className="productContainer">
+              <div className={isEditing ? "flip-card editing" : "flip-card"}>
+                <div className="flip-card-inner">
+                  <div className="flip-card-front">
+                    <div
+                      className="myPrductImgContainer"
+                      style={{ maxWidth: "100%", maxHeight: "60%" }}
+                    >
+                      <img
+                        className="myProductImg"
+                        src={eachProduct.image}
+                        alt="eachProduct"
+                      />
+                    </div>
+                    <p className="title">{eachProduct.name}</p>
+                    <div className="myPriceAndIcon">
+                      <p>{eachProduct.price}€</p>
+                      <button>
+                        <img src="images/add-cart.png" alt="add" />
+                      </button>
+                    </div>
+                    <div>{eachProduct.description}</div>
+                  </div>
+                  <div className="flip-card-back">
+                    <EditProductForm
+                      eachProduct={eachProduct}
+                      getData={getData}
+                      setIsEditing={setIsEditing}
                     />
                   </div>
-                  <p className="title">{eachProduct.name}</p>
-                  <div className="myPriceAndIcon">
-                    <p>{eachProduct.price}€</p>
-                    <button>
-                      <img src="images/add-cart.png" alt="add" />
-                    </button>
-                  </div>
-                  <div>{eachProduct.description}</div>
-                </div>
-                <div className="flip-card-back">
-                  <EditProductForm
-                    eachProduct={eachProduct}
-                    getData={getData}
-                    setIsEditing={setIsEditing}
-                  />
                 </div>
               </div>
+
+              <div>
+                {showPaymentIntent === false ? (
+                  <button onClick={() => setShowPaymentIntent(true)}>
+                    Purchase
+                  </button>
+                ) : (
+                  <PaymentIntent productDetails={eachProduct} />
+                )}
+              </div>
+
+              <button onClick={() => deleteProduct(eachProduct._id)}>
+                eliminar
+              </button>
             </div>
-
-
-            <div>
-  { 
-    showPaymentIntent === false
-    ? <button onClick={() => setShowPaymentIntent(true)}>Purchase</button> 
-    : <PaymentIntent productDetails={ eachProduct }/> 
-  }/*
-</div>
-
-
-            <button className="myEditProductBtn" onClick={flipProduct}>
-              Editar
-            </button>
-
-            <button onClick={() => deleteProduct(eachProduct._id)}>
-              eliminar
-            </button>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 }

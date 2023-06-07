@@ -54,7 +54,7 @@ function Djs() {
 
   // Clausula de loading
   if (isLoading) {
-    return <ScaleLoader color="#36d7b7" className="myLoader" />;
+    return <ScaleLoader color="#471971" className="myLoader" />;
   }
 
   return (

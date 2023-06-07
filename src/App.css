@@ -255,17 +255,18 @@ font-family: Inconsolata;
 
 .myDjFormContainer {
   background-color: white;
-  border: solid 2px black;
+  border: solid 5px #471971;
   position: absolute;
   width: 80vw;
   display: flex;
   flex-direction: column;
+  padding-top: 20px;
   padding-bottom: 20px;
   margin-left: 10vw;
   margin-right: 10vw;
-  /*   border-radius: 50%;
-  top: 250px;
-  right:0% */
+  border-radius: 5vw;
+  z-index: 1;
+  box-shadow: 0px 0px 20px rgba(71, 25, 113, 0.6);
 }
 
 .myDjForm {
@@ -698,6 +699,36 @@ font-family: Inconsolata;
   background-color: #471971;
   color: bisque;
 }
+
+
+.myEditLocationContainer{
+
+  background-color: white;
+  border: solid 5px #471971;
+  position: absolute;
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-left: 10vw;
+  margin-right: 10vw;
+  border-radius: 5vw;
+  z-index: 1;
+  box-shadow: 0px 0px 20px rgba(71, 25, 113, 0.6);
+
+
+}
+
+
+.myEditLocationForm {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-left: 25%;
+  margin-right: 25%;
+  gap: 5px;
+}
 /* DETALLES DE UBICACION __________________________________________________________*/
 
 .locationsDetailsPage {
@@ -762,6 +793,31 @@ font-family: Inconsolata;
   }
 }
 
+.myEditEventFormContainer {
+  background-color: white;
+  border: solid 5px #471971;
+  position: absolute;
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-left: 10vw;
+  margin-right: 10vw;
+  border-radius: 5vw;
+  z-index: 1;
+  box-shadow: 0px 0px 20px rgba(71, 25, 113, 0.6);
+}
+
+.myEditEventForm {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-left: 25%;
+  margin-right: 25%;
+  gap: 5px;
+}
+
 /* REACT PLAYER ______________________________________________*/
 
 .myReactPlayerContainer {
@@ -810,4 +866,31 @@ font-family: Inconsolata;
   height: 500px;
   background-color: #471971;
   color: bisque;
+}
+
+
+.myAddEventFormContainer{
+  background-color: white;
+  border: solid 5px #471971;
+  position: absolute;
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-left: 10vw;
+  margin-right: 10vw;
+  border-radius: 5vw;
+  z-index: 1;
+  box-shadow: 0px 0px 20px rgba(71, 25, 113, 0.6);
+}
+
+
+.myAddEventForm {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-left: 25%;
+  margin-right: 25%;
+  gap: 5px;
 }

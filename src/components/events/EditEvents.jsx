@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import { uploadImageService } from "../../services/upload.services";
 import { uploadVideoService } from "../../services/upload.services";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 function EditEvents(props) {
   const { eventDetails, getData, djsArr, locationsArr } = props;
@@ -132,48 +133,56 @@ function EditEvents(props) {
   }, []);
 
   return (
-    <div key={eventDetails._id}>
+    <div  className="myEditEventFormContainer" key={eventDetails._id}>
       <p className="name">{eventDetails.title}</p>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Titulo</label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          value={title}
-          onChange={handleTitleChange}
-        />
+      <Form onSubmit={handleSubmit} className="myEditEventForm">
+        <Form.Group className="mb-3" controlId="formBasicTitle">
+          <Form.Label htmlFor="name">Titulo</Form.Label>
+          <Form.Control
+            type="text"
+            name="name"
+            id="name"
+            value={title}
+            onChange={handleTitleChange}
+          />
+        </Form.Group>
         <br />
         <div>
-          <label>Image: </label>
-          <input
-            type="file"
-            name="image"
-            onChange={handleImageUpload}
-            disabled={isUploadingImage}
-          />
+          <Form.Group className="mb-3" controlId="formBasicDate">
+            <label>Image: </label>
+            <input
+              type="file"
+              name="image"
+              onChange={handleImageUpload}
+              disabled={isUploadingImage}
+            />
+
+            {isUploadingImage ? (
+              <ScaleLoader color={"#471971"} loading={true} />
+            ) : null}
+            {imageUrl ? (
+              <div>
+                <img src={imageUrl} alt="img" width={200} />
+              </div>
+            ) : null}
+          </Form.Group>
         </div>
-
-        {isUploadingImage ? <h3>... uploading image</h3> : null}
-
-        {imageUrl ? (
-          <div>
-            <img src={imageUrl} alt="img" width={200} />
-          </div>
-        ) : null}
         <br />
-        <label htmlFor="date">FECHA</label>
-        <input
-          type="date"
-          name="date"
-          id="date"
-          value={date}
-          onChange={handleDateChange}
-        />
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label htmlFor="date">Fecha</Form.Label>
+          <Form.Control
+            type="date"
+            name="date"
+            id="date"
+            onChange={handleDateChange}
+            value={date}
+          />
+        </Form.Group>
         <br />
 
         <br />
-        <label htmlFor="location">Ubicacion</label>
+        <Form.Group className="mb-3" controlId="formBasicLocation">
+        <Form.Label htmlFor="location">Ubicacion</Form.Label>
         <Form.Select
           id="dropdown-basic-button"
           title="Dropdown button"
@@ -200,8 +209,10 @@ function EditEvents(props) {
             }
           })}
         </Form.Select>
+        </Form.Group>
         <br />
-        <label htmlFor="djs">DJS</label>
+        <Form.Group className="mb-3" controlId="formBasicDjs">
+        <Form.Label htmlFor="djs">DJS</Form.Label>
         <Form.Select
           multiple={true}
           onChange={handleSelectedDjs}
@@ -223,29 +234,36 @@ function EditEvents(props) {
             }
           })}
         </Form.Select>
+        </Form.Group>
         <br />
-
-        <label htmlFor="galleryImages">Galería de Imágenes</label>
-        <input
+        <Form.Group className="mb-3" controlId="formBasicDate">
+        <Form.Label>Galería de Imágenes</Form.Label>
+        
+        <Form.Control
           type="file"
           name="galleryImages"
           id="galleryImages"
           onChange={handleGalleryImagesChange}
           multiple
         />
-
+        </Form.Group>
         <br />
         <div>
-          <label>After Movie: </label>
-          <input
+        <Form.Group className="mb-3" controlId="formBasicDate">
+        <Form.Label>After Movie:</Form.Label>
+          
+          <Form.Control
             type="file"
             name="aftermovie"
             onChange={handleVideoUpload}
             disabled={isUploadingVideo}
           />
-        </div>
+          
+        
 
-        {isUploadingVideo ? <h3>... uploading aftermovie</h3> : null}
+        {isUploadingVideo ? (
+            <ScaleLoader color={"#471971"} loading={true} />
+          ) : null}
 
         {videoUrl ? (
           <div>
@@ -258,10 +276,11 @@ function EditEvents(props) {
           </div>
         ) : null}
         <br />
-
+        </Form.Group>
+        </div>
         <button className="myButtons">Aceptar cambios</button>
         <br />
-      </form>
+      </Form>
 
       {/* PREGUNTAR SOBRE LOS DJS */}
     </div>

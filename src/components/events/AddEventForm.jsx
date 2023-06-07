@@ -99,10 +99,10 @@ function AddEventForm(props) {
     }
   };
   return (
-    <div className="myEventFormContainer">
+    <div className="myAddEventFormContainer">
       <h3>Añadir Evento</h3>
 
-      <Form onSubmit={handleSubmit} className="myEventForm">
+      <Form onSubmit={handleSubmit} className="myAddEventForm">
       <Form.Group className="mb-3" controlId="formBasicTitle">
         <Form.Label htmlFor="title">titulo</Form.Label>
         <Form.Control
@@ -119,7 +119,7 @@ function AddEventForm(props) {
         {isUploading ? (
             <ScaleLoader color={"#471971"} loading={true} />
           ) : null}
-          <input
+          <Form.Control
             type="file"
             name="image"
             onChange={handleFileUpload}

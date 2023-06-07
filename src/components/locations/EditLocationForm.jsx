@@ -81,9 +81,9 @@ function EditLocationForm(props) {
 
   return (
     
-    <div >
+    <div className="myEditLocationContainer" >
     
-    <Form onSubmit={handleSubmit} className="myProductForm">
+    <Form onSubmit={handleSubmit} className="myEditLocationForm">
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Nombre</Form.Label>
           <Form.Control

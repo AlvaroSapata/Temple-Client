@@ -64,7 +64,7 @@ function Djs() {
           Añadir Dj
         </button>
       ) : null}
-
+      <h3>Nuestros Djs</h3>
       {isFormVisible ? (
         <AddDjForm
           getData={getData}
@@ -77,7 +77,7 @@ function Djs() {
           return (
             <div key={eachDj._id} >
             <div className="mainIGborder">
-                      <span>{eachDj.name}</span>
+                      <span>- {eachDj.name} -</span>
                     </div>
                     <br />
               <div >

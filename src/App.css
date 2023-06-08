@@ -111,10 +111,12 @@ font-family: Inconsolata;
   height: 50px;
   position: absolute;
   top: 0;
-  left: 0;
   display: flex;
   align-items: center;
   z-index: 2;
+}
+html{
+  overflow-x: hidden;
 }
 
 .myNavbar a {

@@ -20,6 +20,8 @@ function Products() {
   const [isFormVisible, setIsFormVisible] = useState(false);
   // Estado para editar el producto
   const [isEditing, setIsEditing] = useState(false);
+  // Estado pagos individuales
+  const [productIdToBuy, setProductIdToBuy] = useState();
 
   // Destructuracion
   const { isAdmin } = useContext(AuthContext);
@@ -136,8 +138,8 @@ function Products() {
               </div>
 
               <div>
-                {showPaymentIntent === false ? (
-                  <button onClick={() => setShowPaymentIntent(true)}>
+              {productIdToBuy != eachProduct._id ? (
+                  <button onClick={() => setProductIdToBuy(eachProduct._id)}>
                     Purchase
                   </button>
                 ) : (

@@ -57,7 +57,7 @@ function AuthWrapper(props) {
   
 
   if (isLoading) {
-    return <ScaleLoader color="#36d7b7" className="myLoader" />;
+    return <ScaleLoader color="#471971" className="myLoader" />;
 
     //3* la renderizacion de la app con el contexto pasado
   }

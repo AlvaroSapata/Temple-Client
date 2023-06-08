@@ -64,8 +64,9 @@ function Djs() {
           Añadir Dj
         </button>
       ) : null}
-
+        
       {isFormVisible ? (
+        
         <AddDjForm
           getData={getData}
           setIsLoading={setIsLoading}

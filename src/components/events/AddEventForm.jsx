@@ -6,6 +6,8 @@ import { uploadImageService } from "../../services/upload.services";
 import { useNavigate } from "react-router-dom";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
+
+
 function AddEventForm(props) {
   const { getData, djsArr, locationsArr, toggleForm } = props;
   const navigate = useNavigate();
@@ -22,6 +24,8 @@ function AddEventForm(props) {
 
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+ 
 
   const handleselectedLocations = (e) => {
     setLocationsSelected(e.target.value);

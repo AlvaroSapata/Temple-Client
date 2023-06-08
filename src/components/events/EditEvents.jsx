@@ -185,7 +185,7 @@ function EditEvents(props) {
               <ScaleLoader color={"#471971"} loading={true} />
             ) : null}
             {imageUrl ? (
-              <div>
+              <div className="preview">
                 <img src={imageUrl} alt="img" width={200} />
               </div>
             ) : null}

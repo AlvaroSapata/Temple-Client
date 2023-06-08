@@ -125,7 +125,7 @@ function AddEventForm(props) {
               disabled={isUploading}
             />
             {imageUrl ? (
-              <div>
+              <div className="preview">
                 <img src={imageUrl} alt="img" width={200} />
               </div>
             ) : null}

@@ -35,7 +35,7 @@ function Navbar() {
       <img
         onClick={toggleNavbar}
         className="myDesplegable"
-        src="images/image (3).png"
+        src="/images/BotonBarra.png"
         alt="asd"
       />
       </div>

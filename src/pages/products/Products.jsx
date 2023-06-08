@@ -63,7 +63,6 @@ function Products() {
 
   return (
     <div className="myProductsPage">
-      <h3>Nuestros Productos</h3>
       <div className="productButtons">
         <div>
           {isAdmin ? (
@@ -80,6 +79,7 @@ function Products() {
           ) : null}
         </div>
       </div>
+      <h3>Nuestros Productos</h3>
 
       {isFormVisible ? (
         <AddProductForm

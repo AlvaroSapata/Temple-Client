@@ -63,13 +63,13 @@ function Locations() {
 
   return (
     <div className="locationsListPage">
-      <h3>Nuestros Locales</h3>
       {isAdmin ? (
         <button className="myButtons" onClick={toggleForm}>
           Añadir Ubicacion
         </button>
       ) : null}
 
+      <h3>Nuestros Locales</h3>
       {/* Solo Admin */}
       {isFormVisible ? (
         <AddLocationForm
@@ -84,15 +84,30 @@ function Locations() {
           return (
             <div key={eachLocation._id}>
               <Link to={`/locations/${eachLocation._id}`}>
-                <Card className="myLocationCardStyle">
-                  <div className="myLocationsListImgContainer">
-                    <Card.Img variant="top" src={eachLocation.image} />
+                <div>
+                  <div className="mycardIG">
+                    <div className="myimageIG">
+                      <img src={eachLocation.image} alt="eachImg" />
+                    </div>
+                    <div className="mytextIG">
+                      <div className="mymainIG">
+                        <span>{eachLocation.name}</span>
+                      </div>
+                      <div className="mysubIG">
+                        <span>
+                          <img
+                            className="locationImgfix"
+                            src="images/icons8-location-50.png"
+                            alt="eachImg"
+                          />
+                        </span>
+                      </div>
+                    </div>
+                    <div className="mydateIG">
+                      <span>{eachLocation.name}</span>
+                    </div>
                   </div>
-                  <Card.Body>
-                    <Card.Title>{eachLocation.name}</Card.Title>
-                    <Card.Text>{eachLocation.description}</Card.Text>
-                  </Card.Body>
-                </Card>
+                </div>
               </Link>
             </div>
           );
@@ -103,3 +118,15 @@ function Locations() {
 }
 
 export default Locations;
+
+{
+  /*              <Card className="myLocationCardStyle">
+                  <div className="myLocationsListImgContainer">
+                    <Card.Img variant="top" src={eachLocation.image} />
+                  </div>
+                  <Card.Body>
+                    <Card.Title>{eachLocation.name}</Card.Title>
+                    <Card.Text>{eachLocation.description}</Card.Text>
+                  </Card.Body>
+                </Card> */
+}

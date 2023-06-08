@@ -77,7 +77,7 @@ function Home() {
     <div className="eventsPage">
       <div className="Divgrandehome">
         <div className="divfondo">
-          <img src="images/templecirculo.png" alt="img" />
+          <img src="/images/ImagenHomeTemple.png" alt="img" />
         </div>
       </div>
       {/* <div className="neonText">
@@ -90,28 +90,31 @@ function Home() {
           <Carousel interval={3000} ride="carousel" wrap={true}>
             {nextEvents.map((eachEvent) => (
               <Carousel.Item key={eachEvent._id}>
-                <Link to={`/events/${eachEvent._id}`}>
-                  <Card className="myEventsCardStyle">
-                    <div className="myEventsCardTitle">
-                      <Card.Title>{eachEvent.title}</Card.Title>
-                    </div>
-                    <div className="myEventsListImgContainer">
-                      <Card.Img src={eachEvent.image} alt="imagen" />
-                    </div>
-                    <Card.Body>
-                      <div className="myEventsListDateContainer">
-                        <Card.Text>{eachEvent.date}</Card.Text>
+                <Link to={`/events/${eachEvent._id}`} key={eachEvent._id}>
+                  <div>
+                    <div className="mycardIG">
+                      <div className="myimageIG">
+                        <img src={eachEvent.image} alt="eachImg" />
                       </div>
-                      <div className="myEventsListLocationContainer">
-                        <Card.Img
-                          className="myEventsListLocationContainerImg"
-                          src="images/icons8-location-50.png"
-                          alt="imagen"
-                        />
-                        <Card.Text>{eachEvent.location?.name}</Card.Text>
+                      <div className="mytextIG">
+                        <div className="mymainIG">
+                          <span>{eachEvent.title}</span>
+                        </div>
+                        <div className="mysubIG">
+                          <span>
+                            <img
+                              src="images/icons8-location-50.png"
+                              alt="eachImg"
+                            />
+                            {eachEvent.location?.name}
+                          </span>
+                        </div>
                       </div>
-                    </Card.Body>
-                  </Card>
+                      <div className="mydateIG">
+                        <span>{eachEvent.date}</span>
+                      </div>
+                    </div>
+                  </div>
                 </Link>
               </Carousel.Item>
             ))}

@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { useActionData, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
 import { loginService } from "../../services/auth.services";
+import Form from 'react-bootstrap/Form';
 
 function Login() {
   const { authenticateUser } = useContext(AuthContext);
@@ -45,26 +46,26 @@ function Login() {
           <pre>
         <h2>Login</h2>
       </pre>
-      <form onSubmit={handleLogin}>
-        <div className="user-box">
-          <input type="email" value={email} onChange={handleEmailChange} />
-          <label>Email</label>
-        </div>
+      <Form onSubmit={handleLogin}>
+        <Form.Group className="mb-3" >
+          <Form.Label>Email</Form.Label>
+          <Form.Control type="email" value={email} onChange={handleEmailChange} />
+        </Form.Group>
 
-        <div className="user-box">
-          <input
+        <Form.Group className="mb-3" >
+          <Form.Label>Contraseña</Form.Label>
+          <Form.Control
             type="password"
             value={password}
             onChange={handlePasswordChange}
           />
-          <label>Contraseña</label>
-        </div>
+        </Form.Group>
 
         <br />
-        <button className="loginBtnFix" type="submit" style={{ width: "auto" }}>Log In</button>
+        <button className="myButtons" type="submit" style={{ width: "auto" }}>Log In</button>
         <br />
         {errorMessage && <p style={{ color: "#03e9f4" }}>{errorMessage}</p>}
-      </form>
+      </Form>
     </div>
   );
 }

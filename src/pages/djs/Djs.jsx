@@ -75,24 +75,22 @@ function Djs() {
       <div className="myEventsList">
         {djs.map((eachDj) => {
           return (
-            <div key={eachDj._id} >
-            <div className="mainIGborder">
-                      <span>- {eachDj.name} -</span>
-                    </div>
-                    <br />
-              <div >
+            <div key={eachDj._id}>
+              <div className="mainIGborder">
+                <span className="nobresDjs">- {eachDj.name} -</span>
+              </div>
+              <div>
                 <div className="cardIGborder">
                   <div className="imageIGborder">
                     <img src={eachDj.image} alt="eachDj" />
                   </div>
                   <div className="textIGborder">
-                   
                     <div className="subIGborder">
                       <span>@{eachDj.name}</span>
                     </div>
                   </div>
                 </div>
-                <br/>
+                <br />
                 {isAdmin ? (
                   <button
                     className="myButtons"

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import { updatePaymentIntentService } from "../../services/payment.services";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 const PaymentSuccessOne = () => {
 
@@ -41,7 +42,7 @@ const PaymentSuccessOne = () => {
   };
 
   if (isFetching) {
-    return <h3>... updating payment</h3>;
+    <ScaleLoader color={"#471971"} loading={true} />
   }
 
   return (

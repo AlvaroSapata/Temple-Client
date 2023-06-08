@@ -140,7 +140,7 @@ function Products() {
     showPaymentIntent === false
     ? <button onClick={() => setShowPaymentIntent(true)}>Purchase</button> 
     : <PaymentIntent productDetails={ eachProduct }/> 
-  }/*
+  }
 </div>
 
 

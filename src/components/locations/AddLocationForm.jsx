@@ -118,20 +118,14 @@ function AddLocationForm(props) {
           />
 
           {imageUrl ? (
-            <div>
+            <div className="preview">
               <img src={imageUrl} alt="img" width={250} />
             </div>
           ) : null}
         </Form.Group>
 
-        {/*         <Form.Label htmlFor="adress">adress</Form.Label>
-        <Form.Control
-          type="text"
-          name="adress"
-          onChange={handleAdressChange}
-          value={adress}
-        /> */}
-        <br />
+        
+   <div className="mapFixer">
         <MapContainer center={center} zoom={13} scrollWheelZoom={true}>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -140,7 +134,7 @@ function AddLocationForm(props) {
           <ClickMarker setCoordinates={setCoordinates} />
           {coordinates !== null && <Marker position={coordinates} />}
         </MapContainer>
-
+</div>
         <button className="myButtons" type="submit" disabled={isLoading}>
           Agregar
         </button>

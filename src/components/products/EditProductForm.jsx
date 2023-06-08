@@ -141,11 +141,6 @@ function EditProductForm(props) {
 
         {isUploading ? <ScaleLoader color={"#471971"} loading={true} /> : null}
 
-        {/* {imageUrl ? (
-          <div>
-            <img src={imageUrl} alt="img" width={200} />
-          </div>
-        ) : null} */}
         <br />
         {isEditing ? (
           <div className="botonesprodictos">

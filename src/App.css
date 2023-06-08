@@ -29,84 +29,6 @@ a {
 .carousel-control-next {
   width: 0px !important;
 }
-/* CARTA CSS */
-
-/* .card {
-  position: absolute;
-  border-radius: 8px;
-  height: 450px;
-  width: 400px;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  margin: auto;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  box-shadow: 0 0 80px -10px black;
-  overflow: hidden;
-}
-
-.card-blur {
-  position: absolute;
-  height: 100%;
-  width: calc(100% + 1px);
-  background-color: black;
-  opacity: 0;
-  transition: opacity 0.15s ease-in;
-}
-
-.card:hover .card-blur {
-  opacity: 0.6;
-}
-
-.footer {
-  z-index: 1;
-  position: absolute;
-  height: 80px;
-  width: 100%;
-  bottom: 0;
-}
-
-svg#curve {
-  position: absolute;
-  fill: white;
-  left: 0;
-  bottom: 0;
-  width: 400px;
-  height: 450px;
-}
-
-.info {
-font-family: Inconsolata;
-  padding-left: 20px;
-  transform: translateY(250px);
-  
-  transition: transform 1s cubic-bezier(.31,1.21,.64,1.02);
-}
-
-.card:hover .info {
-  transform: translateY(0px);
-}
-
-.name {
-  font-weight: bolder;
-  padding-top: 5px;
-}
-
-.job {
-  margin-top: 10px;
-}
-
-
-.card {
-  background-image: url("https://http.cat/100")
-}
-
-.background {
-  background-image: url("")
-} */
 
 /* NAVBAR */
 .myNavbar {
@@ -118,7 +40,7 @@ font-family: Inconsolata;
   top: 0;
   display: flex;
   align-items: center;
-  z-index: 2;
+  z-index: 5;
 }
 html {
   overflow-x: hidden;
@@ -154,7 +76,7 @@ html {
   width: 100vw;
   height: 100vh;
   opacity: 0.9;
-  z-index: 3;
+  z-index: 4;
 }
 
 .mySecNavbarTop {
@@ -187,15 +109,15 @@ html {
   top: 5px;
   width: 40px;
   height: 40px;
-  z-index: 4;
+  z-index: 5;
 }
 .myInsta {
   position: absolute;
-  z-index: 4;
+  z-index: 5;
 }
 .myLogout {
   position: absolute;
-  z-index: 4;
+  z-index: 5;
 }
 @media (min-width: 360px) {
   .myDesplegable {
@@ -277,10 +199,10 @@ html {
 
 /* DJS ________________________________________________________________________*/
 
-.cardIGborder{
+.cardIGborder {
   width: 300px;
   height: 360px;
-  
+
   position: relative;
   border-radius: 8px;
   display: grid;
@@ -301,40 +223,24 @@ html {
   content: "";
   position: absolute;
   inset: 8px;
-  
+
   border-radius: inherit;
 }
-.imageIGborder{
- z-index: 1;
- width: 285px;
- height: 349px;
- position: absolute;
- 
+.imageIGborder {
+  z-index: 1;
+  width: 285px;
+  height: 349px;
+  position: absolute;
 }
 .imageIGborder img {
   border-radius: 7px;
 }
 
 @keyframes rotate {
-  100%{
-    rotate: 360deg
+  100% {
+    rotate: 360deg;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .DjsPage {
   margin-top: 60px;
@@ -343,17 +249,35 @@ html {
   background-color: white;
   border: solid 5px #471971;
   position: absolute;
-  width: 80vw;
+  width: 60vw;
+  
+
+  /* background-image: url("/public/images/imagentemplefondo.jpg");
+  background-size: cover; */
+  background-color: #a2e7d0;
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding-top: 20px;
-  padding-bottom: 20px;
-  margin-left: 10vw;
-  margin-right: 10vw;
-  border-radius: 5vw;
-  z-index: 1;
+  padding-bottom: 0px;
+  margin-left: 20vw;
+  margin-right: 20vw;
+  border-radius: 15px;
+  z-index: 2;
   box-shadow: 0px 0px 20px rgba(71, 25, 113, 0.6);
 }
+.preview{
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+@media (max-width:360px){
+.myDjFormContainer{
+  width: 340px;
+  margin-left: 5px;
+}
+}
+
 
 .myDjForm {
   display: flex;
@@ -525,17 +449,24 @@ html {
   background-color: white;
   border: solid 5px #471971;
   position: absolute;
-  width: 80vw;
+  width: 60vw;
+  background-color: #a2e7d0;
   display: flex;
   flex-direction: column;
   padding-top: 20px;
   padding-bottom: 20px;
-  margin-left: 10vw;
-  margin-right: 10vw;
-  border-radius: 5vw;
+  margin-left: 20vw;
+  margin-right: 20vw;
+  border-radius: 15px;
   z-index: 1;
   box-shadow: 0px 0px 20px rgba(71, 25, 113, 0.6);
 }
+@media (max-width:360px){
+  .myProductFormContainer{
+    width: 340px;
+    margin-left: 5px;
+  }
+  }
 
 .myProductForm {
   display: flex;
@@ -616,7 +547,6 @@ html {
   width: 340px;
   z-index: 2;
   position: absolute;
-  
 }
 
 @media (max-width: 360px) {
@@ -841,18 +771,27 @@ html {
   background-color: white;
   border: solid 5px #471971;
   position: absolute;
-  width: 80vw;
+  width: 60vw;
+  background-color: #a2e7d0;
   display: flex;
   flex-direction: column;
   padding-top: 20px;
   padding-bottom: 20px;
-  margin-left: 10vw;
-  margin-right: 10vw;
-  border-radius: 5vw;
+  margin-left: 20vw;
+  margin-right: 20vw;
+  border-radius: 15px;
   z-index: 1;
   box-shadow: 0px 0px 20px rgba(71, 25, 113, 0.6);
 }
-
+@media (max-width:360px){
+  .myLocationFormContainer{
+    width: 340px;
+    margin-left: 5px;
+  }
+  .leaflet-container{
+    width: 340px;
+  }
+  }
 .myLocationsList {
   display: flex;
   justify-content: center;
@@ -886,18 +825,26 @@ html {
   background-color: white;
   border: solid 5px #471971;
   position: absolute;
-  width: 80vw;
+  top: 130px;
+  width: 60vw;
+  background-color:#a2e7d0 ;
   display: flex;
   flex-direction: column;
   padding-top: 20px;
   padding-bottom: 20px;
-  margin-left: 10vw;
-  margin-right: 10vw;
+  margin-left: 20vw;
+  margin-right: 20vw;
   border-radius: 5vw;
   z-index: 1;
   box-shadow: 0px 0px 20px rgba(71, 25, 113, 0.6);
 }
-
+@media (max-width:360px){
+  .myEditLocationContainer{
+    width: 340px;
+    margin-left: 5px;
+  }
+  
+  }
 .myEditLocationForm {
   display: flex;
   flex-direction: column;
@@ -910,7 +857,7 @@ html {
 
 .locationsDetailsPage {
   margin-top: 60px;
-  color: bisque;
+  color: black;
 }
 
 .leaflet-container {
@@ -918,6 +865,10 @@ html {
   width: 100%;
   border: #000000 solid 4px;
   border-radius: 15px;
+}
+.mapFixer{
+  display: flex;
+  justify-content: center;
 }
 
 .myLocationCard {
@@ -956,6 +907,33 @@ html {
 .descripcionLocation {
   font-size: 20px;
   margin-bottom: 40px;
+}
+
+@media (max-width: 360px) {
+  .myLocationCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .divIzd{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+  }
+  .divIzd .card-body{
+    display: flex;
+    justify-content: center;
+  }
+  .divIzd img{
+    width: 250px;
+    height: 300px;
+    margin-right: 10px;
+    }
+  .divDcha{
+    width: 100%;
+    margin: 0;
+  }
 }
 /* NOTFOUND ___________________________________________*/
 .notFoundPage {
@@ -1016,18 +994,25 @@ html {
   background-color: white;
   border: solid 5px #471971;
   position: absolute;
-  width: 80vw;
+  width: 60vw;
+  background-color:#a2e7d0 ;
   display: flex;
   flex-direction: column;
   padding-top: 20px;
   padding-bottom: 20px;
-  margin-left: 10vw;
-  margin-right: 10vw;
+  margin-left: 20vw;
+  margin-right: 20vw;
   border-radius: 5vw;
   z-index: 1;
   box-shadow: 0px 0px 20px rgba(71, 25, 113, 0.6);
 }
+@media (max-width:360px){
+  .myEditEventFormContainer{
+    width: 340px;
+    margin-left: 5px;
+  }
 
+  }
 .myEditEventForm {
   display: flex;
   flex-direction: column;
@@ -1063,7 +1048,7 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2vw;
+  
 }
 .gentequeva {
   display: flex;
@@ -1127,6 +1112,7 @@ html {
 }
 .djscontainer {
   margin-top: 10px;
+  gap: 20px;
 }
 .djsFix {
   height: 300px;
@@ -1170,6 +1156,74 @@ html {
   gap: 2vw;
   padding-top: 20px;
 }
+.djsImagencontenedor {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  
+}
+
+.djsImagencontenedor img {
+  height: 200px;
+  width: 15vw;
+  object-fit: cover;
+}
+
+@media (max-width: 360px) {
+  .myDetailsCard {
+    width: 90vw;
+    margin-left: 5vw;
+  }
+  .myFirstDiv {
+    flex-direction: column;
+  }
+  .myCartel {
+    width: 70vw;
+    margin-left: 5vw;
+  }
+  .divDerecha {
+    width: 100%;
+  }
+  .TitulodetallesContainer {
+    width: 100%;
+  }
+  .TitulodetallesContainerText {
+    width: 100%;
+  }
+  .DatedetallesContainer {
+    width: 100%;
+  }
+  .djsImagencontenedor {
+    width: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+  }
+  .djsImagencontenedor img {
+    height: 100px;
+    width: 45vw;
+    object-fit: cover;
+  }
+  .centraciondjs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+  }
+  .gentequeva{
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .genteicono img{
+    width: 50px;
+  }
+  .djscontainer {
+    margin-top: 10px;
+    gap: 0px;
+  }
+}
+
 /* REACT PLAYER ______________________________________________*/
 
 .myReactPlayerContainer {
@@ -1256,18 +1310,25 @@ html {
   background-color: white;
   border: solid 5px #471971;
   position: absolute;
-  width: 80vw;
+  width: 60vw;
+  background-color:#a2e7d0;
   display: flex;
   flex-direction: column;
   padding-top: 20px;
   padding-bottom: 20px;
-  margin-left: 10vw;
-  margin-right: 10vw;
-  border-radius: 5vw;
+  margin-left: 20vw;
+  margin-right: 20vw;
+  border-radius: 15px;
   z-index: 1;
   box-shadow: 0px 0px 20px rgba(71, 25, 113, 0.6);
 }
+@media (max-width:360px){
+  .myAddEventFormContainer{
+    width: 340px;
+    margin-left: 5px;
+  }
 
+  }
 .myAddEventForm {
   display: flex;
   flex-direction: column;
@@ -1285,7 +1346,7 @@ html {
   border-radius: 10px;
   margin-bottom: 20px;
 }
-.mycardIG a{
+.mycardIG a {
   text-decoration: none;
   color: white;
 }
@@ -1294,7 +1355,7 @@ html {
   width: 100%;
   overflow: hidden;
 }
-.mytituliIG{
+.mytituliIG {
   background-color: #000000;
   position: absolute;
   z-index: 1;
@@ -1309,7 +1370,6 @@ html {
   filter: grayscale(0) brightness(1);
   scale: 1.2;
   transition: scale 2s ease-in-out, filter 1s ease-in-out;
-  
 }
 .mycardIG:hover .myimageIG img {
   filter: grayscale(1) brightness(0.7);
@@ -1333,13 +1393,12 @@ html {
 .mysubIG span {
   display: block;
   transition: transform 0.5s ease;
-  
 }
 .mymainIG span {
   transition-delay: 0.2s;
   transform: translateY(100%);
   font-size: 20px;
-  background: linear-gradient(to right, transparent, black, transparent)
+  background: linear-gradient(to right, transparent, black, transparent);
 }
 .mysubIG span {
   transform: translateY(-100%);
@@ -1348,9 +1407,9 @@ html {
   justify-content: center;
   align-items: center;
   margin-top: 0px;
-  background: linear-gradient(to right, transparent, black, transparent)
+  background: linear-gradient(to right, transparent, black, transparent);
 }
-.mysubIG span img{
+.mysubIG span img {
   width: 30px;
 }
 .mycardIG:hover .mytextIG :is(span) {
@@ -1371,7 +1430,7 @@ html {
 .mycardIG:hover .mytextIG::after {
   transform: translate(-50%, -50%) scaleX(1);
 }
-.mydateIG{
+.mydateIG {
   background-color: #d65e49;
   border-top: solid 2px black;
   border-bottom-left-radius: 5px;

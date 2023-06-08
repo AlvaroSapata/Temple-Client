@@ -111,7 +111,7 @@ function EditLocationForm(props) {
           />
 
           {imageUrl ? (
-            <div>
+            <div className="preview">
               <img src={imageUrl} alt="img" width={250} />
             </div>
           ) : null}

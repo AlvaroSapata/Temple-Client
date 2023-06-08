@@ -154,14 +154,16 @@ function EventDetailsComponents(props) {
                 <div className="djscontainer">
                   {eventDetails.djs.map((eachDjs) => {
                     return (
-                      <div key={eachDjs._id}>
+                      <div key={eachDjs._id} className="centraciondjs">
                         <Card.Text>{eachDjs.name}</Card.Text>
+                        <div className="djsImagencontenedor">
                         <Card.Img
                           className="djDetailsImg"
                           src={eachDjs.image}
                           alt="img"
                           width={"100px"}
                         />
+                        </div>
                       </div>
                     );
                   })}

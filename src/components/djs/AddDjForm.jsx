@@ -119,7 +119,7 @@ function AddDjForm(props) {
           ) : null}
         {/* below line will render a preview of the image from cloudinary */}
         {imageUrl ? (
-          <div>
+          <div className="preview">
             <img src={imageUrl} alt="img" width={200} />
           </div>
         ) : null}

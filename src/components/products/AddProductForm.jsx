@@ -130,7 +130,7 @@ function AddProductForm(props) {
 
           <br />
           {imageUrl ? (
-            <div>
+            <div className="preview">
               <img src={imageUrl} alt="img" width={250} />
             </div>
           ) : null}

@@ -78,7 +78,7 @@ function Locations() {
           toggleForm={toggleForm}
         />
       ) : null}
-       {/* Cartas */}
+      {/* Cartas */}
       <div className="myLocationsList">
         {locations.map((eachLocation) => {
           return (
@@ -91,14 +91,6 @@ function Locations() {
                   <Card.Body>
                     <Card.Title>{eachLocation.name}</Card.Title>
                     <Card.Text>{eachLocation.description}</Card.Text>
-                    {isAdmin ? (
-                      <button
-                        className="myButtons"
-                        onClick={() => deleteProduct(eachLocation._id)}
-                      >
-                        Eliminar
-                      </button>
-                    ) : null}
                   </Card.Body>
                 </Card>
               </Link>

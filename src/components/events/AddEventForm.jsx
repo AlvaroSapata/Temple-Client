@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
 function AddEventForm(props) {
-  const { setIsLoading, getData, djsArr, locationsArr, toggleForm } = props;
+  const { getData, djsArr, locationsArr, toggleForm } = props;
   const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
@@ -19,6 +19,9 @@ function AddEventForm(props) {
 
   const [imageUrl, setImageUrl] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
+
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleselectedLocations = (e) => {
     setLocationsSelected(e.target.value);
@@ -37,6 +40,7 @@ function AddEventForm(props) {
 
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDateChange = (e) => setDate(e.target.value);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -54,8 +58,13 @@ function AddEventForm(props) {
 
       await createEventService(newEvent);
       getData();
+       toggleForm();
     } catch (error) {
-      console.log(error);
+      if (error.response.status === 400) {
+        console.log(error.response.data.message);
+        setErrorMessage(error.response.data.message);
+        setIsLoading(false);
+      }
     }
   };
 
@@ -81,7 +90,7 @@ function AddEventForm(props) {
       <Form
         onSubmit={(event) => {
           handleSubmit(event);
-          toggleForm(event);
+          
         }}
         className="myAddEventForm"
       >
@@ -132,7 +141,7 @@ function AddEventForm(props) {
             title="Dropdown button"
             onChange={handleselectedLocations}
           >
-          <option disabled={true}>Elige una Ubicacion</option>
+            <option disabled={true} selected>Elige una Ubicacion</option>
             {locationsArr.map((eachLocation) => {
               return (
                 <option key={eachLocation._id} value={eachLocation._id}>
@@ -158,9 +167,10 @@ function AddEventForm(props) {
         </Form.Group>
         <br />
 
-        <button className="myButtons" type="submit">
+        <button className="myButtons" type="submit" disabled={isLoading}>
           Agregar
         </button>
+        {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
       </Form>
     </div>
   );

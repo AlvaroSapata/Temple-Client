@@ -271,7 +271,9 @@ html{
 }
 
 /* DJS ________________________________________________________________________*/
-
+.DjsPage{
+  margin-top: 60px;
+}
 .myDjFormContainer {
   background-color: white;
   border: solid 5px #471971;
@@ -411,23 +413,25 @@ html{
 }
 
 .myBackCard {
+  margin-top: 25px;
   display: flex;
   flex-direction: column;
 }
-
+.botonesprodictos{
+  display: flex;
+  justify-content: center;
+  gap:10px
+}
 .myBackCardForm {
   display: flex;
   flex-direction: column;
-  width: 80%;
-  margin-left: 10%;
-  margin-right: 10%;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
   margin-top: 20px;
 }
 .myBackCardForm button {
-  width: 50%;
-  margin-left: 25%;
-  margin-right: 25%;
-  margin-top: 20px;
+  width: 120px;
 }
 
 .myPrductImgContainer {

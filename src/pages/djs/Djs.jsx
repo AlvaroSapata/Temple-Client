@@ -58,8 +58,8 @@ function Djs() {
   }
 
   return (
-    <div>
-      <h3>Nuestros Djs</h3>
+    <div className="DjsPage">
+      
       {isAdmin?<button className="myButtons" onClick={toggleForm}>Añadir Dj</button>:null}
       
       {isFormVisible ? (

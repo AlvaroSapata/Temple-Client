@@ -9,7 +9,7 @@ function AddDjForm(props) {
   // console.log(props.getData);
 
   // Destructurar props
-  const { setIsLoading, getData, toggleForm } = props;
+  const {  getData, toggleForm } = props;
 
   const navigate = useNavigate();
 
@@ -23,11 +23,15 @@ function AddDjForm(props) {
   const [imageUrl, setImageUrl] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
 
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+
+  console.log(errorMessage)
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log("apretando el boton");
     setIsLoading(true);
-    toggleForm();
+    
 
     try {
       const newDj = {
@@ -36,8 +40,15 @@ function AddDjForm(props) {
       };
       await createDjService(newDj);
       getData();
+      toggleForm();
     } catch (error) {
-      console.log(error);
+       
+      if (error.response.status === 400) {
+        console.log(error.response.data.message);
+        setErrorMessage(error.response.data.message);
+        setIsLoading(false)
+        
+      } 
     }
   };
 
@@ -111,7 +122,8 @@ function AddDjForm(props) {
         </Form.Group>
          </div>
         <br />
-        <button className="myButtons" type="submit">Agregar</button>
+        <button className="myButtons" type="submit" disabled={isLoading}>Agregar</button>
+        {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
       </Form>
     </div>
   );

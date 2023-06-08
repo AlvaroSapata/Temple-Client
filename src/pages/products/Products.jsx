@@ -45,18 +45,6 @@ function Products() {
     }
   };
 
-  // Elimina un Producto por su ID
-  const deleteProduct = async (id) => {
-    try {
-      await deleteProductService(id);
-      // Actualizamos los datos después de la eliminación
-      getData();
-    } catch (error) {
-      navigate("/error");
-      console.log(error);
-    }
-  };
-
   // Muestra/esconde el formulario
   const toggleForm = () => {
     setIsFormVisible(!isFormVisible);
@@ -100,8 +88,8 @@ function Products() {
           toggleForm={toggleForm}
         />
       ) : null}
-      
-            <div className="myProductsList">
+
+      <div className="myProductsList">
         {products.map((eachProduct) => {
           return (
             <div key={eachProduct._id} className="productContainer">
@@ -121,9 +109,19 @@ function Products() {
                     <p className="title">{eachProduct.name}</p>
                     <div className="myPriceAndIcon">
                       <p>{eachProduct.price}€</p>
-                      <button>
-                        <img src="images/add-cart.png" alt="add" />
-                      </button>
+                      <div>
+                        {productIdToBuy != eachProduct._id ? (
+                          <button
+                            onClick={() => setProductIdToBuy(eachProduct._id)}
+                          >
+                            <img src="images/add-cart.png" alt="add" />
+                          </button>
+                        ) : (
+                          <button>
+                            <img src="images/add-cart.png" alt="add" />
+                          </button>
+                        )}
+                      </div>
                     </div>
                     <div>{eachProduct.description}</div>
                   </div>
@@ -132,31 +130,21 @@ function Products() {
                       eachProduct={eachProduct}
                       getData={getData}
                       setIsEditing={setIsEditing}
+                      isEditing={isEditing}
                     />
                   </div>
                 </div>
               </div>
-
               <div>
-              {productIdToBuy != eachProduct._id ? (
-                  <button onClick={() => setProductIdToBuy(eachProduct._id)}>
-                    Purchase
-                  </button>
-                ) : (
+                {productIdToBuy != eachProduct._id ? null : (
                   <PaymentIntent productDetails={eachProduct} />
                 )}
               </div>
-
-              <button onClick={() => deleteProduct(eachProduct._id)}>
-                eliminar
-              </button>
             </div>
           );
         })}
       </div>
-          
     </div>
-        
   );
 }
 

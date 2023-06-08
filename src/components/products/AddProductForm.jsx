@@ -10,7 +10,7 @@ function AddProductForm(props) {
   // console.log(props.getData);
   const navigate = useNavigate();
   // Destructurar props
-  const { setIsLoading, getData, toggleForm } = props;
+  const {  getData, toggleForm } = props;
 
   // Estados para registrar los cambios
   const [name, setName] = useState("");
@@ -21,6 +21,10 @@ function AddProductForm(props) {
   const [imageUrl, setImageUrl] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
 
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+
   const handleNameChange = (e) => setName(e.target.value);
   // const handleImageChange = (e) => setImage(e.target.value);
   const handlePriceChange = (e) => setPrice(e.target.value);
@@ -30,7 +34,6 @@ function AddProductForm(props) {
     e.preventDefault();
     // console.log("apretando el boton");
     setIsLoading(true);
-    toggleForm();
 
     try {
       const newProduct = {
@@ -41,9 +44,14 @@ function AddProductForm(props) {
       };
       await createProductService(newProduct);
       getData();
+      toggleForm();
     } catch (error) {
-      console.log(error);
-    }
+      if (error.response.status === 400) {
+        console.log(error.response.data.message);
+        setErrorMessage(error.response.data.message);
+        setIsLoading(false)
+        
+      }     }
   };
 
   const handleFileUpload = async (event) => {
@@ -131,9 +139,10 @@ function AddProductForm(props) {
           ) : null}
         </Form.Group>
 
-        <button className="myButtons" type="submit" disabled={isUploading}>
+        <button className="myButtons" type="submit" disabled={isLoading}>
           Agregar
         </button>
+        {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
       </Form>
     </div>
   );

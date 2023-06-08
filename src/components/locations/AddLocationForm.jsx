@@ -9,10 +9,9 @@ import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import ClickMarker from "../../components/locations/ClickMarker";
 
 function AddLocationForm(props) {
-
   const navigate = useNavigate();
   // Destructurar props
-  const { setIsLoading, getData, toggleForm } = props;
+  const { getData, toggleForm } = props;
 
   // Estados para registrar los cambios
   const [name, setName] = useState("");
@@ -24,7 +23,12 @@ function AddLocationForm(props) {
 
   // Estados mapa
   const [coordinates, setCoordinates] = useState(null);
-  const [center, setCenter] = useState([42.340636415406124, -3.7039897681929457])
+  const [center, setCenter] = useState([
+    42.340636415406124, -3.7039897681929457,
+  ]);
+
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleNameChange = (e) => setName(e.target.value);
   // const handleImageChange = (e) => setImage(e.target.value);
@@ -34,19 +38,23 @@ function AddLocationForm(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    toggleForm();
 
     try {
       const newLocation = {
         name,
         image: imageUrl,
-        address:coordinates,
+        address: coordinates,
         description,
       };
       await createLocationService(newLocation);
       getData();
+      toggleForm();
     } catch (error) {
-      console.log(error);
+      if (error.response.status === 400) {
+        console.log(error.response.data.message);
+        setErrorMessage(error.response.data.message);
+        setIsLoading(false);
+      }
     }
   };
 
@@ -54,19 +62,19 @@ function AddLocationForm(props) {
     if (!event.target.files[0]) {
       return;
     }
-    setIsUploading(true); 
+    setIsUploading(true);
     const uploadData = new FormData();
     uploadData.append("image", event.target.files[0]);
     try {
       const response = await uploadImageService(uploadData);
       setImageUrl(response.data.imageUrl);
-      setIsUploading(false); 
+      setIsUploading(false);
     } catch (error) {
       navigate("/error");
     }
   };
 
-  console.log(coordinates)
+  console.log(coordinates);
   return (
     <div className="myLocationFormContainer">
       <h3>Añadir Ubicacion</h3>
@@ -112,7 +120,7 @@ function AddLocationForm(props) {
           ) : null}
         </Form.Group>
 
-{/*         <Form.Label htmlFor="adress">adress</Form.Label>
+        {/*         <Form.Label htmlFor="adress">adress</Form.Label>
         <Form.Control
           type="text"
           name="adress"
@@ -120,11 +128,7 @@ function AddLocationForm(props) {
           value={adress}
         /> */}
         <br />
-        <MapContainer
-          center={center}
-          zoom={13}
-          scrollWheelZoom={true}
-        >
+        <MapContainer center={center} zoom={13} scrollWheelZoom={true}>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -133,9 +137,10 @@ function AddLocationForm(props) {
           {coordinates !== null && <Marker position={coordinates} />}
         </MapContainer>
 
-        <button className="myButtons" type="submit">
+        <button className="myButtons" type="submit" disabled={isLoading}>
           Agregar
         </button>
+        {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
       </Form>
     </div>
   );

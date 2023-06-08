@@ -107,23 +107,25 @@ function Products() {
                       />
                     </div>
                     <p className="title">{eachProduct.name}</p>
+                    <div>{eachProduct.description}</div>
                     <div className="myPriceAndIcon">
                       <p>{eachProduct.price}€</p>
                       <div>
                         {productIdToBuy != eachProduct._id ? (
-                          <button
+                          <img
+                            src="images/icons8-buy-64.png"
+                            alt="add"
                             onClick={() => setProductIdToBuy(eachProduct._id)}
-                          >
-                            <img src="images/add-cart.png" alt="add" />
-                          </button>
+                          />
                         ) : (
-                          <button>
-                            <img src="images/add-cart.png" alt="add" />
-                          </button>
+                          <img
+                            src="images/icons8-thank-you-64.png"
+                            alt="add"
+                            onClick={() => setProductIdToBuy(eachProduct._id)}
+                          />
                         )}
                       </div>
                     </div>
-                    <div>{eachProduct.description}</div>
                   </div>
                   <div className="flip-card-back">
                     <EditProductForm

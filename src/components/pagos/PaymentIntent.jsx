@@ -37,7 +37,7 @@ function PaymentIntent({ productDetails }) {
   };
 
   return (
-    <div className="App">
+    <div className="App paymentPopup">
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
           <CheckoutForm />

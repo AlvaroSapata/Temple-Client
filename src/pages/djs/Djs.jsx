@@ -1,16 +1,16 @@
-import { useEffect, useState,useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AddDjForm from "../../components/djs/AddDjForm";
 import { deleteDjService, getAllDjsService } from "../../services/djs.services";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { AuthContext } from "../../context/auth.context.js";
-import Card from 'react-bootstrap/Card';
+import Card from "react-bootstrap/Card";
 
 function Djs() {
   // Navegar a distintas rutas despues de una accion
   const navigate = useNavigate();
-    // Destructuracion
-    const { isAdmin } = useContext(AuthContext);
+  // Destructuracion
+  const { isAdmin } = useContext(AuthContext);
   // Estado principal
   const [djs, setDjs] = useState([]);
   // Estado de loading
@@ -25,7 +25,7 @@ function Djs() {
   // Actualizamos los estados
   const getData = async () => {
     try {
-      const response = await getAllDjsService()
+      const response = await getAllDjsService();
       // console.log(response);
       setDjs(response.data);
       setIsLoading(false);
@@ -59,9 +59,12 @@ function Djs() {
 
   return (
     <div className="DjsPage">
-      
-      {isAdmin?<button className="myButtons" onClick={toggleForm}>Añadir Dj</button>:null}
-      
+      {isAdmin ? (
+        <button className="myButtons" onClick={toggleForm}>
+          Añadir Dj
+        </button>
+      ) : null}
+
       {isFormVisible ? (
         <AddDjForm
           getData={getData}
@@ -69,17 +72,37 @@ function Djs() {
           toggleForm={toggleForm}
         />
       ) : null}
-      {djs.map((eachDj) => {
-        return (
-          <div key={eachDj._id}>
-            <img src={eachDj.image} alt="eachDj" width={"250px"} />
-            <p>{eachDj.name}</p>
-            {/* Utilizamos una funcion anonima para pasar el id a la funcion delete */}
-            {isAdmin?<button className="myButtons" onClick={() => deleteDj(eachDj._id)}>eliminar</button>:null}
-            
-          </div>
-        );
-      })}
+      <div className="myEventsList">
+        {djs.map((eachDj) => {
+          return (
+            <div key={eachDj._id} >
+              <div >
+                <div className="cardIG">
+                  <div className="imageIG">
+                    <img src={eachDj.image} alt="eachDj" />
+                  </div>
+                  <div className="textIG">
+                    <div className="mainIG">
+                      <span>{eachDj.name}</span>
+                    </div>
+                    <div className="subIG">
+                      <span>@{eachDj.name}</span>
+                    </div>
+                  </div>
+                </div>
+                {isAdmin ? (
+                  <button
+                    className="myButtons"
+                    onClick={() => deleteDj(eachDj._id)}
+                  >
+                    eliminar
+                  </button>
+                ) : null}
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

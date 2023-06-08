@@ -8,7 +8,6 @@ import { getAllEventsService } from "../../services/events.services";
 import { AuthContext } from "../../context/auth.context.js";
 import Card from "react-bootstrap/Card";
 
-
 function Events() {
   const navigate = useNavigate();
   // Destructuracion
@@ -112,27 +111,27 @@ function Events() {
       <div className="myEventsList">
         {nextEvents.map((eachEvent) => (
           <Link to={`/events/${eachEvent._id}`} key={eachEvent._id}>
-          <Card className="myEventsCardStyle">
-              <div className="myEventsCardTitle">
-                <Card.Title>{eachEvent.title}</Card.Title>
-              </div>
-              <div className="myEventsListImgContainer">
-                <Card.Img src={eachEvent.image} alt="imagen" />
-              </div>
-              <Card.Body>
-                <div className="myEventsListDateContainer">
-                  <Card.Text>{eachEvent.date}</Card.Text>
+            <div>
+              <div className="mycardIG">
+                <div className="myimageIG">
+                  <img src={eachEvent.image} alt="eachImg" />
                 </div>
-                <div className="myEventsListLocationContainer">
-                  <Card.Img
-                    className="myEventsListLocationContainerImg"
-                    src="images/icons8-location-50.png"
-                    alt="imagen"
-                  />
-                  <Card.Text>{eachEvent.location?.name}</Card.Text>
+                <div className="mytextIG">
+                  <div className="mymainIG">
+                    <span>{eachEvent.title}</span>
+                  </div>
+                  <div className="mysubIG">
+                    <span>
+                      <img src="images/icons8-location-50.png" alt="eachImg" />
+                      {eachEvent.location?.name}
+                    </span>
+                  </div>
                 </div>
-              </Card.Body>
-            </Card>
+                <div className="mydateIG">
+                  <span>{eachEvent.date}</span>
+                </div>
+              </div>
+            </div>
           </Link>
         ))}
       </div>
@@ -140,27 +139,27 @@ function Events() {
       <div className="myEventsList">
         {pastEvents.map((eachEvent) => (
           <Link to={`/events/${eachEvent._id}`} key={eachEvent._id}>
-            <Card className="myEventsCardStyle">
-              <div className="myEventsCardTitle">
-                <Card.Title>{eachEvent.title}</Card.Title>
-              </div>
-              <div className="myEventsListImgContainer">
-                <Card.Img src={eachEvent.image} alt="imagen" />
-              </div>
-              <Card.Body>
-                <div className="myEventsListDateContainer">
-                  <Card.Text>{eachEvent.date}</Card.Text>
+            <div>
+              <div className="mycardIG">
+                <div className="myimageIG">
+                  <img src={eachEvent.image} alt="eachImg" />
                 </div>
-                <div className="myEventsListLocationContainer">
-                  <Card.Img
-                    className="myEventsListLocationContainerImg"
-                    src="images/icons8-location-50.png"
-                    alt="imagen"
-                  />
-                  <Card.Text>{eachEvent.location?.name}</Card.Text>
+                <div className="mytextIG">
+                  <div className="mymainIG">
+                    <span>{eachEvent.title}</span>
+                  </div>
+                  <div className="mysubIG">
+                    <span>
+                      <img src="images/icons8-location-50.png" alt="eachImg" />
+                      {eachEvent.location?.name}
+                    </span>
+                  </div>
                 </div>
-              </Card.Body>
-            </Card>
+                <div className="mydateIG">
+                  <span>{eachEvent.date}</span>
+                </div>
+              </div>
+            </div>
           </Link>
         ))}
       </div>
@@ -169,3 +168,28 @@ function Events() {
 }
 
 export default Events;
+
+/* 
+<Link to={`/events/${eachEvent._id}`} key={eachEvent._id}>
+<Card className="myEventsCardStyle">
+  <div className="myEventsCardTitle">
+    <Card.Title>{eachEvent.title}</Card.Title>
+  </div>
+  <div className="myEventsListImgContainer">
+    <Card.Img src={eachEvent.image} alt="imagen" />
+  </div>
+  <Card.Body>
+    <div className="myEventsListDateContainer">
+      <Card.Text>{eachEvent.date}</Card.Text>
+    </div>
+    <div className="myEventsListLocationContainer">
+      <Card.Img
+        className="myEventsListLocationContainerImg"
+        src="images/icons8-location-50.png"
+        alt="imagen"
+      />
+      <Card.Text>{eachEvent.location?.name}</Card.Text>
+    </div>
+  </Card.Body>
+</Card>
+</Link> */

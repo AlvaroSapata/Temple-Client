@@ -5,9 +5,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background-color: black; */
-/*   background-image: url("../public/images/imagentemplefondo.jpg");
-  background-size: cover; */
+
+  /* background-image: url("/public/images/imagesfondotemple.jpg"); 
+  /* background-image: url("images/fondodalle.png"); */
+  background-size: cover;
+  background-color: rgb(80, 219, 173);
 }
 
 code {

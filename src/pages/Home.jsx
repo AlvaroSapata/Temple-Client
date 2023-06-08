@@ -75,14 +75,19 @@ function Home() {
   }
   return (
     <div className="eventsPage">
-      <div className="neonText">
+      <div className="Divgrandehome">
+        <div className="divfondo">
+          <img src="images/templecirculo.png" alt="img" />
+        </div>
+      </div>
+      {/* <div className="neonText">
         <h2>Temple</h2>
         <h4>Tasty Electronic Music</h4>
-      </div>
-      <h3>Proximos Eventos:</h3>
+      </div> */}
+      <h5>Proximos Eventos:</h5>
       <div className="carousel-container">
         <div className="carousel-slide">
-          <Carousel interval={1000} ride="carousel" wrap={true}>
+          <Carousel interval={3000} ride="carousel" wrap={true}>
             {nextEvents.map((eachEvent) => (
               <Carousel.Item key={eachEvent._id}>
                 <Link to={`/events/${eachEvent._id}`}>

@@ -86,6 +86,7 @@ function CheckoutForm() {
   }
 
   return (
+    <div >
     <form id="payment-form" onSubmit={handleSubmit}>
       {/* <LinkAuthenticationElement
         id="link-authentication-element"
@@ -100,6 +101,7 @@ function CheckoutForm() {
       {/* Show any error or success messages */}
       {message && <div id="payment-message">{message}</div>}
     </form>
+    </div>
   );
 }
 

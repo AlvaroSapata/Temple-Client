@@ -21,6 +21,9 @@ function EditProductForm(props) {
   const [imageUrl, setImageUrl] = useState(eachProduct.image);
   const [isUploading, setIsUploading] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
   const handleNameChange = (e) => setName(e.target.value);
   const handlePriceChange = (e) => setPrice(e.target.value);
   const handleDescriptionChange = (e) => setDescription(e.target.value);
@@ -28,7 +31,7 @@ function EditProductForm(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
     try {
       const updatedProduct = {
         name,
@@ -39,7 +42,11 @@ function EditProductForm(props) {
       await editProductService(eachProduct._id, updatedProduct);
       setShowMessage(true);
     } catch (error) {
-      console.log(error);
+      if (error.response.status === 400) {
+        console.log(error.response.data.message);
+        setErrorMessage(error.response.data.message);
+        setIsLoading(false);
+      }
     }
   };
 
@@ -60,8 +67,11 @@ function EditProductForm(props) {
 
       setIsUploading(false);
     } catch (error) {
-      navigate("/error");
-    }
+      if (error.response.status === 400) {
+        setErrorMessage("Archivo demasiado grande");
+        setIsLoading(false);
+        setIsUploading(false);
+      }     }
   };
   // Elimina un Producto por su ID
   const deleteProduct = async (id) => {
@@ -139,15 +149,19 @@ function EditProductForm(props) {
         <br />
         {isEditing ? (
           <div className="botonesprodictos">
-            <button className="myButtons">Aceptar</button>
+            <button className="myButtons" disabled={isLoading}>
+              Aceptar
+            </button>
             <button
               onClick={() => deleteProduct(eachProduct._id)}
               className="myButtons"
+              disabled={isLoading}
             >
               eliminar
             </button>
           </div>
         ) : null}
+        {errorMessage && <p style={{ color: "lightred" }}>{errorMessage}</p>}
 
         <br />
         <div>

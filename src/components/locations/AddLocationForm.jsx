@@ -70,8 +70,12 @@ function AddLocationForm(props) {
       setImageUrl(response.data.imageUrl);
       setIsUploading(false);
     } catch (error) {
-      navigate("/error");
-    }
+      console.log(error.response);
+      if (error.response.status === 400) {
+        setErrorMessage("Archivo demasiado grande ( 10485760 bytes max )");
+        setIsLoading(false)
+        setIsUploading(false)
+      }     }
   };
 
   console.log(coordinates);

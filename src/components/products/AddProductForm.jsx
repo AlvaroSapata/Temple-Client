@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { createProductService } from "../../services/products.services";
 import { uploadImageService } from "../../services/upload.services";
-import { useNavigate } from "react-router-dom";
+
 import Form from "react-bootstrap/Form";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
 function AddProductForm(props) {
-  // console.log(props.setIsLoading);
-  // console.log(props.getData);
-  const navigate = useNavigate();
+
   // Destructurar props
   const {  getData, toggleForm } = props;
 
@@ -71,16 +69,15 @@ function AddProductForm(props) {
 
     try {
       const response = await uploadImageService(uploadData);
-      // or below line if not using services
-      // const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/upload`, uploadData)
-
       setImageUrl(response.data.imageUrl);
-      //                          |
-      //     this is how the backend sends the image to the frontend => res.json({ imageUrl: req.file.path });
-
-      setIsUploading(false); // to stop the loading animation
+      setIsUploading(false);
     } catch (error) {
-      navigate("/error");
+      console.log(error.response);
+      if (error.response.status === 400) {
+        setErrorMessage("Archivo demasiado grande: 10485760 bytes max");
+        setIsLoading(false)
+        setIsUploading(false)
+      } 
     }
   };
   return (

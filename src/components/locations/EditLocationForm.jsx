@@ -17,9 +17,11 @@ function EditLocationForm(props) {
   const [name, setName] = useState(locationDetails.name);
   const [description, setDescription] = useState(locationDetails.description);
 
-
   const [imageUrl, setImageUrl] = useState(locationDetails.image);
   const [isUploading, setIsUploading] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   // Estados mapa
   const [coordinates, setCoordinates] = useState(locationDetails.address);
@@ -30,7 +32,7 @@ function EditLocationForm(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
     try {
       const updatedProduct = {
         name,
@@ -41,7 +43,11 @@ function EditLocationForm(props) {
       await editLocationService(locationDetails._id, updatedProduct);
       navigate("/locations");
     } catch (error) {
-      console.log(error);
+      if (error.response.status === 400) {
+        console.log(error.response.data.message);
+        setErrorMessage(error.response.data.message);
+        setIsLoading(false);
+      }
     }
   };
 
@@ -50,15 +56,18 @@ function EditLocationForm(props) {
       return;
     }
     setIsUploading(true);
-    const uploadData = new FormData(); 
+    const uploadData = new FormData();
     uploadData.append("image", event.target.files[0]);
     try {
       const response = await uploadImageService(uploadData);
       setImageUrl(response.data.imageUrl);
-      setIsUploading(false); 
+      setIsUploading(false);
     } catch (error) {
-      navigate("/error");
-    }
+      if (error.response.status === 400) {
+        setErrorMessage("Archivo demasiado grande: 10485760 bytes max");
+        setIsLoading(false);
+        setIsUploading(false);
+      }    }
   };
 
   useEffect(() => {
@@ -119,7 +128,10 @@ function EditLocationForm(props) {
           {coordinates !== null && <Marker position={coordinates} />}
         </MapContainer>
 
-        <button className="myButtons">Aceptar cambios</button>
+        <button className="myButtons" disabled={isLoading}>
+          Aceptar cambios
+        </button>
+        {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
         <br />
       </Form>
     </div>

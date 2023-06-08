@@ -33,6 +33,9 @@ function EditEvents(props) {
   const [isUploadingVideo, setIsUploadingVideo] = useState(false);
   const [isUploadingGallery, setIsUploadingGallery] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDateChange = (e) => setDate(e.target.value);
   const handleGalleryImagesChange = (e) => {
@@ -60,6 +63,7 @@ function EditEvents(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const updatedEvent = {
         title,
@@ -73,7 +77,11 @@ function EditEvents(props) {
       await editEventsService(eventDetails._id, updatedEvent);
       navigate("/events");
     } catch (error) {
-      console.log(error);
+      if (error.response.status === 400) {
+        console.log(error.response.data.message);
+        setErrorMessage(error.response.data.message);
+        setIsLoading(false);
+      }
     }
   };
 
@@ -90,7 +98,11 @@ function EditEvents(props) {
       setImageUrl(response.data.imageUrl);
       setIsUploadingImage(false);
     } catch (error) {
-      navigate("/error");
+      if (error.response.status === 400) {
+        setErrorMessage("Archivo demasiado grande: 10485760 bytes max");
+        setIsLoading(false);
+        setIsUploadingImage(false);
+      }
     }
   };
 
@@ -106,8 +118,11 @@ function EditEvents(props) {
       setVideoUrl(response.data.videoUrl);
       setIsUploadingVideo(false);
     } catch (error) {
-      navigate("/error");
-    }
+      if (error.response.status === 400) {
+        setErrorMessage("Archivo demasiado grande: 104857600 bytes max");
+        setIsLoading(false);
+        setIsUploadingImage(false);
+      }    }
   };
 
   const handleGalleryImagesUpload = async (event) => {
@@ -131,8 +146,11 @@ function EditEvents(props) {
       setGalleryImageUrls(imageUrls);
       setIsUploadingGallery(false);
     } catch (error) {
-      console.log(error);
-    }
+      if (error.response.status === 400) {
+        setErrorMessage("Alguno de los Archivos es demasiado grande: 10485760 bytes max");
+        setIsLoading(false);
+        setIsUploadingImage(false);
+      }    }
   };
 
   useEffect(() => {
@@ -272,7 +290,8 @@ function EditEvents(props) {
             ) : null}
           </Form.Group>
         </div>
-        <button className="myButtons">Aceptar cambios</button>
+        <button className="myButtons" disabled={isLoading}>Aceptar cambios</button>
+        {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
         <br />
       </Form>
     </div>

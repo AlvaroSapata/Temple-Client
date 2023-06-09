@@ -118,6 +118,7 @@ function EditEvents(props) {
       setVideoUrl(response.data.videoUrl);
       setIsUploadingVideo(false);
     } catch (error) {
+      console.log(error)
       if (error.response.status === 400) {
         setErrorMessage("Archivo demasiado grande: 104857600 bytes max");
         setIsLoading(false);

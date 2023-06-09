@@ -196,6 +196,10 @@ html {
   left: 6vw;
   width: 140px;
   height: 45px;
+}@media (max-width: 900px) {
+  .myHomeNav {
+    left: -20px;
+  }
 }
 @media (max-width: 360px) {
   .myHomeNav {

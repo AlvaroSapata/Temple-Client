@@ -14,8 +14,8 @@ function AddEventForm(props) {
 
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
-  const [gallery, setGallery] = useState("");
-  const [afterMovie, setAfterMovie] = useState("");
+  const [gallery, setGallery] = useState();
+  const [afterMovie, setAfterMovie] = useState();
   const [djs, setDjs] = useState([]);
   const [locationsSelected, setLocationsSelected] = useState("");
 
@@ -55,8 +55,8 @@ function AddEventForm(props) {
         image: imageUrl,
         date: date,
         location: locationsSelected,
-        gallery: gallery,
-        afterMovie: afterMovie,
+        // gallery: gallery,
+        // afterMovie: afterMovie,
         djs: djs,
       };
 

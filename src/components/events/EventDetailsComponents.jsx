@@ -36,7 +36,7 @@ function EventDetailsComponents(props) {
   useEffect(() => {
     getData();
   }, []);
-
+console.log(eventDetails?.gallery)
   const getData = async () => {
     try {
       const response = await getEventsDetailsService(params.eventsId);

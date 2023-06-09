@@ -1062,6 +1062,59 @@ html {
   object-fit: cover;
 }
 
+@media (max-width: 900px) {
+  .myDetailsCard {
+    width: 90vw;
+    margin-left: 5vw;
+  }
+  .myFirstDiv {
+    flex-direction: column;
+  }
+  .myCartel {
+    width: 70vw;
+    margin-left: 5vw;
+  }
+  .divDerecha {
+    width: 100%;
+  }
+  .TitulodetallesContainer {
+    width: 100%;
+  }
+  .TitulodetallesContainerText {
+    width: 100%;
+  }
+  .DatedetallesContainer {
+    width: 100%;
+  }
+  .djsImagencontenedor {
+    width: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+  }
+  .djsImagencontenedor img {
+    height: 100px;
+    width: 45vw;
+    object-fit: cover;
+  }
+  .centraciondjs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .gentequeva {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .genteicono img {
+    width: 50px;
+  }
+  .djscontainer {
+    margin-top: 10px;
+    gap: 0px;
+  }
+}
+
 @media (max-width: 360px) {
   .myDetailsCard {
     width: 90vw;

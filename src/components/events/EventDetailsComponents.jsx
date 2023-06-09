@@ -36,7 +36,6 @@ function EventDetailsComponents(props) {
   useEffect(() => {
     getData();
   }, []);
-console.log(eventDetails?.gallery)
   const getData = async () => {
     try {
       const response = await getEventsDetailsService(params.eventsId);
@@ -157,12 +156,12 @@ console.log(eventDetails?.gallery)
                       <div key={eachDjs._id} className="centraciondjs">
                         <Card.Text>{eachDjs.name}</Card.Text>
                         <div className="djsImagencontenedor">
-                        <Card.Img
-                          className="djDetailsImg"
-                          src={eachDjs.image}
-                          alt="img"
-                          width={"100px"}
-                        />
+                          <Card.Img
+                            className="djDetailsImg"
+                            src={eachDjs.image}
+                            alt="img"
+                            width={"100px"}
+                          />
                         </div>
                       </div>
                     );

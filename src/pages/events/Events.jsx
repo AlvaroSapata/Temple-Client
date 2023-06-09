@@ -8,7 +8,6 @@ import { getAllEventsService } from "../../services/events.services";
 import { AuthContext } from "../../context/auth.context.js";
 import Card from "react-bootstrap/Card";
 
-
 function Events() {
   const navigate = useNavigate();
   // Destructuracion
@@ -109,7 +108,7 @@ function Events() {
         />
       ) : null}
       <h3>Proximos Eventos:</h3>
-      
+
       <div className="myEventsList">
         {nextEvents.map((eachEvent) => (
           <Link to={`/events/${eachEvent._id}`} key={eachEvent._id}>

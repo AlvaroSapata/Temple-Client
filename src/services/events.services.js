@@ -26,9 +26,7 @@ const joinService = (eventId, updatedEvent) => {
 
 const unJoinService = (eventId, updatedEvent) => {
   return service.put(`/events/${eventId}/unjoin`, updatedEvent);
-}
-
-
+};
 
 export {
   getAllEventsService,
@@ -37,5 +35,5 @@ export {
   deleteEventsService,
   editEventsService,
   joinService,
-  unJoinService
+  unJoinService,
 };

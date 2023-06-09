@@ -30,12 +30,10 @@ function Locations() {
   const getData = async () => {
     try {
       const response = await getAllLocationsService();
-      console.log(response);
       setLocations(response.data);
       setIsLoading(false);
     } catch (error) {
       navigate("/error");
-      console.log(error);
     }
   };
 
@@ -47,7 +45,6 @@ function Locations() {
       getData();
     } catch (error) {
       navigate("/error");
-      console.log(error);
     }
   };
 

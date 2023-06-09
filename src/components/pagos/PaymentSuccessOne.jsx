@@ -7,9 +7,8 @@ import { updatePaymentIntentService } from "../../services/payment.services";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
 const PaymentSuccessOne = () => {
-
   const navigate = useNavigate();
-  const location = useLocation()
+  const location = useLocation();
 
   const [isFetching, setIsFetching] = useState(true);
 
@@ -18,7 +17,6 @@ const PaymentSuccessOne = () => {
   }, []);
 
   const handleUseEffect = async () => {
-
     // below is a way to extract queries from the search queries.
     // unfortunately, react-router-dom doesn't come with a proper way to extract them, similar to useParams
     const clientSecret = new URLSearchParams(location.search).get(
@@ -30,8 +28,8 @@ const PaymentSuccessOne = () => {
 
     const paymentIntentInfo = {
       clientSecret: clientSecret,
-      paymentIntentId: paymentIntentId
-    }
+      paymentIntentId: paymentIntentId,
+    };
 
     try {
       await updatePaymentIntentService(paymentIntentInfo);
@@ -42,7 +40,7 @@ const PaymentSuccessOne = () => {
   };
 
   if (isFetching) {
-    <ScaleLoader color={"#471971"} loading={true} />
+    <ScaleLoader color={"#471971"} loading={true} />;
   }
 
   return (

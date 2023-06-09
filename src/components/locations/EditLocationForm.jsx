@@ -44,7 +44,6 @@ function EditLocationForm(props) {
       navigate("/locations");
     } catch (error) {
       if (error.response.status === 400) {
-        console.log(error.response.data.message);
         setErrorMessage(error.response.data.message);
         setIsLoading(false);
       }
@@ -67,7 +66,8 @@ function EditLocationForm(props) {
         setErrorMessage("Archivo demasiado grande: 10485760 bytes max");
         setIsLoading(false);
         setIsUploading(false);
-      }    }
+      }
+    }
   };
 
   useEffect(() => {

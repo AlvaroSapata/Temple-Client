@@ -18,18 +18,18 @@ function PaymentIntent({ productDetails }) {
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    handleUseEffect()
+    handleUseEffect();
   }, []);
-  
+
   const handleUseEffect = async () => {
     //                   this is the product info sent to the backend with the product to purchase
     //                                                    |
-    const response = await createPaymentIntentService(productDetails)
-    setClientSecret(response.data.clientSecret)
-  }
+    const response = await createPaymentIntentService(productDetails);
+    setClientSecret(response.data.clientSecret);
+  };
 
   const appearance = {
-    theme: 'stripe',
+    theme: "stripe",
   };
   const options = {
     clientSecret,

@@ -1,13 +1,11 @@
-import EventDetailsComponents from "../../components/events/EventDetailsComponents"
-
+import EventDetailsComponents from "../../components/events/EventDetailsComponents";
 
 function EventDetails() {
   return (
     <div>
-
-      <EventDetailsComponents/>
+      <EventDetailsComponents />
     </div>
-  )
+  );
 }
 
-export default EventDetails
+export default EventDetails;

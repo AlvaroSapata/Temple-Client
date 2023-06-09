@@ -1,11 +1,11 @@
-import LocationDetailsComponent from "../../components/locations/LocationDetailsComponent"
+import LocationDetailsComponent from "../../components/locations/LocationDetailsComponent";
 
 function LocationDetails() {
   return (
     <div>
-    <LocationDetailsComponent />
+      <LocationDetailsComponent />
     </div>
-  )
+  );
 }
 
-export default LocationDetails
+export default LocationDetails;

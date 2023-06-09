@@ -43,7 +43,6 @@ function EditProductForm(props) {
       setShowMessage(true);
     } catch (error) {
       if (error.response.status === 400) {
-        console.log(error.response.data.message);
         setErrorMessage(error.response.data.message);
         setIsLoading(false);
       }
@@ -71,7 +70,8 @@ function EditProductForm(props) {
         setErrorMessage("Archivo demasiado grande");
         setIsLoading(false);
         setIsUploading(false);
-      }     }
+      }
+    }
   };
   // Elimina un Producto por su ID
   const deleteProduct = async (id) => {
@@ -81,7 +81,6 @@ function EditProductForm(props) {
       getData();
     } catch (error) {
       navigate("/error");
-      console.log(error);
     }
   };
   useEffect(() => {

@@ -26,12 +26,10 @@ function Djs() {
   const getData = async () => {
     try {
       const response = await getAllDjsService();
-      // console.log(response);
       setDjs(response.data);
       setIsLoading(false);
     } catch (error) {
       navigate("/error");
-      console.log(error);
     }
   };
 
@@ -43,7 +41,6 @@ function Djs() {
       getData();
     } catch (error) {
       navigate("/error");
-      console.log(error);
     }
   };
 
@@ -66,7 +63,6 @@ function Djs() {
       ) : null}
       <h3>Nuestros Djs</h3>
       {isFormVisible ? (
-        
         <AddDjForm
           getData={getData}
           setIsLoading={setIsLoading}

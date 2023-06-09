@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { signupService } from "../../services/auth.services";
-import Form from 'react-bootstrap/Form';
+import Form from "react-bootstrap/Form";
 
 function Signup() {
   const navigate = useNavigate();
@@ -35,7 +35,6 @@ function Signup() {
       navigate("/auth/login");
     } catch (error) {
       console.log(error);
-      console.log(error.response);
       if (error.response.status === 400) {
         setErrorMessage(error.response.data.message);
       } else {
@@ -51,20 +50,28 @@ function Signup() {
         <h2>Signup</h2>
       </pre>
       <Form onSubmit={handleSingup}>
-        <Form.Group className="mb-3" >
+        <Form.Group className="mb-3">
           <Form.Label>Nombre de usuario</Form.Label>
-          <Form.Control type="text" value={username} onChange={handleUsernameChange} />
+          <Form.Control
+            type="text"
+            value={username}
+            onChange={handleUsernameChange}
+          />
         </Form.Group>
 
         <br />
-        <Form.Group className="mb-3" >
+        <Form.Group className="mb-3">
           <Form.Label>Email</Form.Label>
-          <Form.Control type="email" value={email} onChange={handleEmailChange} />
+          <Form.Control
+            type="email"
+            value={email}
+            onChange={handleEmailChange}
+          />
         </Form.Group>
 
         <br />
 
-        <Form.Group className="mb-3" >
+        <Form.Group className="mb-3">
           <Form.Label>Contraseña</Form.Label>
           <Form.Control
             type="password"
@@ -75,7 +82,7 @@ function Signup() {
 
         <br />
 
-        <Form.Group className="mb-3" >
+        <Form.Group className="mb-3">
           <Form.Label>Repite la Contraseña</Form.Label>
           <Form.Control
             type="password"
@@ -86,7 +93,9 @@ function Signup() {
 
         <br />
 
-        <button type="submit" className="myButtons">Sign Up</button>
+        <button type="submit" className="myButtons">
+          Sign Up
+        </button>
         <pre>
           {errorMessage && <p style={{ color: "#03e9f4" }}>{errorMessage}</p>}
         </pre>

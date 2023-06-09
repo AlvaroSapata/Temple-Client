@@ -36,12 +36,10 @@ function Products() {
   const getData = async () => {
     try {
       const response = await getAllProductsService();
-      // console.log(response);
       setProducts(response.data);
       setIsLoading(false);
     } catch (error) {
       navigate("/error");
-      console.log(error);
     }
   };
 
@@ -52,7 +50,6 @@ function Products() {
 
   // Da la vuelta al producto
   const flipProduct = () => {
-    // console.log(isEditing)
     setIsEditing(true);
   };
 

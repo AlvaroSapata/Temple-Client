@@ -4,8 +4,8 @@ const uploadImageService = (imageFile) => {
   return service.post("/upload/image", imageFile);
 };
 
-const uploadVideoService =(videoFile) => {
+const uploadVideoService = (videoFile) => {
   return service.post("/upload/video", videoFile);
 };
 
-export { uploadImageService,uploadVideoService };
+export { uploadImageService, uploadVideoService };

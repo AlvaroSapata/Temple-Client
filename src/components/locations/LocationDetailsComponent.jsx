@@ -12,7 +12,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import ScaleLoader from "react-spinners/ScaleLoader";
 function LocationDetails() {
   const params = useParams();
-  // console.log(params);
+
   // Destructuracion
   const { isAdmin } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -31,7 +31,6 @@ function LocationDetails() {
     try {
       const response = await getLocationDetailsService(params.locationId);
 
-      // console.log(response);
       setLocationDetails(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -60,46 +59,55 @@ function LocationDetails() {
   return (
     <div className="locationsDetailsPage">
       <div className="separadorbtns">
-      {isAdmin ? (
-        <Button className="myButtons" variant="primary" onClick={handleDelete}>
-          eliminar
-        </Button>
-      ) : null}
-      {isAdmin ? (
-        <Button className="myButtons" variant="primary" onClick={toggleForm}>
-          editar
-        </Button>
-      ) : null}
+        {isAdmin ? (
+          <Button
+            className="myButtons"
+            variant="primary"
+            onClick={handleDelete}
+          >
+            eliminar
+          </Button>
+        ) : null}
+        {isAdmin ? (
+          <Button className="myButtons" variant="primary" onClick={toggleForm}>
+            editar
+          </Button>
+        ) : null}
       </div>
       <div>
         <Card className="myLocationCard">
-        <div className="divIzd" >
-          <Card.Body >
-            <Card.Img variant="top" src={locationDetails.image} />
-          </Card.Body>
+          <div className="divIzd">
+            <Card.Body>
+              <Card.Img variant="top" src={locationDetails.image} />
+            </Card.Body>
           </div>
-          <div className="divDcha" >
-          <Card.Body>
-            <Card.Title className="tituloLocation">{locationDetails.name}</Card.Title>
-            <Card.Text className="descripcionLocation">{locationDetails.description}</Card.Text>
-            <div className="contendorMapa">
-            <MapContainer className="mapLocationShow"
-              center={locationDetails.address}
-              zoom={17}
-              scrollWheelZoom={true}
-            >
-              <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
-              <Marker position={locationDetails.address}>
-                <Popup>
-                  <b>{locationDetails.name}</b>
-                </Popup>
-              </Marker>
-            </MapContainer>
-            </div>
-          </Card.Body>
+          <div className="divDcha">
+            <Card.Body>
+              <Card.Title className="tituloLocation">
+                {locationDetails.name}
+              </Card.Title>
+              <Card.Text className="descripcionLocation">
+                {locationDetails.description}
+              </Card.Text>
+              <div className="contendorMapa">
+                <MapContainer
+                  className="mapLocationShow"
+                  center={locationDetails.address}
+                  zoom={17}
+                  scrollWheelZoom={true}
+                >
+                  <TileLayer
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  />
+                  <Marker position={locationDetails.address}>
+                    <Popup>
+                      <b>{locationDetails.name}</b>
+                    </Popup>
+                  </Marker>
+                </MapContainer>
+              </div>
+            </Card.Body>
           </div>
         </Card>
       </div>

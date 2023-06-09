@@ -12,7 +12,7 @@ function AuthWrapper(props) {
   // Funcion isloading => la app empieza validando el token
   const [isLoading, setIsLoading] = useState(true);
   // isAdmin
-   const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     authenticateUser();
@@ -28,22 +28,20 @@ function AuthWrapper(props) {
       setIsLoggedIn(true);
       // info del usuario
       setUser(response.data.payload);
-      console.log(response.data.payload)
       // deja de cargar
       setIsLoading(false);
       // Chekea si el usuario es admin
-       if (response.data.payload.role === "admin") {
-         setIsAdmin(true);
-       } else {
-        setIsAdmin(false)
-       }
+      if (response.data.payload.role === "admin") {
+        setIsAdmin(true);
+      } else {
+        setIsAdmin(false);
+      }
     } catch (error) {
       // actualiza el estado de la app
-      console.log(error);
       setIsLoggedIn(false);
       setUser(null);
       setIsLoading(false);
-      setIsAdmin(false)
+      setIsAdmin(false);
     }
   };
   //2* el objeto de contexto que pasaremos
@@ -53,8 +51,6 @@ function AuthWrapper(props) {
     authenticateUser,
     isAdmin,
   };
-
-  
 
   if (isLoading) {
     return <ScaleLoader color="#471971" className="myLoader" />;

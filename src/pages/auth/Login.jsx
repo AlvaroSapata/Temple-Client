@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { useActionData, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
 import { loginService } from "../../services/auth.services";
-import Form from 'react-bootstrap/Form';
+import Form from "react-bootstrap/Form";
 
 function Login() {
   const { authenticateUser } = useContext(AuthContext);
@@ -43,16 +43,20 @@ function Login() {
   };
   return (
     <div className="login-box">
-          <pre>
+      <pre>
         <h2>Login</h2>
       </pre>
       <Form onSubmit={handleLogin}>
-        <Form.Group className="mb-3" >
+        <Form.Group className="mb-3">
           <Form.Label>Email</Form.Label>
-          <Form.Control type="email" value={email} onChange={handleEmailChange} />
+          <Form.Control
+            type="email"
+            value={email}
+            onChange={handleEmailChange}
+          />
         </Form.Group>
 
-        <Form.Group className="mb-3" >
+        <Form.Group className="mb-3">
           <Form.Label>Contraseña</Form.Label>
           <Form.Control
             type="password"
@@ -62,7 +66,9 @@ function Login() {
         </Form.Group>
 
         <br />
-        <button className="myButtons" type="submit" style={{ width: "auto" }}>Log In</button>
+        <button className="myButtons" type="submit" style={{ width: "auto" }}>
+          Log In
+        </button>
         <br />
         {errorMessage && <p style={{ color: "#03e9f4" }}>{errorMessage}</p>}
       </Form>

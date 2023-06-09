@@ -196,7 +196,8 @@ html {
   left: 6vw;
   width: 140px;
   height: 45px;
-}@media (max-width: 900px) {
+}
+@media (max-width: 900px) {
   .myHomeNav {
     left: -20px;
   }
@@ -854,7 +855,7 @@ html {
   filter: blur(0px);
   z-index: 1;
 }
-.ceentrarimagen{
+.ceentrarimagen {
   display: flex;
   justify-content: center;
 }
@@ -876,7 +877,7 @@ html {
   filter: blur(0px);
   z-index: 1;
 }
-.Errorceentrarimagen{
+.Errorceentrarimagen {
   display: flex;
   justify-content: center;
 }
@@ -892,22 +893,22 @@ html {
   left: 0;
   filter: blur(5px);
 }
-.textoError{
+.textoError {
   z-index: 1;
   font-size: 30px;
   position: absolute;
   color: white;
   top: 70vh;
   width: 350px;
-  background: linear-gradient(to right, transparent, black,transparent);
+  background: linear-gradient(to right, transparent, black, transparent);
   padding: 10px;
 }
 
-
 @media (max-width: 360px) {
   .ErrorPage1 {
-   margin-right: 100px;
-  }}
+    margin-right: 100px;
+  }
+}
 /* DETALLES EVENTO _________________________________________ */
 .eventDetailsPage {
   margin-top: 50px;
@@ -1258,7 +1259,6 @@ html {
   flex-wrap: wrap;
   overflow: hidden;
   gap: 80px;
-  
 }
 
 .myEventsListImgContainer {

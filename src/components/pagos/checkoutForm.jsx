@@ -5,14 +5,14 @@ import {
   PaymentElement,
   LinkAuthenticationElement,
   useStripe,
-  useElements
+  useElements,
 } from "@stripe/react-stripe-js";
 
 function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
 
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -65,14 +65,13 @@ function CheckoutForm() {
         return_url: `${process.env.REACT_APP_CLIENT_URL}/products`,
       },
     });
-        
+
     // This point will only be reached if there is an immediate error when
     // confirming the payment. Otherwise, your customer will be redirected to
     // your `return_url`. For some payment methods like iDEAL, your customer will
     // be redirected to an intermediate site first to authorize the payment, then
     // redirected to the `return_url`.
     if (error.type === "card_error" || error.type === "validation_error") {
-        console.log(error.type, "aquiiiii");
       setMessage(error.message);
     } else {
       setMessage("An unexpected error occurred.");
@@ -82,27 +81,35 @@ function CheckoutForm() {
   };
 
   const paymentElementOptions = {
-    layout: "tabs"
-  }
+    layout: "tabs",
+  };
 
   return (
-    <div >
-    <form id="payment-form" onSubmit={handleSubmit}>
-      {/* <LinkAuthenticationElement
+    <div>
+      <form id="payment-form" onSubmit={handleSubmit}>
+        {/* <LinkAuthenticationElement
         id="link-authentication-element"
         onChange={(e) => setEmail(e.target.value)}
       /> */}
-      <PaymentElement id="payment-element" options={paymentElementOptions} />
-      <div className="pagosFix">
-      <button disabled={isLoading || !stripe || !elements} id="submit" className="myButtons">
-        <span id="button-text">
-          {isLoading ? <div className="spinner" id="spinner"></div> : "Comprar Ahora"}
-        </span>
-      </button>
-      </div>
-      {/* Show any error or success messages */}
-      {message && <div id="payment-message">{message}</div>}
-    </form>
+        <PaymentElement id="payment-element" options={paymentElementOptions} />
+        <div className="pagosFix">
+          <button
+            disabled={isLoading || !stripe || !elements}
+            id="submit"
+            className="myButtons"
+          >
+            <span id="button-text">
+              {isLoading ? (
+                <div className="spinner" id="spinner"></div>
+              ) : (
+                "Comprar Ahora"
+              )}
+            </span>
+          </button>
+        </div>
+        {/* Show any error or success messages */}
+        {message && <div id="payment-message">{message}</div>}
+      </form>
     </div>
   );
 }

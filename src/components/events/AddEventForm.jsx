@@ -1,21 +1,15 @@
 import { useState } from "react";
 import { createEventService } from "../../services/events.services";
 import Form from "react-bootstrap/Form";
-
 import { uploadImageService } from "../../services/upload.services";
-import { useNavigate } from "react-router-dom";
 import ScaleLoader from "react-spinners/ScaleLoader";
-
-
 
 function AddEventForm(props) {
   const { getData, djsArr, locationsArr, toggleForm } = props;
-  const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
-  const [gallery, setGallery] = useState();
-  const [afterMovie, setAfterMovie] = useState();
+
   const [djs, setDjs] = useState([]);
   const [locationsSelected, setLocationsSelected] = useState("");
 
@@ -24,8 +18,6 @@ function AddEventForm(props) {
 
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
- 
 
   const handleselectedLocations = (e) => {
     setLocationsSelected(e.target.value);
@@ -62,7 +54,7 @@ function AddEventForm(props) {
 
       await createEventService(newEvent);
       getData();
-       toggleForm();
+      toggleForm();
     } catch (error) {
       if (error.response.status === 400) {
         console.log(error.response.data.message);
@@ -87,9 +79,10 @@ function AddEventForm(props) {
       console.log(error.response);
       if (error.response.status === 400) {
         setErrorMessage("Archivo demasiado grande ( 10485760 bytes max )");
-        setIsLoading(false)
-        setIsUploading(false)
-      }     }
+        setIsLoading(false);
+        setIsUploading(false);
+      }
+    }
   };
   return (
     <div className="myAddEventFormContainer">
@@ -98,7 +91,6 @@ function AddEventForm(props) {
       <Form
         onSubmit={(event) => {
           handleSubmit(event);
-          
         }}
         className="myAddEventForm"
       >
@@ -149,7 +141,9 @@ function AddEventForm(props) {
             title="Dropdown button"
             onChange={handleselectedLocations}
           >
-            <option disabled={true} selected>Elige una Ubicacion</option>
+            <option disabled={true} selected>
+              Elige una Ubicacion
+            </option>
             {locationsArr.map((eachLocation) => {
               return (
                 <option key={eachLocation._id} value={eachLocation._id}>

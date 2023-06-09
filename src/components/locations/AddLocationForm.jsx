@@ -51,7 +51,6 @@ function AddLocationForm(props) {
       toggleForm();
     } catch (error) {
       if (error.response.status === 400) {
-        console.log(error.response.data.message);
         setErrorMessage(error.response.data.message);
         setIsLoading(false);
       }
@@ -73,12 +72,12 @@ function AddLocationForm(props) {
       console.log(error.response);
       if (error.response.status === 400) {
         setErrorMessage("Archivo demasiado grande ( 10485760 bytes max )");
-        setIsLoading(false)
-        setIsUploading(false)
-      }     }
+        setIsLoading(false);
+        setIsUploading(false);
+      }
+    }
   };
 
-  console.log(coordinates);
   return (
     <div className="myLocationFormContainer">
       <h3>Añadir Ubicacion</h3>
@@ -124,17 +123,16 @@ function AddLocationForm(props) {
           ) : null}
         </Form.Group>
 
-        
-   <div className="mapFixer">
-        <MapContainer center={center} zoom={13} scrollWheelZoom={true}>
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          <ClickMarker setCoordinates={setCoordinates} />
-          {coordinates !== null && <Marker position={coordinates} />}
-        </MapContainer>
-</div>
+        <div className="mapFixer">
+          <MapContainer center={center} zoom={13} scrollWheelZoom={true}>
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <ClickMarker setCoordinates={setCoordinates} />
+            {coordinates !== null && <Marker position={coordinates} />}
+          </MapContainer>
+        </div>
         <button className="myButtons" type="submit" disabled={isLoading}>
           Agregar
         </button>

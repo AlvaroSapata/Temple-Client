@@ -12,9 +12,4 @@ const deleteDjService = (djId) => {
   return service.delete(`/djs/${djId}`);
 };
 
-
-export {
-    getAllDjsService,
-    createDjService,
-    deleteDjService,
-};
+export { getAllDjsService, createDjService, deleteDjService };

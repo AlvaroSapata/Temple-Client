@@ -32,12 +32,12 @@ function Navbar() {
         Inicio
       </Link>
       <div className="iconContainer">
-      <img
-        onClick={toggleNavbar}
-        className="myDesplegable"
-        src="/images/BotonBarra.png"
-        alt="asd"
-      />
+        <img
+          onClick={toggleNavbar}
+          className="myDesplegable"
+          src="/images/BotonBarra.png"
+          alt="asd"
+        />
       </div>
       <a
         href="https://www.instagram.com/templewav/"

@@ -265,9 +265,6 @@ html {
   border: solid 5px #471971;
   position: absolute;
   width: 60vw;
-
-  /* background-image: url("/public/images/imagentemplefondo.jpg");
-  background-size: cover; */
   background-color: #a2e7d0;
   display: flex;
   flex-direction: column;
@@ -285,6 +282,14 @@ html {
   display: flex;
   justify-content: center;
 }
+
+@media (max-width: 900px) {
+  .myDjFormContainer {
+    width: 95vw;
+    margin-left: 2.5vw;
+  }
+}
+
 @media (max-width: 360px) {
   .myDjFormContainer {
     width: 340px;
@@ -474,6 +479,14 @@ html {
   z-index: 1;
   box-shadow: 0px 0px 20px rgba(71, 25, 113, 0.6);
 }
+
+@media (max-width: 900px) {
+  .myProductFormContainer {
+    width: 95vw;
+    margin-left: 2.5vw;
+  }
+}
+
 @media (max-width: 360px) {
   .myProductFormContainer {
     width: 340px;
@@ -634,6 +647,14 @@ html {
   z-index: 1;
   box-shadow: 0px 0px 20px rgba(71, 25, 113, 0.6);
 }
+
+@media (max-width: 900px) {
+  .myLocationFormContainer {
+    width: 95vw;
+    margin-left: 2.5vw;
+  }
+}
+
 @media (max-width: 360px) {
   .myLocationFormContainer {
     width: 340px;
@@ -692,6 +713,14 @@ html {
   z-index: 1;
   box-shadow: 0px 0px 20px rgba(71, 25, 113, 0.6);
 }
+
+@media (max-width: 900px) {
+  .myEditLocationContainer {
+    width: 95vw;
+    margin-left: 2.5vw;
+  }
+}
+
 @media (max-width: 360px) {
   .myEditLocationContainer {
     width: 340px;
@@ -926,6 +955,13 @@ html {
   z-index: 1;
   box-shadow: 0px 0px 20px rgba(71, 25, 113, 0.6);
 }
+@media (max-width: 900px) {
+  .myEditEventFormContainer {
+    width: 95vw;
+    margin-left: 2.5vw;
+  }
+}
+
 @media (max-width: 360px) {
   .myEditEventFormContainer {
     width: 340px;
@@ -1291,6 +1327,13 @@ html {
   border-radius: 15px;
   z-index: 1;
   box-shadow: 0px 0px 20px rgba(71, 25, 113, 0.6);
+}
+
+@media (max-width: 900px) {
+  .myAddEventFormContainer {
+    width: 95vw;
+    margin-left: 2.5vw;
+  }
 }
 @media (max-width: 360px) {
   .myAddEventFormContainer {

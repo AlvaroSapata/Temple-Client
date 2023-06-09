@@ -204,11 +204,10 @@ html {
 }
 
 /* DJS ________________________________________________________________________*/
-.nobresDjs{
+.nobresDjs {
   font-size: larger;
-  
 }
-.mainIGborder{
+.mainIGborder {
   margin-bottom: 10px;
 }
 .cardIGborder {
@@ -791,24 +790,66 @@ html {
   height: 95vh;
 }
 
-.notFoundPage1 img {
-  margin-top: 0px;
+.notFoundPage1 {
+  position: absolute;
   height: 100vh;
   filter: blur(0px);
+  z-index: 1;
 }
-/* .notFoundPage2 img{
-  margin-top: 0px;
+.ceentrarimagen{
+  display: flex;
+  justify-content: center;
+}
+.notFoundPage2 {
+  position: absolute;
+  height: 100vh;
+  right: 0;
+  filter: blur(5px);
+}
+.notFoundPage3 {
+  position: absolute;
+  height: 100vh;
+  left: 0;
+  filter: blur(5px);
+}
+.ErrorPage1 {
+  position: absolute;
   height: 100vh;
   filter: blur(0px);
-  margin-left: 0;
+  z-index: 1;
 }
-.notFoundPage3 img{
-  margin-top: 0px;
+.Errorceentrarimagen{
+  display: flex;
+  justify-content: center;
+}
+.ErrorPage2 {
+  position: absolute;
   height: 100vh;
-  filter: blur(0px);
+  right: 0;
+  filter: blur(5px);
 }
- */
+.ErrorPage3 {
+  position: absolute;
+  height: 100vh;
+  left: 0;
+  filter: blur(5px);
+}
+.textoError{
+  z-index: 1;
+  font-size: 30px;
+  position: absolute;
+  color: white;
+  top: 70vh;
+  width: 350px;
+  background: linear-gradient(to right, transparent, black,transparent);
+  padding: 10px;
+}
 
+
+@media (max-width: 360px) {
+  .ErrorPage1 {
+   margin-right: 100px;
+  }}
 /* DETALLES EVENTO _________________________________________ */
 .eventDetailsPage {
   margin-top: 50px;
@@ -852,7 +893,7 @@ html {
   padding-bottom: 20px;
   margin-left: 20vw;
   margin-right: 20vw;
-  border-radius: 5vw;
+  border-radius: 15px;
   z-index: 1;
   box-shadow: 0px 0px 20px rgba(71, 25, 113, 0.6);
 }
@@ -1224,7 +1265,7 @@ html {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 80%;
+  width: 90%;
   transform: translate(-50%, -50%);
   text-align: center;
   color: white;

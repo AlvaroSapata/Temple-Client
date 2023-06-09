@@ -8,6 +8,7 @@ import { getAllEventsService } from "../../services/events.services";
 import { AuthContext } from "../../context/auth.context.js";
 import Card from "react-bootstrap/Card";
 
+
 function Events() {
   const navigate = useNavigate();
   // Destructuracion

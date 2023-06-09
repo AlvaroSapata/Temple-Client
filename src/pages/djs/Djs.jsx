@@ -66,6 +66,7 @@ function Djs() {
       ) : null}
       <h3>Nuestros Djs</h3>
       {isFormVisible ? (
+        
         <AddDjForm
           getData={getData}
           setIsLoading={setIsLoading}

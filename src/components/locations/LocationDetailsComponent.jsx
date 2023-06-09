@@ -9,7 +9,7 @@ import Card from "react-bootstrap/Card";
 import { Button } from "react-bootstrap";
 import { AuthContext } from "../../context/auth.context.js";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-
+import ScaleLoader from "react-spinners/ScaleLoader";
 function LocationDetails() {
   const params = useParams();
   // console.log(params);
@@ -54,7 +54,7 @@ function LocationDetails() {
   };
 
   if (isLoading) {
-    return <h3>...buscando</h3>;
+    return <ScaleLoader color="#471971" className="myLoader" />;
   }
 
   return (

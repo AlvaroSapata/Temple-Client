@@ -761,7 +761,32 @@ html {
   font-size: 20px;
   margin-bottom: 40px;
 }
-
+@media (max-width: 900px) {
+  .myLocationCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .divIzd {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+  }
+  .divIzd .card-body {
+    display: flex;
+    justify-content: center;
+  }
+  .divIzd img {
+    width: 250px;
+    height: 300px;
+    margin-right: 10px;
+  }
+  .divDcha {
+    width: 100%;
+    margin: 0;
+  }
+}
 @media (max-width: 360px) {
   .myLocationCard {
     display: flex;

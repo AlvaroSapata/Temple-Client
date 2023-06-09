@@ -1,70 +1,140 @@
-# Getting Started with Create React App
+TEMPLE
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+  DESCRIPTION: Es una APP de eventos musicales donde poder apuntarte a diferentes eventos y tambien comprar merch.
 
-In the project directory, you can run:
+  client repo:
 
-### `npm start`
+  server repo: 
+  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+ BACKLOG FUNCIONALITIES: 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+ -Mejora del apartado del merch
+ -Mejorar estilos
+ -Implementacion de musica
 
-### `npm test`
+ TECHNOLOGIES USED: 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  -Javascript
+  -JSX
+  -React
+  -CSS
+  
+-CLIENT STRUCTURE 
 
-### `npm run build`
+ USER ESTRUCTURE:
+ 
+ -INICIO: Como Usuario puede navegar en la pagina de inicio donde poder acceder a los distintos lugares de la pagina.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ -REGISTRARSE: Como usuario puede registrarse para acceder a varios puntos de la pagina donde solo puedes si estas registrado.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+ -INICIAR SESION: Como usuario puede iniciar sesion para poder interactuar dentro de la pagina. 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+ -CERRAR SESION: Como usuario puede cerrar sesion.
 
-### `npm run eject`
+ -EVENTOS: Como usuario puede acceder y ver todos los eventos.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+ -DJS: Como usuario puede ver acceder y ver todos los Djs disponibles para los siguientes eventos.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+ -UBICACIONES: Como usuario puede acceder y ver todas la ubicaciones donde seran los eventos.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+ -PRODUCTOS: Como usuario puede acceder a productos donde ver y poder comprar los productos de la marca.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+ -INSTAGRAM: Como usuario tiene un acceso directo al instragram official de la marca de eventos.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+| Camino               | Página           | Componentes            | Permisos                  | Comportamiento                                    |
+|----------------------|------------------|------------------------|---------------------------|--------------------------------------------------|
+| /                    | Hogar            |                        | público                   | Página de inicio                                  |
+| /signup              | Inscribirse      |                        | solo anónimo<IsAnon>      | Formulario de registro, enlace para iniciar sesión, navegar a la página de inicio después del registro |
+| /login               | Acceso           |                        | solo anónimo<IsAnon>      | Formulario de inicio de sesión, enlace para registrarse, navegar a la página de inicio después de iniciar sesión |
+| /djs                 | DJs              | Editar DJ               | solo usuario<IsPrivate>   | Muestra todos los Djs |
+| /events              | Eventos          | Agregar evento          | solo usuario<IsPrivate>   | Muestra todos los eventos en la cartera           |
+| /locations           | Localizaciones   | Agregar localización    | solo usuario<IsPrivate>   | Muestra todas las localizaciones       |
+| /products            | Productos        |                         | solo usuario<IsPrivate>   | Muestra todos los productos donde poder verlos y comprarlos           |
+| /events/:eventId     | Detalles del evento |                      | solo usuario<IsPrivate>   | Muestra los detalles de un evento específico y poder actualizarlo    |
+| /locations/:locationId | Detalles de la ubicación |               | solo usuario<IsPrivate>   | Muestra los detalles de una ubicación específica y poder actualizarlas|
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+ SERVICES:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+ Auth Service:
 
-### Making a Progressive Web App
+   - verifyService()
+   - sigupService()
+   - loginService()
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+ Config.Service:
+ 
+ -config.service
 
-### Advanced Configuration
+ Djs Service: 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+    - getAllDjsService()
+    - createDjService()
+    - deleteDjService()
 
-### Deployment
+ Events Service:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+     -getAllEventsService()
+     -createEventService()
+     -getEventsDetailsService()
+     -deleteEventsService()
+     -editEventsService()
+     -joinService()
+     -unJoinService()
 
-### `npm run build` fails to minify
+ Locations Services:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+      -getAllLocationsService()
+      -createLocationService()
+      -getLocationDetailsService()
+      -deleteLocationService()
+      -editLocationService()
+
+ Payments Services:
+
+      -createPaymentIntentService()
+      -updatePaymentIntentService
+
+ Products Services:
+    
+      -getAllProductsService()
+      -createProductService()
+      -deleteProductService()
+      -editProductService()
+
+ Upload ervices:
+
+      -uploadImageService()
+      -uploadVideoService()
+
+
+ CONTEXT:
+
+ auth.context
+
+
+ COLLABORATORS:
+
+ - Alvaro Martinez
+
+ -Jonatan Iglesias
+
+
+
+ PROJECT: 
+
+   REPOSITORY LINK CLIENT: https://github.com/AlvaroSapata/Temple-Client
+
+   REPOSITORY LINK SERVER: https://github.com/AlvaroSapata/Temple-Server
+
+   DEPLOY LINK: https://templewav.netlify.app/
+
+
+   SLIDES: https:
+
+   SLIDES LINK:   https://www.canva.com/design/DAFlUt7352c/4C_0TuI3PdvdAwYS3nGefg/edit?utm_content=DAFlUt7352c&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton

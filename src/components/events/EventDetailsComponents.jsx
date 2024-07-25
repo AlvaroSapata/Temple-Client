@@ -3,71 +3,55 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import {
   deleteEventsService,
   getEventsDetailsService,
+  joinService,
+  unJoinService,
 } from "../../services/events.services";
 import EditEvent from "./EditEvents";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { getAllLocationsService } from "../../services/locations.services";
 import { getAllDjsService } from "../../services/djs.services";
 import { AuthContext } from "../../context/auth.context.js";
-import { joinService } from "../../services/events.services";
-import { unJoinService } from "../../services/events.services";
 import ReactPlayer from "react-player";
 import Card from "react-bootstrap/Card";
 
-function EventDetailsComponents(props) {
-  // Destructuracion
+function EventDetailsComponents() {
   const { isAdmin } = useContext(AuthContext);
   const authContext = useContext(AuthContext);
-
   const params = useParams();
-
   const navigate = useNavigate();
 
   const [eventDetails, setEventDetails] = useState(null);
-
   const [allLocations, setAllLocations] = useState([]);
-
   const [allDjs, setAllDjs] = useState([]);
-  // Estado de loading
   const [isLoading, setIsLoading] = useState(true);
-  // Estado visivilidad formulario
   const [isFormVisible, setIsFormVisible] = useState(false);
 
   useEffect(() => {
     getData();
   }, []);
+
   const getData = async () => {
+    setIsLoading(true);
     try {
-      const response = await getEventsDetailsService(params.eventsId);
-      response.data.date = new Date(response.data.date)
-        .toISOString()
-        .slice(0, 10);
-      setEventDetails(response.data);
-      setIsLoading(false);
+      const eventResponse = await getEventsDetailsService(params.eventsId);
+      const event = eventResponse.data;
+      event.date = new Date(event.date).toISOString().slice(0, 10);
+      setEventDetails(event);
+
+      const locationsResponse = await getAllLocationsService();
+      setAllLocations(locationsResponse.data);
+
+      const djsResponse = await getAllDjsService();
+      setAllDjs(djsResponse.data);
     } catch (error) {
-      console.log(error);
-    }
-
-    try {
-      const response = await getAllLocationsService();
-
-      setAllLocations(response.data);
+      console.error(error);
+      navigate("/error");
+    } finally {
       setIsLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
-
-    try {
-      const response = await getAllDjsService();
-
-      setAllDjs(response.data);
-      setIsLoading(false);
-    } catch (error) {
-      console.log(error);
     }
   };
 
-  const handlecountPeople = async (req, res, next) => {
+  const handleCountPeople = async () => {
     try {
       if (eventDetails.joinPeople.includes(authContext.user._id)) {
         await unJoinService(params.eventsId);
@@ -76,7 +60,7 @@ function EventDetailsComponents(props) {
       }
       getData();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -85,11 +69,10 @@ function EventDetailsComponents(props) {
       await deleteEventsService(params.eventsId);
       navigate("/events");
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
-  // Muestra/esconde el formulario
   const toggleForm = () => {
     setIsFormVisible(!isFormVisible);
   };
@@ -98,39 +81,44 @@ function EventDetailsComponents(props) {
     return <ScaleLoader color="#471971" className="myLoader" />;
   }
 
+  if (!eventDetails) {
+    return <p>Loading event details...</p>;
+  }
+
   return (
     <div className="eventDetailsPage">
-      {/* <h3>Detalles del Evento</h3> */}
       <div className="separadorbtns">
-        {isAdmin ? (
-          <button className="myButtons" onClick={handleDelete}>
-            eliminar
-          </button>
-        ) : null}
-        {isAdmin ? (
-          <button className="myButtons" onClick={toggleForm}>
-            editar
-          </button>
-        ) : null}
+        {isAdmin && (
+          <>
+            <button className="myButtons" onClick={handleDelete}>
+              eliminar
+            </button>
+            <button className="myButtons" onClick={toggleForm}>
+              editar
+            </button>
+          </>
+        )}
       </div>
-      {isFormVisible ? (
+      {isFormVisible && (
         <EditEvent
           eventDetails={eventDetails}
           getData={getData}
           djsArr={allDjs}
           locationsArr={allLocations}
         />
-      ) : null}
+      )}
 
       <Card className="myDetailsCard">
         <Card.Body className="myFirstDiv">
           <div className="divIzquierda">
-            <Card.Img
-              className="myCartel"
-              src={eventDetails.image}
-              alt="imagen"
-              width={"200px"}
-            />
+            {eventDetails.image && (
+              <Card.Img
+                className="myCartel"
+                src={eventDetails.image}
+                alt="imagen"
+                width={"200px"}
+              />
+            )}
           </div>
 
           <div className="divDerecha">
@@ -140,32 +128,34 @@ function EventDetailsComponents(props) {
               </Card.Title>
             </div>
             <div className="DatedetallesContainer">
-              <Card.Text> {eventDetails.date}</Card.Text>
+              <Card.Text>{eventDetails.date}</Card.Text>
             </div>
             <div className="LocationdetallesContainer">
-              <Card.Img src="/images/icons8-location-50.png" alt="asd" />
-              <Link to={`/locations/${eventDetails.location}`}>
-                <Card.Text>{eventDetails.location.name}</Card.Text>
-              </Link>
+              <Card.Img src="/images/icons8-location-50.png" alt="location icon" />
+              {eventDetails.location && (
+                <Link to={`/locations/${eventDetails.location._id}`}>
+                  <Card.Text>{eventDetails.location.name}</Card.Text>
+                </Link>
+              )}
             </div>
             <div className="djsFix">
               <Link to={`/djs`}>
                 <div className="djscontainer">
-                  {eventDetails.djs.map((eachDjs) => {
-                    return (
-                      <div key={eachDjs._id} className="centraciondjs">
-                        <Card.Text>{eachDjs.name}</Card.Text>
-                        <div className="djsImagencontenedor">
+                  {eventDetails.djs && eventDetails.djs.map((dj) => (
+                    <div key={dj._id} className="centraciondjs">
+                      <Card.Text>{dj.name}</Card.Text>
+                      <div className="djsImagencontenedor">
+                        {dj.image && (
                           <Card.Img
                             className="djDetailsImg"
-                            src={eachDjs.image}
-                            alt="img"
+                            src={dj.image}
+                            alt="dj"
                             width={"100px"}
                           />
-                        </div>
+                        )}
                       </div>
-                    );
-                  })}
+                    </div>
+                  ))}
                 </div>
               </Link>
             </div>
@@ -174,7 +164,7 @@ function EventDetailsComponents(props) {
               <div className="botoncontainer">
                 <button
                   className="myButtons"
-                  onClick={handlecountPeople}
+                  onClick={handleCountPeople}
                   width="200px"
                 >
                   {eventDetails.joinPeople.includes(authContext.user._id)
@@ -186,11 +176,11 @@ function EventDetailsComponents(props) {
                 <Card.Img
                   className="iconogente"
                   src="/images/icons8-people-50.png"
-                  alt="img"
+                  alt="people icon"
                   width={"40px"}
                 />
                 <Card.Text className="numeropersonas">
-                  {eventDetails.joinPeople.length} Personas se han apuntado{" "}
+                  {eventDetails.joinPeople.length} Personas se han apuntado
                 </Card.Text>
               </div>
             </div>
@@ -204,29 +194,27 @@ function EventDetailsComponents(props) {
           <div className="tituloseparacion">
             <h2>Galeria de Fotos</h2>
           </div>
-          <div>
-            {eventDetails.gallery && eventDetails.gallery.length > 0 ? (
-              <div className="myGalleryContainer">
-                {eventDetails.gallery.map((image, index) => (
-                  <div className="myEachGallery" key={index}>
-                    <Card.Img
-                      key={index}
-                      src={image}
-                      alt={`imagen-${index}`}
-                      width={"200px"}
-                    />
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p>Proximamente ...</p>
-            )}
-            <div className="hrContainer">
-              <hr className="custom-hr" />
+          {eventDetails.gallery && eventDetails.gallery.length > 0 ? (
+            <div className="myGalleryContainer">
+              {eventDetails.gallery.map((image, index) => (
+                <div className="myEachGallery" key={index}>
+                  <Card.Img
+                    key={index}
+                    src={image}
+                    alt={`imagen-${index}`}
+                    width={"200px"}
+                  />
+                </div>
+              ))}
             </div>
-            <div className="tituloseparacion">
-              <h2>Aftermovie Oficial</h2>
-            </div>
+          ) : (
+            <p>Proximamente ...</p>
+          )}
+          <div className="hrContainer">
+            <hr className="custom-hr" />
+          </div>
+          <div className="tituloseparacion">
+            <h2>Aftermovie Oficial</h2>
           </div>
           {eventDetails.afterMovie ? (
             <div className="myReactPlayerContainer">

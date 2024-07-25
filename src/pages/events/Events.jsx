@@ -10,20 +10,13 @@ import Card from "react-bootstrap/Card";
 
 function Events() {
   const navigate = useNavigate();
-  // Destructuracion
   const { isAdmin } = useContext(AuthContext);
 
   const [events, setEvents] = useState([]);
-
   const [isLoading, setIsLoading] = useState(true);
-
   const [djs, setDjs] = useState([]);
-
   const [locations, setLocations] = useState([]);
-
-  // Estado visivilidad formulario
   const [isFormVisible, setIsFormVisible] = useState(false);
-
   const [pastEvents, setPastEvents] = useState([]);
   const [nextEvents, setNextEvents] = useState([]);
 
@@ -35,7 +28,6 @@ function Events() {
     try {
       const response = await getAllLocationsService();
       setLocations(response.data);
-      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -43,29 +35,24 @@ function Events() {
     try {
       const response = await getAllDjsService();
       setDjs(response.data);
-      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
 
     try {
       const response = await getAllEventsService();
-      const responseClone = [...response.data];
-      /*       responseClone.forEach((eachEvent) => {
-        eachEvent.date = new Date(eachEvent.date).toLocaleDateString();
-      }); */
+      const eventsData = response.data;
 
-      setEvents(responseClone);
-      setIsLoading(false);
+      setEvents(eventsData);
 
       const thisDate = new Date();
-
-      const past = responseClone.filter(
+      const past = eventsData.filter(
         (eachEvent) => new Date(eachEvent.date) < thisDate
       );
-      const next = responseClone.filter(
+      const next = eventsData.filter(
         (eachEvent) => new Date(eachEvent.date) > thisDate
       );
+
       past.forEach((eachEvent) => {
         eachEvent.date = new Date(eachEvent.date).toISOString().slice(0, 10);
       });
@@ -78,27 +65,28 @@ function Events() {
       setNextEvents(next);
     } catch (error) {
       navigate("/error");
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  // Muestra/esconde el formulario
   const toggleForm = () => {
     setIsFormVisible(!isFormVisible);
   };
 
-  // Estado de loading
   if (isLoading) {
     return <ScaleLoader color="#471971" className="myLoader" />;
   }
+
   return (
     <div className="eventsPage">
-      {isAdmin ? (
+      {isAdmin && (
         <button className="myButtons" onClick={toggleForm}>
           Añadir Evento
         </button>
-      ) : null}
+      )}
 
-      {isFormVisible ? (
+      {isFormVisible && (
         <AddEventForm
           getData={getData}
           setIsLoading={setIsLoading}
@@ -106,36 +94,41 @@ function Events() {
           locationsArr={locations}
           toggleForm={toggleForm}
         />
-      ) : null}
-      <h3>Proximos Eventos:</h3>
+      )}
 
-      <div className="myEventsList">
-        {nextEvents.map((eachEvent) => (
-          <Link to={`/events/${eachEvent._id}`} key={eachEvent._id}>
-            <div>
-              <div className="mycardIG">
-                <div className="myimageIG">
-                  <img src={eachEvent.image} alt="eachImg" />
-                </div>
-                <div className="mytextIG">
-                  <div className="mymainIG">
-                    <span>{eachEvent.title}</span>
+      {nextEvents.length > 0 && (
+        <>
+          <h3>Proximos Eventos:</h3>
+          <div className="myEventsList">
+            {nextEvents.map((eachEvent) => (
+              <Link to={`/events/${eachEvent._id}`} key={eachEvent._id}>
+                <div>
+                  <div className="mycardIG">
+                    <div className="myimageIG">
+                      <img src={eachEvent.image} alt="eachImg" />
+                    </div>
+                    <div className="mytextIG">
+                      <div className="mymainIG">
+                        <span>{eachEvent.title}</span>
+                      </div>
+                      <div className="mysubIG">
+                        <span>
+                          <img src="images/icons8-location-50.png" alt="eachImg" />
+                          {eachEvent.location?.name}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="mydateIG">
+                      <span>{eachEvent.date}</span>
+                    </div>
                   </div>
-                  <div className="mysubIG">
-                    <span>
-                      <img src="images/icons8-location-50.png" alt="eachImg" />
-                      {eachEvent.location?.name}
-                    </span>
-                  </div>
                 </div>
-                <div className="mydateIG">
-                  <span>{eachEvent.date}</span>
-                </div>
-              </div>
-            </div>
-          </Link>
-        ))}
-      </div>
+              </Link>
+            ))}
+          </div>
+        </>
+      )}
+
       <h3>Eventos Pasados:</h3>
       <div className="myEventsList">
         {pastEvents.map((eachEvent) => (
@@ -169,28 +162,3 @@ function Events() {
 }
 
 export default Events;
-
-/* 
-<Link to={`/events/${eachEvent._id}`} key={eachEvent._id}>
-<Card className="myEventsCardStyle">
-  <div className="myEventsCardTitle">
-    <Card.Title>{eachEvent.title}</Card.Title>
-  </div>
-  <div className="myEventsListImgContainer">
-    <Card.Img src={eachEvent.image} alt="imagen" />
-  </div>
-  <Card.Body>
-    <div className="myEventsListDateContainer">
-      <Card.Text>{eachEvent.date}</Card.Text>
-    </div>
-    <div className="myEventsListLocationContainer">
-      <Card.Img
-        className="myEventsListLocationContainerImg"
-        src="images/icons8-location-50.png"
-        alt="imagen"
-      />
-      <Card.Text>{eachEvent.location?.name}</Card.Text>
-    </div>
-  </Card.Body>
-</Card>
-</Link> */

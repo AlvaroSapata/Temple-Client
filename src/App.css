@@ -1,9 +1,12 @@
-.App {
+color .App {
   text-align: center;
   margin-top: 20px;
   font-family: "Noto Serif", serif;
 }
-
+html,
+body {
+  background-color: #42b890;
+}
 a {
   margin: 10px;
 }
@@ -214,6 +217,8 @@ html {
 }
 .mainIGborder {
   margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
 }
 .cardIGborder {
   width: 300px;
@@ -260,6 +265,10 @@ html {
 
 .DjsPage {
   margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .myDjFormContainer {
   background-color: white;
@@ -373,7 +382,7 @@ html {
   transform: translate(-50%, -50%) scaleX(0);
   transform-origin: left;
   transition: 0.5s ease;
-  background-color: #50dbad;
+  background-color: #42b890;
 }
 .cardIG:hover .textIG::after {
   transform: translate(-50%, -50%) scaleX(1);
@@ -628,6 +637,9 @@ html {
 /* UBICACIONES __________________________________________________________*/
 .locationsListPage {
   margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items:  center;
 }
 .locationImgfix {
   margin-top: 8px;
@@ -1251,11 +1263,15 @@ html {
 /* EVENTS _______________________________________________ */
 .eventsPage {
   margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .myEventsList {
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   overflow: hidden;
   gap: 80px;
@@ -1437,7 +1453,7 @@ html {
   transform: translate(-50%, -50%) scaleX(0);
   transform-origin: left;
   transition: 0.5s ease;
-  background-color: #50dbad;
+  background-color: #42b890;
 }
 .mycardIG:hover .mytextIG::after {
   transform: translate(-50%, -50%) scaleX(1);
@@ -1447,8 +1463,24 @@ html {
   border-top: solid 2px black;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+  display: flex; 
+  justify-content: center;
 }
 /* HOME */
+.homePastEvents {
+  display: flex;
+  justify-content: center;
+}
+
+.homePastEvents a {
+  font-weight: 500;
+  color: rgb(48, 47, 47);
+  transition: 0.1s;
+
+}
+.homePastEvents a:hover {
+  font-size: 1.1rem;
+}
 
 .neonText {
   color: #fff;
@@ -1491,12 +1523,13 @@ html {
   justify-content: center;
   align-items: center;
   height: 170px;
+  width: 90%;
   margin-top: 130px;
   margin-bottom: 80px;
 }
 
 .divfondo {
-  background-color: #50dbad;
+  background-color: #42b890;
   border-radius: 100%;
   height: 300px;
   width: 300px;
